@@ -24,9 +24,8 @@
 <script>
 	
 	
-	import {
-		mapState
-	} from 'vuex'
+	import {mapState} from 'vuex'
+
 
 	export default {
 		computed: mapState(['forcedLogin', 'hasLogin', 'userName']),
@@ -35,9 +34,7 @@
 				uni.showModal({
 					title: '未登录',
 					content: '您未登录，需要登录后才能继续',
-					/**
-					 * 如果需要强制登录，不显示取消按钮
-					 */
+					//是否强制登录
 					showCancel: !this.forcedLogin,
 					success: (res) => {
 						if (res.confirm) {

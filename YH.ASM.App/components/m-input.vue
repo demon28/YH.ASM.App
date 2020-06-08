@@ -14,7 +14,7 @@
 
 <script>
 	import mIcon from './m-icon/m-icon.vue'
-
+   
 	export default {
 		components: {
 			mIcon
