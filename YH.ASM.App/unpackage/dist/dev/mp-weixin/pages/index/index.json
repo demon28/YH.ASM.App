@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "uni-ui",
+  "usingComponents": {
+    "uni-link": "/components/uni-link/uni-link"
+  }
+}
