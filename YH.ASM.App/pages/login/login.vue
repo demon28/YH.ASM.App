@@ -72,7 +72,7 @@
 				}
 				
 				
-			
+			  console.log("======"+ this.LoginHost+"/api/Login2/Login");
 				
 				uni.request({
 				    url:this.LoginHost+"/api/Login2/Login", //仅为示例，并非真实接口地址。
@@ -87,7 +87,7 @@
 				    success: (res) => {
 				  
 				        this.text = 'request success';
-					
+					 console.log(JSON.stringify(res));
 					
 						 if (res.data.Success) {
 							 

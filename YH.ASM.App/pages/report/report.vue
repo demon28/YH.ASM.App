@@ -7,8 +7,8 @@
 
 					<cmd-cel-item title="姓名" addon="文天成 (11003870)"></cmd-cel-item>
 					<cmd-cel-item title="部门" addon="信息中心-MES"></cmd-cel-item>
-					<cmd-cel-item title="日期" addon="2020-06-29"></cmd-cel-item>
-					<cmd-cel-item title="定位地址" addon="广西壮族自治区南宁市西乡塘区大学西路29号"></cmd-cel-item>
+					<cmd-cel-item title="日期" :addon="datetime"></cmd-cel-item>
+					<cmd-cel-item title="定位地址" :addon="locatladdress"></cmd-cel-item>
 
 
 					<view class="uni-list" style="margin-top: 30upx;">
@@ -30,8 +30,8 @@
 								* 当前项目（必填）:
 							</view>
 							<view class="uni-list-cell-db">
-								<picker @change="bindPickerChange" :value="index" :range="array">
-									<view class="uni-input">{{array[index]}}</view>
+								<picker @change="bindPickerChange" :value="indexProject" :range="arrayProject" :range-key="'value'">
+									<view class="uni-input">{{arrayProject[indexProject].value}}</view>
 								</picker>
 							</view>
 						</view>
@@ -42,8 +42,10 @@
 								* 项目客户（必填）:
 							</view>
 							<view class="uni-list-cell-db">
-								<picker @change="bindPickerChange" :value="index" :range="array">
-									<view class="uni-input">{{array[index]}}</view>
+								<picker @change="projectkehuPickerChange" :value="indexProjectkehu" :range="arrayProjectKehu" :range-key="'value'">
+									<view class="uni-input">
+										{{arrayProjectKehu[indexProjectkehu].value}}
+									</view>
 								</picker>
 							</view>
 						</view>
@@ -54,8 +56,10 @@
 								* 问题工单（必填）:
 							</view>
 							<view class="uni-list-cell-db">
-								<picker @change="bindPickerChange" :value="index" :range="array">
-									<view class="uni-input">{{array[index]}}</view>
+								<picker @change="supportPickerChange" :value="indexSupport" :range="arraySupport" :range-key="'value'">
+									<view class="uni-input">
+										{{arraySupport[indexSupport].value}}
+									</view>
 								</picker>
 							</view>
 						</view>
@@ -71,7 +75,7 @@
 
 
 
-					<view class="uni-form-item uni-column" style="margin-top: 20upx;">
+					<view style="margin-top: 20upx;">
 
 						<textarea class="uni-input" style="border:solid 1upx #D3D3D3 ; height: 150upx; width: 100%;" name="input"
 						 placeholder="每日简报" />
@@ -131,22 +135,119 @@
 				  }],
 				  
 				 index: 0,
-				
+				 indexProject:0,
+				 indexProjectkehu:0,
+				 indexSupport:0,
+				 locatladdress:"",
+				 locatllongitude:"0",
+				 locatllatitude:"0",
+				datetime:""
 			}
 		},
 
 		mounted() {
-
-
+			
+			//当前时间
+			    var myDate = new Date();
+			    this.datetime= myDate.toLocaleDateString();
+			//当前定位
+		     this.getAuthorizeInfo();
+			
 		},
 
 		methods: {
 		
 			
          bindPickerChange: function(e) {
-            console.log('picker发送选择改变，携带值为', e.target.value)
+         
             this.index = e.target.value
         },
+		
+		projectPickerChange: function(e) {
+		 
+		    this.indexProject = e.target.value
+		},
+		projectkehuPickerChange: function(e) {
+		
+		    this.indexProjectkehu = e.target.value
+		},
+		supportPickerChange: function(e) {
+		 
+		    this.indexSupport = e.target.value
+		},
+		// 位置授权
+		        getAuthorizeInfo(){
+		            const that = this;
+		            uni.authorize({
+		                scope: 'scope.userLocation',
+		                success() { // 允许授权
+		                    that.getLocationInfo();
+		                },
+		                fail(){    // 拒绝授权
+		                    that.openConfirm();
+		                    console.log("你拒绝了授权，无法获得周边信息")
+		                }
+		            })
+		        },
+		        // 获取地理位置
+		        getLocationInfo(){  
+					var _self=this;
+					
+		            uni.getLocation({
+		                type: 'wgs84',
+		                success (res) {
+		                    console.log(res);
+							console.log(res.latitude.toString());
+							
+											_self.locatllatitude= res.latitude.toString();
+											_self.locatllongitude  = res.longitude.toString();
+							uni.request({
+										header:{
+													"Content-Type": "application/text"
+												},
+											url:'http://apis.map.qq.com/ws/geocoder/v1/?location='+res.latitude+','+res.longitude+'&key=MVGBZ-R2U3U-W5CVY-2PQID-AT4VZ-PDF35',
+												success(re) {
+													console.log(re)
+													console.log(re.data.result.address)	 
+													 
+													if(re.statusCode===200){
+														 _self.locatladdress=re.data.result.address;
+														console.log("获取中文街道地理位置成功")
+													}else{
+														console.log("获取信息失败，请重试！")
+													}
+												 }
+											});
+							
+						
+							
+							
+		                }
+		            });
+		        },
+		
+		        // 再次获取授权
+		        // 当用户第一次拒绝后再次请求授权
+		        openConfirm(){
+		            uni.showModal({
+		                title: '请求授权当前位置',
+		                content: '需要获取您的地理位置，请确认授权',
+		                success: (res)=> {
+		                    if (res.confirm) {
+		                        uni.openSetting();// 打开地图权限设置
+		                    } else if (res.cancel) {
+		                        uni.showToast({
+		                            title: '你拒绝了授权，无法获得周边信息',
+		                            icon: 'none',
+		                            duration: 1000
+		                        })
+		                    }
+		                }
+		            });
+		        }
+		
+		       
+		
 		}
 	}
 </script>
