@@ -2,22 +2,22 @@
 	<view class="content">
 		<view v-if="hasLogin" class="hello">
 			<view class="title">
-				您好 {{userName}}，您已成功登录。
+				您好 ：{{userName}}  [{{workid}}] 
 			</view>
-			<view class="ul">
-				<view>这是 uni-app 带登录模板的示例App首页。</view>
-				<view>在 “我的” 中点击 “退出” 可以 “注销当前账户”</view>
-			</view>
+			
+			
+		<view class="title">
+		<button v-if="hasLogin" type="default" @tap="AddReport">提交日报</button>
+		
 		</view>
-		<view v-if="!hasLogin" class="hello">
-			<view class="title">
-				您好 游客。
-			</view>
-			<view class="ul">
-				<view>这是 uni-app 带登录模板的示例App首页。</view>
-				<view>在 “我的” 中点击 “登录” 可以 “登录您的账户”</view>
-			</view>
+		
+		<view class="title">
+		<button v-if="hasLogin" type="default" @tap="ViewReportHis">日报记录</button>
+		
 		</view>
+		
+		</view>
+		
 	</view>
 </template>
 
@@ -28,8 +28,11 @@
 
 
 	export default {
-		computed: mapState(['forcedLogin', 'hasLogin', 'userName']),
+		computed: {...mapState(['forcedLogin', 'hasLogin', 'userName','workid'])},
 		onLoad() {
+			
+			console.log(this.forcedLogin+"===="+this.hasLogin+"==="+this.userName+"==="+this.workid+"==="+this.department+"===");
+			
 			if (!this.hasLogin) {
 				uni.showModal({
 					title: '未登录',
@@ -55,6 +58,22 @@
 				});
 			}
 		}
+	    ,methods:{
+			AddReport(){
+				uni.navigateTo({
+					url: '../report/report'
+				});
+			},
+			ViewReportHis(){
+				
+				uni.navigateTo({
+					url: '../report/history'
+				});
+				
+			}
+		}
+	
+	
 	}
 </script>
 

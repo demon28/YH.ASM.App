@@ -32,8 +32,8 @@
 			return {
 				providerList: [],
 				hasProvider: false,
-				account: '',
-				password: '',
+				account: '11003870',
+				password: '1346888',
 				positionTop: 0,
 				isDevtools: false,
 			}
@@ -70,23 +70,12 @@
 					});
 					return;
 				}
-				/**
-				 * 下面简单模拟下服务端的处理
-				 * 检测用户账号密码是否在已注册的用户列表中
-				 * 实际开发中，使用 uni.request 将账号信息发送至服务端，客户端在回调函数中获取结果信息。
-				 */
-				const data = {
-					Username: this.account,
-					Password: this.password
-				};
-				// const validUser = service.getUsers().some(function(user) {
-				// 	return data.account === user.account && data.password === user.password;
-				// });
 				
-				var validUser;
-				 console.log("请求地址 ======"+this.LoginUrl);
+				
+			
+				
 				uni.request({
-				    url: this.LoginUrl, //仅为示例，并非真实接口地址。
+				    url:this.LoginHost+"/api/Login2/Login", //仅为示例，并非真实接口地址。
 				    data: {
 				       Username: this.account,
 				       Password: this.password
@@ -96,13 +85,21 @@
 				        'content-type': 'application/json' //自定义请求头信息
 				    },
 				    success: (res) => {
-				        console.log("======"+JSON.stringify(res));
+				  
 				        this.text = 'request success';
-						validUser=res.data.success;
-						 console.log("======"+validUser);
-						 
-						 if (validUser==true) {
-						 	this.toMain(this.account);
+					
+					
+						 if (res.data.Success) {
+							 
+							 //登录信息写进本地数据库
+							 
+							  console.log("======"+ res.data.Content.WORK_ID);
+							  
+						 	this.login(res.data.Content);
+								
+								//跳转本地数据库
+								this.toMain();
+									
 						 } else {
 						 	uni.showToast({
 						 		icon: 'none',
@@ -119,20 +116,9 @@
 			
 			},
 			
-			getUserInfo({
-				detail
-			}) {
-				if (detail.userInfo) {
-					this.toMain(detail.userInfo.nickName);
-				} else {
-					uni.showToast({
-						icon: 'none',
-						title: '登陆失败'
-					});
-				}
-			},
-			toMain(userName) {
-				this.login(userName);
+		
+			toMain() {
+		
 				/**
 				 * 强制登录时使用reLaunch方式跳转过来
 				 * 返回首页也使用reLaunch方式
