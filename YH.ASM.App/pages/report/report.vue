@@ -13,16 +13,15 @@
 		</uni-list>
 
 
-		<uni-section title="必填信息" type="line" style="height: 80upx;"></uni-section>
-		    <view class="uni-list" >
+		    <view class="uni-list" style="margin-top: 30upx;">
 								<view class="uni-list-cell">
 									<view class="uni-list-cell-left">
 										* 日报类型:
 									</view>
 									
 									<view class="uni-list-cell-db">
-										<picker @change="bindPickerChange" :value="index" :range="array">
-											<view class="uni-input">{{array[index]}}</view>
+										<picker @change="bindPickerChange" :value="indexType" :range="arrayType">
+											<view class="uni-input">{{arrayType[indexType]}}</view>
 										</picker>
 									</view>
 								</view>
@@ -34,7 +33,7 @@
 										* 当前项目:
 									</view>
 									<view class="uni-list-cell-db">
-										<picker @change="bindPickerChange" :value="indexProject" :range="arrayProject" :range-key="'value'">
+										<picker @change="projectPickerChange" :value="indexProject" :range="arrayProject" :range-key="'value'">
 											<view class="uni-input">{{arrayProject[indexProject].value}}</view>
 										</picker>
 									</view>
@@ -62,59 +61,18 @@
 							<view class="uni-list-cell-db">
 								<picker @change="supportPickerChange" :value="indexSupport" :range="arraySupport" :range-key="'value'">
 									<view class="uni-input">
+									
 										{{arraySupport[indexSupport].value}}
 									</view>
 								</picker>
 							</view>
 						</view>
 					</view>
-<!--
-		<uni-list>
-			<uni-list-item title="日报类型:">
 
-				<template v-slot:right="">
-					<picker @change="bindPickerChange" :value="index" :range="array">
-						<view class="uni-input">{{array[index]}}</view>
-					</picker>
-				</template>
-			</uni-list-item>
-
-
-			<uni-list-item title="项目名称:">
-
-				<template v-slot:right="">
-					<picker @change="bindPickerChange" :value="indexProject" :range="arrayProject" :range-key="'value'">
-						<view class="uni-input">{{arrayProject[indexProject].value}}</view>
-					</picker>
-				</template>
-			</uni-list-item>
-
-			<uni-list-item title="项目客户:" >
-
-				<template v-slot:right="" >
-					<picker style="width:100%;" @change="projectkehuPickerChange" :value="indexProjectkehu" :range="arrayProjectKehu" :range-key="'value'">
-						<view class="uni-input">
-							{{arrayProjectKehu[indexProjectkehu].value}}
-						</view>
-					</picker>
-				</template>
-			</uni-list-item>
-			<uni-list-item title="问题工单:">
-
-				<template v-slot:right="">
-					<picker @change="supportPickerChange" :value="indexSupport" :range="arraySupport" :range-key="'value'">
-						<view class="uni-input">
-							{{arraySupport[indexSupport].value}}
-						</view>
-					</picker>
-				</template>
-			</uni-list-item>
-		</uni-list>
-		-->
-		<uni-section title="填写简报" type="line" style="height: 80upx;"></uni-section>
+		
     
-                     <view class="uni-textarea">
-                         <textarea placeholder="请输入今日简报的内容" />
+                     <view class="uni-textarea" style="margin-top: 30upx;">
+                         <textarea placeholder="请输入今日简报的内容"  v-model="content" />
                      </view>
                 
 
@@ -136,11 +94,6 @@
 	import unilist_item from '../../components/uni-list/uni-list.vue';
 
 	
-	// import cmdNavBar from "@/components/cmd-nav-bar/cmd-nav-bar.vue"
-	// import cmdPageBody from "@/components/cmd-page-body/cmd-page-body.vue"
-	// import cmdTransition from "@/components/cmd-transition/cmd-transition.vue"
-	// import cmdCelItem from "@/components/cmd-cell-item/cmd-cell-item.vue"
-	// import cmdAvatar from "@/components/cmd-avatar/cmd-avatar.vue"
 
 	import {
 		mapState
@@ -148,21 +101,18 @@
 
 
 	export default {
-		computed: { ...mapState(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname'])
+		computed: { ...mapState(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname','userId'])
 		},
 
 		components: {
-			// cmdNavBar,
-			// cmdPageBody,
-			// cmdTransition,
-			// cmdCelItem,
-			// cmdAvatar
+			unilist,
+			unilist_item
 		},
 
 		data() {
 			return {
 
-				array: ['早报', '晚报'],
+				arrayType: ['早报', '晚报'],
 
 				arrayProject: [{
 					key: "0",
@@ -188,7 +138,7 @@
 					value: "宏观002设备没声音"
 				}],
 
-				index: 0,
+				indexType: 0,
 				indexProject: 0,
 				indexProjectkehu: 0,
 				indexSupport: 0,
@@ -198,7 +148,8 @@
 
 				unionName: "",
 				unionDtname: "",
-				datetime: ""
+				datetime: "",
+				content:""
 			}
 		},
 
@@ -219,8 +170,8 @@
 
 
 			bindPickerChange: function(e) {
-
-				this.index = e.target.value
+			console.log(e.target.value);
+				this.indexType = e.target.value
 			},
 
 			projectPickerChange: function(e) {
@@ -232,8 +183,8 @@
 				this.indexProjectkehu = e.target.value
 			},
 			supportPickerChange: function(e) {
-
-				this.indexSupport = e.target.value
+                console.log(e.target.value);
+				this.indexSupport =e.target.value;
 			},
 			// 位置授权
 			getAuthorizeInfo() {
@@ -305,11 +256,75 @@
 			},
 
 			onInfoSubmit() {
-
-				uni.showToast({
-					title: '提交成功',
-					duration: 2000
+				var _self=this;
+				
+				uni.showLoading({
+				    title: '提交中'
 				});
+				
+				var Key=this.ApiKey;
+				 console.log(_self.userId);
+				 console.log(_self.indexProject);
+				 console.log(_self.indexProjectkehu);
+				 console.log(this.indexType);
+				  console.log(_self.indexType);
+				 console.log(_self.indexSupport);
+				uni.request({
+				    url:this.LoginHost+"/api/Direction/Put", //仅为示例，并非真实接口地址。
+				    data: {
+						userId:_self.userId,
+						projecId:_self.indexProject,
+						customerId:_self.indexProjectkehu,
+						type:_self.indexType,
+						supportId:_self.indexSupport,
+						longitude:_self.locatllongitude,
+						latitude:_self.locatllatitude,
+						content:_self.content,
+						address:_self.locatladdress,
+						date:_self.datetime,
+					   SigningKey:Key
+				    },
+					method :"POST",
+				    header: {
+				        'content-type': 'application/json' //自定义请求头信息
+				    },
+				    success: (res) => {
+				     
+					 console.log(JSON.stringify(res));
+					 
+					 //关闭加载框
+					 uni.hideLoading(); 
+					 
+						 if (!res.data.Success) {
+							
+							uni.showToast({
+								icon: 'none',
+								title: res.data.Message,
+							});
+							
+							return;
+							}
+						
+							
+						uni.showModal({
+							
+							content: '提交成功，是否返回首页？',
+							showCancel: true,
+							success: (res) => {
+								if (res.confirm) {
+								
+											uni.navigateBack();
+									
+								   }
+							    }
+					     	});
+						 
+				    }
+				});
+				
+				
+				
+				
 
 			}
 

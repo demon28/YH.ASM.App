@@ -80,13 +80,13 @@
 				
 			  console.log("======"+ this.LoginHost+"/api/Login2/Login");
 				
-				var array={};
-				array.push(this.account);
-				array.push(this.password);
+				// var array={};
+				// array.push(this.account);
+				// array.push(this.password);
 				
 				
-				var Key=config.Singin(array,this.ApiKey);
-				
+				//var Key=config.Singin(array,this.ApiKey);
+				var Key=this.ApiKey;
 				
 				console.log("======key"+Key);
 				
@@ -105,13 +105,12 @@
 				  
 				        this.text = 'request success';
 					 console.log(JSON.stringify(res));
+				console.log("======key"+res.data.Content.USER_ID);
 					
 						 if (res.data.Success) {
 							 
 							 //登录信息写进本地数据库
 							 
-							  console.log("======"+ res.data.Content.WORK_ID);
-							  
 						 	this.login(res.data.Content);
 								
 								//跳转本地数据库

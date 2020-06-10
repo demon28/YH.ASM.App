@@ -3,6 +3,7 @@
   "usingComponents": {
     "uni-list": "/components/uni-list/uni-list",
     "uni-list-item": "/components/uni-list-item/uni-list-item",
-    "uni-section": "/components/uni-section/uni-section"
+    "unilist": "/components/uni-list-item/uni-list-item",
+    "unilist_item": "/components/uni-list/uni-list"
   }
 }

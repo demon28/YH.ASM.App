@@ -1694,9 +1694,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!***********************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/store/index.js ***!
-  \***********************************************************/
+/*!****************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/store/index.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1713,6 +1713,7 @@ var store = new _vuex.default.Store({
             */
     forcedLogin: true,
     hasLogin: false,
+    userId: "",
     userName: "",
     workid: "12313213",
     department: "",
@@ -1722,7 +1723,9 @@ var store = new _vuex.default.Store({
 
   mutations: {
     login: function login(state, data) {
-      state.userName = data.USER_NAME || '新用户';
+
+      state.userId = data.USER_ID;
+      state.userName = data.USER_NAME;
       state.hasLogin = true;
 
       state.workid = data.WORK_ID;
@@ -8723,41 +8726,10 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 3:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 35:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/service.js ***!
-  \*******************************************************/
+/***/ 27:
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/service.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8791,10 +8763,64 @@ var addUser = function addUser(userInfo) {
 
 /***/ }),
 
+/***/ 28:
+/*!******************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/config.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+//import md5 from 'js-md5/src/md5';
+
+function Singin(array, ApiKey) {
+
+  var str = "";
+  for (var i = 0; i < array.length; i++) {
+    str += array[i];
+  }
+  //return md5(str);
+
+}
+
+/***/ }),
+
+/***/ 3:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
 /***/ 4:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/pages.json ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/pages.json ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8802,10 +8828,10 @@ var addUser = function addUser(userInfo) {
 
 /***/ }),
 
-/***/ 89:
-/*!**************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
-  \**************************************************************************/
+/***/ 83:
+/*!*******************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
