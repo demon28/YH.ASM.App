@@ -1,10 +1,8 @@
 {
   "navigationBarTitleText": "提交日报",
   "usingComponents": {
-    "cmd-page-body": "/components/cmd-page-body/cmd-page-body",
-    "cmd-transition": "/components/cmd-transition/cmd-transition",
-    "cmd-nav-bar": "/components/cmd-nav-bar/cmd-nav-bar",
-    "cmd-cel-item": "/components/cmd-cell-item/cmd-cell-item",
-    "cmd-avatar": "/components/cmd-avatar/cmd-avatar"
+    "uni-list": "/components/uni-list/uni-list",
+    "uni-list-item": "/components/uni-list-item/uni-list-item",
+    "uni-section": "/components/uni-section/uni-section"
   }
 }

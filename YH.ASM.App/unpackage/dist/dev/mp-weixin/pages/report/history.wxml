@@ -1,1 +1,1 @@
-<view class="_div"></view>
+<view class="content"><uni-list vue-id="aae93f58-1" bind:__l="__l" vue-slots="{{['default']}}"><block wx:for="{{dataList}}" wx:for-item="item" wx:for-index="index"><uni-list-item vue-id="{{('aae93f58-2-'+index)+','+('aae93f58-1')}}" title="{{item.type}}" note="{{item.date}}" show-arrow="{{false}}" bind:__l="__l"></uni-list-item></block></uni-list></view>
