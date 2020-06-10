@@ -1,5 +1,9 @@
 <template>
 	<view class="content">
+		
+		
+		
+		
 		<view class="input-group">
 			<view class="input-row border">
 				<text class="title">账号：</text>
@@ -18,6 +22,8 @@
 
 <script>
 	import service from '../../service.js';
+	import config from'../../common/config.js';
+	
 	import {
 		mapState,
 		mapMutations
@@ -74,11 +80,22 @@
 				
 			  console.log("======"+ this.LoginHost+"/api/Login2/Login");
 				
+				var array={};
+				array.push(this.account);
+				array.push(this.password);
+				
+				
+				var Key=config.Singin(array,this.ApiKey);
+				
+				
+				console.log("======key"+Key);
+				
 				uni.request({
-				    url:this.LoginHost+"/api/Login2/Login", //仅为示例，并非真实接口地址。
+				    url:this.LoginHost+"/api/Login/Login", //仅为示例，并非真实接口地址。
 				    data: {
 				       Username: this.account,
-				       Password: this.password
+				       Password: this.password,
+					   SigningKey:Key
 				    },
 					method :"POST",
 				    header: {

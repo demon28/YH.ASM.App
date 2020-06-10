@@ -15,10 +15,19 @@ const app = new Vue({
 })
 app.$mount();
 
+//通讯加密key
+Vue.prototype.ApiKey="58b59b3ae5d0ec0629950ebdd4dabe39"
 
+//测试环境  host
+Vue.prototype.LoginHost="http://www.asm.cn:50428";
 
-
-Vue.prototype.LoginHost="http://sso.asm.cn:51419";
-
-Vue.prototype.LoginUrl="http://sso.asm.cn:51419"+"/api/Login2/Login";
-
+//签名方法
+Vue.prototype.getImgSrc = function(array,ApiKey){
+  
+  var str="";
+  for(var i=0 ;i<array.length;i++){
+	  str+=array[i];
+  }
+  
+  
+}

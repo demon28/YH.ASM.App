@@ -32,7 +32,7 @@
 		onLoad() {
 			
 			console.log(this.forcedLogin+"===="+this.hasLogin+"==="+this.userName+"==="+this.workid+"==="+this.department+"===");
-			
+			   
 			if (!this.hasLogin) {
 				uni.showModal({
 					title: '未登录',

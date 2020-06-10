@@ -24,12 +24,22 @@ _App.default));
 
 createApp(app).$mount();
 
+//通讯加密key
+_vue.default.prototype.ApiKey = "58b59b3ae5d0ec0629950ebdd4dabe39";
+
+//测试环境  host
+_vue.default.prototype.LoginHost = "http://www.asm.cn:50428";
+
+//签名方法
+_vue.default.prototype.getImgSrc = function (array, ApiKey) {
+
+  var str = "";
+  for (var i = 0; i < array.length; i++) {
+    str += array[i];
+  }
 
 
-
-_vue.default.prototype.LoginHost = "http://sso.asm.cn:51419";
-
-_vue.default.prototype.LoginUrl = "http://sso.asm.cn:51419" + "/api/Login2/Login";
+};
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
 
 /***/ }),
