@@ -344,8 +344,13 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
     // 获取地理位置
     getLocationInfo: function getLocationInfo() {
       var _self = this;
+
+      //加载提醒
       uni.showLoading({
         title: '正在获取当前位置...' });
+
+
+
 
       uni.getLocation({
         type: 'wgs84',
@@ -355,7 +360,8 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
 
 
           if (!res.latitude) {
-
+            //关闭加载框
+            uni.hideLoading();
             console.log("经纬度不存在！");
 
             uni.showModal({
@@ -399,11 +405,20 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
                 uni.showToast({
                   title: '获取地理位置信息失败！',
                   icon: 'none',
-                  duration: 1000 });
+                  duration: 3000 });
 
 
               }
             } });
+
+
+        }, fail: function fail(err) {
+          console.log(err);
+          uni.hideLoading();
+          uni.showToast({
+            title: '获取地理位置信息失败！请打开手机GPS定位!',
+            icon: 'none',
+            duration: 3000 });
 
 
         } });

@@ -35,6 +35,15 @@
 				"navigationBarTitleText": "查看日报",
 				"enablePullDownRefresh":true
 			}
+		},
+		
+		
+		{
+			"path": "pages/report/reportHis",
+			"style": {
+				"navigationBarTitleText": "查看日报",
+				"enablePullDownRefresh":true
+			}
 		}
 	],
 	"tabBar": {

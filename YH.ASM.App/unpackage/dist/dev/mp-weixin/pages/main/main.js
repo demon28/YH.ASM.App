@@ -206,7 +206,8 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
     ViewReportHis: function ViewReportHis() {
 
       uni.navigateTo({
-        url: '../report/history' });
+        //url: '../report/history'
+        url: '../report/reportHis' });
 
 
     } } };exports.default = _default;

@@ -12,67 +12,67 @@
 			<uni-list-item title="定位地址:" :show-arrow="false" :rightText="locatladdress"></uni-list-item>
 		</uni-list>
 
-		    <view class="uni-list" style="margin-top: 30upx;">
-								<view class="uni-list-cell">
-									<view class="uni-list-cell-left">
-										* 日报类型:
-									</view>
-									
-									<view class="uni-list-cell-db">
-										<picker @change="bindPickerChange" :value="indexType" :range="arrayType">
-											<view class="uni-input">{{arrayType[indexType]}}</view>
-										</picker>
-									</view>
-								</view>
-							</view>
-		
-							<view class="uni-list" >
-								<view class="uni-list-cell">
-									<view class="uni-list-cell-left">
-										* 当前项目:
-									</view>
-									<view class="uni-list-cell-db">
-										<picker @change="projectPickerChange" :value="indexProject" :range="arrayProject" :range-key="'value'">
-											<view class="uni-input">{{arrayProject[indexProject].value}}</view>
-										</picker>
-									</view>
-								</view>
-							</view>
-							<view class="uni-list" >
-								<view class="uni-list-cell">
-									<view class="uni-list-cell-left">
-										* 项目客户:
-									</view>
-									<view class="uni-list-cell-db">
-										<picker @change="projectkehuPickerChange" :value="indexProjectkehu" :range="arrayProjectKehu" :range-key="'value'">
-											<view class="uni-input">
-												{{arrayProjectKehu[indexProjectkehu].value}}
-											</view>
-										</picker>
-									</view>
-								</view>
-							</view>
-	<view class="uni-list" >
-						<view class="uni-list-cell">
-							<view class="uni-list-cell-left">
-								* 问题工单:
-							</view>
-							<view class="uni-list-cell-db">
-								<picker @change="supportPickerChange" :value="indexSupport" :range="arraySupport" :range-key="'value'">
-									<view class="uni-input">
-									
-										{{arraySupport[indexSupport].value}}
-									</view>
-								</picker>
-							</view>
-						</view>
-					</view>
+		<view class="uni-list" style="margin-top: 30upx;">
+			<view class="uni-list-cell">
+				<view class="uni-list-cell-left">
+					* 日报类型:
+				</view>
 
-		
-    
-                     <view class="uni-textarea" style="margin-top: 30upx;">
-                         <textarea placeholder="请输入今日简报的内容"  v-model="content" />
-                     </view>
+				<view class="uni-list-cell-db">
+					<picker @change="bindPickerChange" :value="indexType" :range="arrayType">
+						<view class="uni-input">{{arrayType[indexType]}}</view>
+					</picker>
+				</view>
+			</view>
+		</view>
+
+		<view class="uni-list">
+			<view class="uni-list-cell">
+				<view class="uni-list-cell-left">
+					* 当前项目:
+				</view>
+				<view class="uni-list-cell-db">
+					<picker @change="projectPickerChange" :value="indexProject" :range="arrayProject" :range-key="'value'">
+						<view class="uni-input">{{arrayProject[indexProject].value}}</view>
+					</picker>
+				</view>
+			</view>
+		</view>
+		<view class="uni-list">
+			<view class="uni-list-cell">
+				<view class="uni-list-cell-left">
+					* 项目客户:
+				</view>
+				<view class="uni-list-cell-db">
+					<picker @change="projectkehuPickerChange" :value="indexProjectkehu" :range="arrayProjectKehu" :range-key="'value'">
+						<view class="uni-input">
+							{{arrayProjectKehu[indexProjectkehu].value}}
+						</view>
+					</picker>
+				</view>
+			</view>
+		</view>
+		<view class="uni-list">
+			<view class="uni-list-cell">
+				<view class="uni-list-cell-left">
+					* 问题工单:
+				</view>
+				<view class="uni-list-cell-db">
+					<picker @change="supportPickerChange" :value="indexSupport" :range="arraySupport" :range-key="'value'">
+						<view class="uni-input">
+
+							{{arraySupport[indexSupport].value}}
+						</view>
+					</picker>
+				</view>
+			</view>
+		</view>
+
+
+
+		<view class="uni-textarea" style="margin-top: 30upx;">
+			<textarea placeholder="请输入今日简报的内容" v-model="content" />
+			</view>
                 
 
 		<button class="btn-logout" style="margin-top: 20upx;" @click="onInfoSubmit()">提交</button>
@@ -205,9 +205,14 @@
 			// 获取地理位置
 			getLocationInfo() {
 				var _self = this;
+				
+				//加载提醒
 	   uni.showLoading({
 				    title: '正在获取当前位置...'
 				});
+				
+				
+				
 				uni.getLocation({
 					type: 'wgs84',
 					success(res) {
@@ -216,7 +221,8 @@
 
 
 						if(!res.latitude){
-							
+							//关闭加载框
+							 uni.hideLoading(); 
 							console.log("经纬度不存在！");
 							
 							uni.showModal({
@@ -247,9 +253,9 @@
 
 
 
-					//关闭加载框
-					 uni.hideLoading(); 
-					 
+								//关闭加载框
+								 uni.hideLoading(); 
+						
 								console.log(re.data.result.address)
 
 								if (re.statusCode === 200) {
@@ -260,14 +266,23 @@
 									uni.showToast({
 										title: '获取地理位置信息失败！',
 										icon: 'none',
-										duration: 1000
-									})
+										duration: 3000
+									});
 									
 								}
 							}
 						});
 
-					}
+					},fail: (err) => {
+							console.log(err);
+							 uni.hideLoading(); 
+							uni.showToast({
+								title: '获取地理位置信息失败！请打开手机GPS定位!',
+								icon: 'none',
+								duration: 3000
+							});
+   
+							}							
 				});
 			},
 

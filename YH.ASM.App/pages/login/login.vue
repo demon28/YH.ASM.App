@@ -89,10 +89,7 @@
 				console.log("======key"+Key);
 				
 				
-				//加载提醒
-				uni.showLoading({
-								    title: '登录中...'
-								});
+				
 								
 				
 				uni.request({
@@ -111,8 +108,6 @@
 				        this.text = 'request success';
 					 console.log(JSON.stringify(res));
 			
-					//关闭加载框
-					 uni.hideLoading(); 
 					 
 						 if (res.data.Success) {
 							 	console.log("======key"+res.data.Content.USER_ID);

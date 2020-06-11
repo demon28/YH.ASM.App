@@ -221,9 +221,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
       console.log("======key" + Key);
 
 
-      //加载提醒
-      uni.showLoading({
-        title: '登录中...' });
 
 
 
@@ -243,8 +240,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
           _this.text = 'request success';
           console.log(JSON.stringify(res));
 
-          //关闭加载框
-          uni.hideLoading();
 
           if (res.data.Success) {
             console.log("======key" + res.data.Content.USER_ID);

@@ -148,6 +148,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var unilist = function unilist() {__webpack_require__.e(/*! require.ensure | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list-item/uni-list-item.vue */ 71));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var unilist_item = function unilist_item() {__webpack_require__.e(/*! require.ensure | components/uni-list/uni-list */ "components/uni-list/uni-list").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list/uni-list.vue */ 64));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
@@ -162,8 +167,10 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
 
   data: function data() {
     return {
-      dataList: [],
-      pageindex: 1 };
+      list: [],
+      pageindex: 1,
+      pagesize: 15,
+      pageTotal: 10 };
 
   },
   created: function created() {
@@ -174,10 +181,25 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
   methods: {
 
     loadData: function loadData() {
-      this.pageindex += 1;
-      console.log("页码：" + this.pageindex);
+
+
       var _self = this;
+      _self.pageindex += 1;
+
+      if (_self.pageindex >= _self.pageTotal) {
+
+        uni.showToast({
+          icon: 'none',
+          title: "没有更多数据了..." });
+
+        return;
+      }
+
+      console.log("页码：" + this.pageindex);
+
       var Key = this.ApiKey;
+
+      //加载提示
       uni.showLoading({
         title: '加载中...' });
 
@@ -187,7 +209,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
         data: {
           userId: _self.userId,
           pageindex: _self.pageindex,
-          pagesize: 20,
+          pagesize: _self.pagesize,
           SigningKey: Key },
 
         method: "GET",
@@ -209,8 +231,8 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
 
             return;
           }
-          // console.log(JSON.stringify(res.data.Content));
-
+          console.log(JSON.stringify(res.data));
+          _self.pageTotal = res.data.PageTotal;
 
 
           for (var i = 0; i < res.data.Content.length; i++) {
@@ -218,7 +240,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
             var str_type = res.data.Content[i].TYPE == 0 ? "早报" : "晚报";
             var str_Date = res.data.Content[i].CREATETIME.substr(0, 10);;
             var str_address = res.data.Content[i].ADDRESS;
-            _self.dataList.push({ type: str_type, date: str_Date, address: str_address });
+            _self.list.push({ type: str_type, date: str_Date, address: str_address });
 
           }
 

@@ -27,12 +27,12 @@ createApp(app).$mount();
 //通讯加密key
 _vue.default.prototype.ApiKey = "58b59b3ae5d0ec0629950ebdd4dabe39";
 
-//测试环境  host
-//Vue.prototype.LoginHost="http://www.asm.cn:50428";
+//开发环境  host
+_vue.default.prototype.LoginHost = "http://www.asm.cn:50428";
 
 //正式环境
 
-_vue.default.prototype.LoginHost = "https://asm.yhwins.com:52420";
+//Vue.prototype.LoginHost="https://asm.yhwins.com:52420";
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
 
 /***/ }),

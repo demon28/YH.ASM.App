@@ -67,7 +67,8 @@
 			ViewReportHis(){
 				
 				uni.navigateTo({
-					url: '../report/history'
+					//url: '../report/history'
+				url: '../report/reportHis'
 				});
 				
 			}
