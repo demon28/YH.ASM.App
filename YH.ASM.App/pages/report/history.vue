@@ -1,13 +1,10 @@
 <template>
 	
 		<view class="content">
-			<uni-list loadmoreoffset="1" @loadmore="loadData()" >
+			<uni-list loadmoreoffset="1"    >
 				<uni-list-item  :title="item.type" :note="item.date"  v-for="(item,index) in dataList"  :rightText="item.address" :show-arrow="false"  >
-							
 				</uni-list-item>
-				
 			</uni-list>
-			
 		</view>
 </template>
 
@@ -35,15 +32,13 @@
 		 created(){
 		    this.pageindex=0;
 			 this.loadData();
-			
-			
-		},
+		}, 
+		
 	    methods: {
-	    
-		   
+	     
 		   loadData(){
 			      this.pageindex+=1;
-				  
+				  console.log( "页码："+this.pageindex);
 			   var _self=this;
 			   var Key=this.ApiKey;
 			   uni.showLoading({
@@ -55,6 +50,7 @@
 			       data: {
 			   		userId:_self.userId,
 			   	    pageindex:_self.pageindex,
+					pagesize:20,
 			   		SigningKey :Key
 			       },
 			   	method :"GET",
@@ -63,8 +59,9 @@
 			       },
 			       success: (res) => {
 			        
-			   	 console.log(JSON.stringify(res));
-			   	 //关闭加载框
+			  // 	 console.log(JSON.stringify(res));
+			  
+				   //关闭加载框
 			   	 uni.hideLoading(); 
 			   		 if (!res.data.Success) {
 			   			
@@ -75,8 +72,10 @@
 			   			
 			   			return;
 			   	   }
-			   	   console.log(JSON.stringify(res.data.Content));
+			   	  // console.log(JSON.stringify(res.data.Content));
 			   	   
+				   
+				   
 			   	   for(var i=0;i<res.data.Content.length; i++){
 			   		   
 			   		   var str_type=res.data.Content[i].TYPE==0?"早报":"晚报";

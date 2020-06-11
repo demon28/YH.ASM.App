@@ -78,11 +78,9 @@
 				}
 				
 				
-			  console.log("======"+ this.LoginHost+"/api/Login2/Login");
+			  console.log("======"+ this.LoginHost+"/api/Login/Login");
 				
-				// var array={};
-				// array.push(this.account);
-				// array.push(this.password);
+			
 				
 				
 				//var Key=config.Singin(array,this.ApiKey);
@@ -105,10 +103,10 @@
 				  
 				        this.text = 'request success';
 					 console.log(JSON.stringify(res));
-				console.log("======key"+res.data.Content.USER_ID);
+			
 					
 						 if (res.data.Success) {
-							 
+							 	console.log("======key"+res.data.Content.USER_ID);
 							 //登录信息写进本地数据库
 							 
 						 	this.login(res.data.Content);

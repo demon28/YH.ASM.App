@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "提交日报",
+  "usingComponents": {
+    "uni-list": "/components/uni-list/uni-list",
+    "uni-list-item": "/components/uni-list-item/uni-list-item",
+    "unilist": "/components/uni-list-item/uni-list-item",
+    "unilist_item": "/components/uni-list/uni-list"
+  }
+}

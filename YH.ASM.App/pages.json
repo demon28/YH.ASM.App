@@ -32,7 +32,8 @@
 		{
 			"path": "pages/report/history",
 			"style": {
-				"navigationBarTitleText": "查看日报"
+				"navigationBarTitleText": "查看日报",
+				"enablePullDownRefresh":true
 			}
 		}
 	],

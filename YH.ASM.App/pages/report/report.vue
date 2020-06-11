@@ -12,7 +12,6 @@
 			<uni-list-item title="定位地址:" :show-arrow="false" :rightText="locatladdress"></uni-list-item>
 		</uni-list>
 
-
 		    <view class="uni-list" style="margin-top: 30upx;">
 								<view class="uni-list-cell">
 									<view class="uni-list-cell-left">
