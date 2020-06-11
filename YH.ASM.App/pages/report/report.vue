@@ -156,7 +156,10 @@
 
 			//变量赋值
 			var myDate = new Date();
-			this.datetime = myDate.toLocaleDateString();
+			
+			this.datetime = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate();
+			
+			
 			this.unionName = this.userName + "(" + this.workid + ")";
 			this.unionDtname = this.department + "-" + this.dtname + "";
 
@@ -202,30 +205,64 @@
 			// 获取地理位置
 			getLocationInfo() {
 				var _self = this;
-
+	   uni.showLoading({
+				    title: '正在获取当前位置...'
+				});
 				uni.getLocation({
 					type: 'wgs84',
 					success(res) {
 						console.log(res);
-						console.log(res.latitude.toString());
+						
 
+
+						if(!res.latitude){
+							
+							console.log("经纬度不存在！");
+							
+							uni.showModal({
+								title: '定位失败',
+								content: '请打开手机GPS定位',
+								showCancel:false,
+								success: (res) => {}
+							});
+							
+							return;
+							
+						}
+
+						console.log(res.latitude.toString());
 						_self.locatllatitude = res.latitude.toString();
 						_self.locatllongitude = res.longitude.toString();
+						
+						
+						
+						
 						uni.request({
 							header: {
 								"Content-Type": "application/text"
 							},
-							url: 'http://apis.map.qq.com/ws/geocoder/v1/?location=' + res.latitude + ',' + res.longitude +
+							url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + res.latitude + ',' + res.longitude +
 								'&key=MVGBZ-R2U3U-W5CVY-2PQID-AT4VZ-PDF35',
 							success(re) {
 
+
+
+					//关闭加载框
+					 uni.hideLoading(); 
+					 
 								console.log(re.data.result.address)
 
 								if (re.statusCode === 200) {
 									_self.locatladdress = re.data.result.address;
-									console.log("获取中文街道地理位置成功")
+									console.log("获取中文街道地理位置成功"+_self.locatladdress);
 								} else {
-									console.log("获取信息失败，请重试！")
+									console.log("获取信息失败，请重试！");
+									uni.showToast({
+										title: '获取地理位置信息失败！',
+										icon: 'none',
+										duration: 1000
+									})
+									
 								}
 							}
 						});

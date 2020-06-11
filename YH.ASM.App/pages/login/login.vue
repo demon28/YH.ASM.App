@@ -88,6 +88,13 @@
 				
 				console.log("======key"+Key);
 				
+				
+				//加载提醒
+				uni.showLoading({
+								    title: '登录中...'
+								});
+								
+				
 				uni.request({
 				    url:this.LoginHost+"/api/Login/Login", //仅为示例，并非真实接口地址。
 				    data: {
@@ -104,7 +111,9 @@
 				        this.text = 'request success';
 					 console.log(JSON.stringify(res));
 			
-					
+					//关闭加载框
+					 uni.hideLoading(); 
+					 
 						 if (res.data.Success) {
 							 	console.log("======key"+res.data.Content.USER_ID);
 							 //登录信息写进本地数据库
