@@ -114,6 +114,7 @@
 							 //登录信息写进本地数据库
 							 
 						 	this.login(res.data.Content);
+							
 							//用户信息需要持久话存储。
 							
 							uni.setStorage({

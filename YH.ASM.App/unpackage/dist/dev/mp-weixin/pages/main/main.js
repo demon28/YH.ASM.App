@@ -304,9 +304,9 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
     ViewReportHis: function ViewReportHis() {
       console.log("日报记录");
       uni.navigateTo({
-        url: '../report/history'
-        //url: '../report/reportHis'
-      });
+        //url: '../report/history'
+        url: '../report/reportHis' });
+
 
     } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

@@ -92,20 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components = {
-  list: function() {
-    return __webpack_require__.e(/*! import() | components/list/list */ "components/list/list").then(__webpack_require__.bind(null, /*! @/components/list/list.vue */ 86))
-  }
-}
+var components
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  if (!_vm._isMounted) {
-    _vm.e0 = function($event) {
-      return _vm.$refs.list.scrollTop()
-    }
-  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -139,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 86));
 
 
 
@@ -157,58 +148,102 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+var _listMixin = _interopRequireDefault(__webpack_require__(/*! @/common/mixins/list-mixin.js */ 89));
+
+__webpack_require__(/*! @/common/colorui/main.css */ 144);
+__webpack_require__(/*! @/common/colorui/icon.css */ 145);
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var mLoading = function mLoading() {__webpack_require__.e(/*! require.ensure | components/m-loading */ "components/m-loading").then((function () {return resolve(__webpack_require__(/*! @/components/m-loading.vue */ 90));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
-
-
-
-
-
-
-var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
 {
+  computed: _objectSpread({}, (0, _vuex.mapState)(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname', 'userId'])),
+
+  mixins: [_listMixin.default],
+  components: {
+    mLoading: mLoading },
+
   data: function data() {
     return {
-      list: [],
-      showToTop: false };
+      list: [] };
 
   },
-  computed: _objectSpread({},
-  (0, _vuex.mapState)(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname', 'userId']), {
-
-    options: function options() {
-      return {
-
-        url: this.LoginHost + "/api/Direction/List", //仅为示例，并非真实接口地址。
-        params: {
-          userId: this.userId,
-          pageindex: 1,
-          pagesize: 20,
-          SigningKey: this.ApiKey } };
-
-
-
-    } }),
-
-
   methods: {
-    onSuccess: function onSuccess(list) {
-      this.list = list;
-      console.log("请求成功，当前的列表内容为：", list);
-    },
-    onScroll: function onScroll(e) {var
-      scrollTop = e.target.scrollTop;
-      if (scrollTop > 100) {
-        this.showToTop = true;
-      } else {
-        this.showToTop = false;
-      }
-    } },
+    // 模拟后端分页
+    getData: function getData(requestParams) {var _this = this;
+      var _self = this;
+      return new Promise(function (res, rej) {
 
-  mounted: function mounted() {
-    this.$refs.list.request();
-  } };exports.default = _default;
+        var params = requestParams;
+        var resload = res;
+
+
+        uni.request({
+          url: _this.LoginHost + "/api/Direction/List",
+          data: {
+            userId: _self.userId,
+            pageindex: params.page,
+            pagesize: params.size,
+            SigningKey: _self.ApiKey },
+
+          method: "GET",
+          header: {
+            'content-type': 'application/text' },
+
+          success: function success(re) {
+
+            console.log(re);
+            var arry = [];
+            for (var i = 0; i < re.data.Content.length; i++) {
+
+              var str_type = re.data.Content[i].TYPE == 0 ? "早报" : "晚报";
+              var str_Date = re.data.Content[i].CREATETIME.substr(0, 10);;
+              var str_address = re.data.Content[i].ADDRESS;
+              arry.push({
+                type: str_type,
+                date: str_Date,
+                address: str_address });
+
+
+            }
+            resload({
+              code: 200,
+              data: {
+                page: params.page,
+                size: params.size,
+                list: arry,
+                total: re.data.PageTotal } });
+
+
+          },
+          fail: function fail(r) {
+            console.log(r);
+
+          } });
+
+
+
+
+      });
+
+    },
+
+
+
+    // 数据请求(没错就是这么少的代码)
+    _getList: function _getList() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result, self;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  _this2.getData({
+                    page: _this2.page,
+                    size: _this2.size }));case 2:result = _context.sent;
+
+                self = _this2;
+                _this2.total = result.data.total;
+                result.data.list.map(function (item) {
+                  self.list.push(item);
+                });case 6:case "end":return _context.stop();}}}, _callee);}))();
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

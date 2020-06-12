@@ -158,8 +158,8 @@
 			ViewReportHis(){
 				console.log("日报记录");
 				uni.navigateTo({
-					url: '../report/history'
-			    	//url: '../report/reportHis'
+					//url: '../report/history'
+			    	url: '../report/reportHis'
 				});
 				
 			}

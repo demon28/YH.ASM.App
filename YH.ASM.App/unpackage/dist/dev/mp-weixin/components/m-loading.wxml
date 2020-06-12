@@ -1,0 +1,1 @@
+<view class="m-loading"><block wx:if="{{!finished&&loading}}"><view class="cu-load  loading"></view></block><block wx:if="{{finished}}"><view class="cu-load  over"></view></block></view>

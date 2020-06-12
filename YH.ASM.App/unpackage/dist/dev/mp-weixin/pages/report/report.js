@@ -403,7 +403,8 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
 
 
       console.log(_self.projectName);
-
+      console.log(_self.customerName);
+      console.log(_self.projectName);
 
       if (_self.projectName == "") {
 
@@ -415,17 +416,17 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
       }
 
 
-      if (_self.customerName.length < 1) {
+      if (_self.customerName == "") {
 
         uni.showToast({
           icon: 'none',
-          title: "请输入项目客户信息" });
+          title: "请输入客户信息" });
 
         return;
       }
 
 
-      if (_self.supportName.length < 1) {
+      if (_self.supportName == "") {
 
         uni.showToast({
           icon: 'none',
@@ -492,9 +493,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
         success: function success(res) {
 
           console.log(JSON.stringify(res));
-
-
-
 
 
           //关闭加载框

@@ -246,6 +246,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
             //登录信息写进本地数据库
 
             _this.login(res.data.Content);
+
             //用户信息需要持久话存储。
 
             uni.setStorage({
