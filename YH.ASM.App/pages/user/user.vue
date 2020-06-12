@@ -26,6 +26,15 @@
 			},
 			bindLogout() {
 				this.logout();
+				
+				try {
+				    uni.removeStorageSync('IsLogined');
+				    uni.removeStorageSync('loginfo');
+				} catch (e) {
+				    // error
+				}
+				
+				
 				/**
 				 * 如果需要强制登录跳转回登录页面
 				 */

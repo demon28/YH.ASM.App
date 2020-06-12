@@ -12,7 +12,7 @@
 			<uni-list-item title="定位地址:" :show-arrow="false" :rightText="locatladdress"></uni-list-item>
 		</uni-list>
 
-		<view class="uni-list" style="margin-top: 30upx;">
+	 <view class="uni-list" style="margin-top: 30upx;">
 			<view class="uni-list-cell">
 				<view class="uni-list-cell-left">
 					* 日报类型:
@@ -25,16 +25,13 @@
 				</view>
 			</view>
 		</view>
-
 		<view class="uni-list">
 			<view class="uni-list-cell">
 				<view class="uni-list-cell-left">
 					* 当前项目:
 				</view>
 				<view class="uni-list-cell-db">
-					<picker @change="projectPickerChange" :value="indexProject" :range="arrayProject" :range-key="'value'">
-						<view class="uni-input">{{arrayProject[indexProject].value}}</view>
-					</picker>
+					 <input class="uni-input"  placeholder="请输入当前项目名称" v-model="projectName" />
 				</view>
 			</view>
 		</view>
@@ -44,11 +41,7 @@
 					* 项目客户:
 				</view>
 				<view class="uni-list-cell-db">
-					<picker @change="projectkehuPickerChange" :value="indexProjectkehu" :range="arrayProjectKehu" :range-key="'value'">
-						<view class="uni-input">
-							{{arrayProjectKehu[indexProjectkehu].value}}
-						</view>
-					</picker>
+				 <input class="uni-input"  placeholder="请输入项目客户信息" v-model="customerName" />
 				</view>
 			</view>
 		</view>
@@ -58,16 +51,11 @@
 					* 问题工单:
 				</view>
 				<view class="uni-list-cell-db">
-					<picker @change="supportPickerChange" :value="indexSupport" :range="arraySupport" :range-key="'value'">
-						<view class="uni-input">
-
-							{{arraySupport[indexSupport].value}}
-						</view>
-					</picker>
+				 <input class="uni-input"  placeholder="请输入处理的工单问题"  v-model="supportName" />
 				</view>
 			</view>
 		</view>
-
+ 
 
 
 		<view class="uni-textarea" style="margin-top: 30upx;">
@@ -76,13 +64,8 @@
                 
 
 		<button class="btn-logout" style="margin-top: 20upx;" @click="onInfoSubmit()">提交</button>
-
-
+ 
 	</view>
-
-
-
-
 
 
 
@@ -113,30 +96,7 @@
 
 				arrayType: ['早报', '晚报'],
 
-				arrayProject: [{
-					key: "0",
-					value: "惠州长治项目"
-				}, {
-					key: "1",
-					value: "深圳龙华项目"
-				}],
-
-				arrayProjectKehu: [{
-					key: "0",
-					value: "张福军"
-				}, {
-					key: "1",
-					value: "刘之龙"
-				}],
-
-				arraySupport: [{
-					key: "0",
-					value: "拿铁001设备噪音较大"
-				}, {
-					key: "1",
-					value: "宏观002设备没声音"
-				}],
-
+				
 				indexType: 0,
 				indexProject: 0,
 				indexProjectkehu: 0,
@@ -148,7 +108,11 @@
 				unionName: "",
 				unionDtname: "",
 				datetime: "",
-				content:""
+				content:"",
+				
+				projectName:"",
+				customerName:"",
+				supportName:""
 			}
 		},
 
@@ -176,18 +140,7 @@
 				this.indexType = e.target.value
 			},
 
-			projectPickerChange: function(e) {
-
-				this.indexProject = e.target.value
-			},
-			projectkehuPickerChange: function(e) {
-
-				this.indexProjectkehu = e.target.value
-			},
-			supportPickerChange: function(e) {
-                console.log(e.target.value);
-				this.indexSupport =e.target.value;
-			},
+		
 			// 位置授权
 			getAuthorizeInfo() {
 				const that = this;
@@ -207,7 +160,7 @@
 				var _self = this;
 				
 				//加载提醒
-	   uni.showLoading({
+	             uni.showLoading({
 				    title: '正在获取当前位置...'
 				});
 				
@@ -309,17 +262,70 @@
 			onInfoSubmit() {
 				var _self=this;
 				
+				
+			console.log(_self.projectName);
+				
+				
+				if(_self.projectName==""){
+					
+					uni.showToast({
+						icon: 'none',
+						title: "请输入当前项目名称",
+					});
+					return
+				}
+				
+				
+				if(_self.customerName.length<1){
+					
+					uni.showToast({
+						icon: 'none',
+						title: "请输入项目客户信息",
+					});
+					return
+				}
+				
+				
+				if(_self.supportName.length<1){
+					
+					uni.showToast({
+						icon: 'none',
+						title: "请输入工单名称",
+					});
+					return
+				}
+				
+				
+				
+				if(this.indexType==1){
+					
+					if(_self.content==""||_self.content.length<10)
+					{
+						uni.showToast({
+							icon: 'none',
+							title: "请输入写今日简报的内容，字数不低于10个字",
+						});
+						return
+						
+					}
+				}
+				
+				
+				
 				uni.showLoading({
 				    title: '提交中'
 				});
 				
 				var Key=this.ApiKey;
 				 console.log(_self.userId);
-				 console.log(_self.indexProject);
-				 console.log(_self.indexProjectkehu);
 				 console.log(this.indexType);
-				  console.log(_self.indexType);
-				 console.log(_self.indexSupport);
+				 
+				 console.log(_self.projectName);
+				 console.log(_self.customerName);
+				 console.log(_self.supportName);
+				 
+				 
+				 
 				uni.request({
 				    url:this.LoginHost+"/api/Direction/Put", //仅为示例，并非真实接口地址。
 				    data: {
@@ -333,6 +339,11 @@
 						content:_self.content,
 						address:_self.locatladdress,
 						date:_self.datetime,
+						
+						projectName:_self.projectName,
+						customerName:_self.customerName,
+						supportName:_self.supportName,
+							
 					   SigningKey:Key
 				    },
 					method :"POST",
@@ -342,6 +353,10 @@
 				    success: (res) => {
 				     
 					 console.log(JSON.stringify(res));
+					 
+					
+					 
+					 
 					 
 					 //关闭加载框
 					 uni.hideLoading(); 

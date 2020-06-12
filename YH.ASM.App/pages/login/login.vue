@@ -38,8 +38,8 @@
 			return {
 				providerList: [],
 				hasProvider: false,
-				account: '11003870',
-				password: '1346888',
+				account: '',
+				password: '',
 				positionTop: 0,
 				isDevtools: false,
 			}
@@ -114,6 +114,27 @@
 							 //登录信息写进本地数据库
 							 
 						 	this.login(res.data.Content);
+							//用户信息需要持久话存储。
+							
+							uni.setStorage({
+							    key: 'loginfo',
+							    data: res.data.Content,
+							    success: function () {
+							        console.log('success');
+							    },
+							});
+							
+							
+							uni.setStorage({
+							    key: 'IsLogined',
+							    data: true,
+							    success: function () {
+							        console.log('success');
+							    },
+							});
+													
+							
+						
 								
 								//跳转本地数据库
 								this.toMain();
