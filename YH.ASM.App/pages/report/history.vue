@@ -1,14 +1,10 @@
 <template>
 	
 		<view class="content">
-			<uni-list loadmoreoffset="1"    >
+			<uni-list loadmoreoffset="1" >
 				<uni-list-item  :title="item.type" :note="item.date"  v-for="(item,index) in list"  :rightText="item.address" :show-arrow="false"  >
 				</uni-list-item>
 			</uni-list>
-			
-			
-		
-			
 			
 		</view>
 </template>
@@ -16,9 +12,7 @@
 <script>
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
-	import {
-		mapState
-	} from 'vuex';
+	import {mapState} from 'vuex';
 	
 	
 	 export default {

@@ -1693,152 +1693,10 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 105:
-/*!**************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  "pulldown": "\uE588",
-  "refreshempty": "\uE461",
-  "back": "\uE471",
-  "forward": "\uE470",
-  "more": "\uE507",
-  "more-filled": "\uE537",
-  "scan": "\uE612",
-  "qq": "\uE264",
-  "weibo": "\uE260",
-  "weixin": "\uE261",
-  "pengyouquan": "\uE262",
-  "loop": "\uE565",
-  "refresh": "\uE407",
-  "refresh-filled": "\uE437",
-  "arrowthindown": "\uE585",
-  "arrowthinleft": "\uE586",
-  "arrowthinright": "\uE587",
-  "arrowthinup": "\uE584",
-  "undo-filled": "\uE7D6",
-  "undo": "\uE406",
-  "redo": "\uE405",
-  "redo-filled": "\uE7D9",
-  "bars": "\uE563",
-  "chatboxes": "\uE203",
-  "camera": "\uE301",
-  "chatboxes-filled": "\uE233",
-  "camera-filled": "\uE7EF",
-  "cart-filled": "\uE7F4",
-  "cart": "\uE7F5",
-  "checkbox-filled": "\uE442",
-  "checkbox": "\uE7FA",
-  "arrowleft": "\uE582",
-  "arrowdown": "\uE581",
-  "arrowright": "\uE583",
-  "smallcircle-filled": "\uE801",
-  "arrowup": "\uE580",
-  "circle": "\uE411",
-  "eye-filled": "\uE568",
-  "eye-slash-filled": "\uE822",
-  "eye-slash": "\uE823",
-  "eye": "\uE824",
-  "flag-filled": "\uE825",
-  "flag": "\uE508",
-  "gear-filled": "\uE532",
-  "reload": "\uE462",
-  "gear": "\uE502",
-  "hand-thumbsdown-filled": "\uE83B",
-  "hand-thumbsdown": "\uE83C",
-  "hand-thumbsup-filled": "\uE83D",
-  "heart-filled": "\uE83E",
-  "hand-thumbsup": "\uE83F",
-  "heart": "\uE840",
-  "home": "\uE500",
-  "info": "\uE504",
-  "home-filled": "\uE530",
-  "info-filled": "\uE534",
-  "circle-filled": "\uE441",
-  "chat-filled": "\uE847",
-  "chat": "\uE263",
-  "mail-open-filled": "\uE84D",
-  "email-filled": "\uE231",
-  "mail-open": "\uE84E",
-  "email": "\uE201",
-  "checkmarkempty": "\uE472",
-  "list": "\uE562",
-  "locked-filled": "\uE856",
-  "locked": "\uE506",
-  "map-filled": "\uE85C",
-  "map-pin": "\uE85E",
-  "map-pin-ellipse": "\uE864",
-  "map": "\uE364",
-  "minus-filled": "\uE440",
-  "mic-filled": "\uE332",
-  "minus": "\uE410",
-  "micoff": "\uE360",
-  "mic": "\uE302",
-  "clear": "\uE434",
-  "smallcircle": "\uE868",
-  "close": "\uE404",
-  "closeempty": "\uE460",
-  "paperclip": "\uE567",
-  "paperplane": "\uE503",
-  "paperplane-filled": "\uE86E",
-  "person-filled": "\uE131",
-  "contact-filled": "\uE130",
-  "person": "\uE101",
-  "contact": "\uE100",
-  "images-filled": "\uE87A",
-  "phone": "\uE200",
-  "images": "\uE87B",
-  "image": "\uE363",
-  "image-filled": "\uE877",
-  "location-filled": "\uE333",
-  "location": "\uE303",
-  "plus-filled": "\uE439",
-  "plus": "\uE409",
-  "plusempty": "\uE468",
-  "help-filled": "\uE535",
-  "help": "\uE505",
-  "navigate-filled": "\uE884",
-  "navigate": "\uE501",
-  "mic-slash-filled": "\uE892",
-  "search": "\uE466",
-  "settings": "\uE560",
-  "sound": "\uE590",
-  "sound-filled": "\uE8A1",
-  "spinner-cycle": "\uE465",
-  "download-filled": "\uE8A4",
-  "personadd-filled": "\uE132",
-  "videocam-filled": "\uE8AF",
-  "personadd": "\uE102",
-  "upload": "\uE402",
-  "upload-filled": "\uE8B1",
-  "starhalf": "\uE463",
-  "star-filled": "\uE438",
-  "star": "\uE408",
-  "trash": "\uE401",
-  "phone-filled": "\uE230",
-  "compose": "\uE400",
-  "videocam": "\uE300",
-  "trash-filled": "\uE8DC",
-  "download": "\uE403",
-  "chatbubble-filled": "\uE232",
-  "chatbubble": "\uE202",
-  "cloud-download": "\uE8E4",
-  "cloud-upload-filled": "\uE8E5",
-  "cloud-upload": "\uE8E6",
-  "cloud-download-filled": "\uE8E9",
-  "headphones": "\uE8BF",
-  "shop": "\uE609" };exports.default = _default;
-
-/***/ }),
-
 /***/ 11:
-/*!***********************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/store/index.js ***!
-  \***********************************************************/
+/*!****************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/store/index.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2838,29 +2696,182 @@ var index_esm = {
 
 /***/ }),
 
-/***/ 144:
-/*!********************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/colorui/main.css ***!
-  \********************************************************************/
+/***/ 123:
+/*!*******************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  "pulldown": "\uE588",
+  "refreshempty": "\uE461",
+  "back": "\uE471",
+  "forward": "\uE470",
+  "more": "\uE507",
+  "more-filled": "\uE537",
+  "scan": "\uE612",
+  "qq": "\uE264",
+  "weibo": "\uE260",
+  "weixin": "\uE261",
+  "pengyouquan": "\uE262",
+  "loop": "\uE565",
+  "refresh": "\uE407",
+  "refresh-filled": "\uE437",
+  "arrowthindown": "\uE585",
+  "arrowthinleft": "\uE586",
+  "arrowthinright": "\uE587",
+  "arrowthinup": "\uE584",
+  "undo-filled": "\uE7D6",
+  "undo": "\uE406",
+  "redo": "\uE405",
+  "redo-filled": "\uE7D9",
+  "bars": "\uE563",
+  "chatboxes": "\uE203",
+  "camera": "\uE301",
+  "chatboxes-filled": "\uE233",
+  "camera-filled": "\uE7EF",
+  "cart-filled": "\uE7F4",
+  "cart": "\uE7F5",
+  "checkbox-filled": "\uE442",
+  "checkbox": "\uE7FA",
+  "arrowleft": "\uE582",
+  "arrowdown": "\uE581",
+  "arrowright": "\uE583",
+  "smallcircle-filled": "\uE801",
+  "arrowup": "\uE580",
+  "circle": "\uE411",
+  "eye-filled": "\uE568",
+  "eye-slash-filled": "\uE822",
+  "eye-slash": "\uE823",
+  "eye": "\uE824",
+  "flag-filled": "\uE825",
+  "flag": "\uE508",
+  "gear-filled": "\uE532",
+  "reload": "\uE462",
+  "gear": "\uE502",
+  "hand-thumbsdown-filled": "\uE83B",
+  "hand-thumbsdown": "\uE83C",
+  "hand-thumbsup-filled": "\uE83D",
+  "heart-filled": "\uE83E",
+  "hand-thumbsup": "\uE83F",
+  "heart": "\uE840",
+  "home": "\uE500",
+  "info": "\uE504",
+  "home-filled": "\uE530",
+  "info-filled": "\uE534",
+  "circle-filled": "\uE441",
+  "chat-filled": "\uE847",
+  "chat": "\uE263",
+  "mail-open-filled": "\uE84D",
+  "email-filled": "\uE231",
+  "mail-open": "\uE84E",
+  "email": "\uE201",
+  "checkmarkempty": "\uE472",
+  "list": "\uE562",
+  "locked-filled": "\uE856",
+  "locked": "\uE506",
+  "map-filled": "\uE85C",
+  "map-pin": "\uE85E",
+  "map-pin-ellipse": "\uE864",
+  "map": "\uE364",
+  "minus-filled": "\uE440",
+  "mic-filled": "\uE332",
+  "minus": "\uE410",
+  "micoff": "\uE360",
+  "mic": "\uE302",
+  "clear": "\uE434",
+  "smallcircle": "\uE868",
+  "close": "\uE404",
+  "closeempty": "\uE460",
+  "paperclip": "\uE567",
+  "paperplane": "\uE503",
+  "paperplane-filled": "\uE86E",
+  "person-filled": "\uE131",
+  "contact-filled": "\uE130",
+  "person": "\uE101",
+  "contact": "\uE100",
+  "images-filled": "\uE87A",
+  "phone": "\uE200",
+  "images": "\uE87B",
+  "image": "\uE363",
+  "image-filled": "\uE877",
+  "location-filled": "\uE333",
+  "location": "\uE303",
+  "plus-filled": "\uE439",
+  "plus": "\uE409",
+  "plusempty": "\uE468",
+  "help-filled": "\uE535",
+  "help": "\uE505",
+  "navigate-filled": "\uE884",
+  "navigate": "\uE501",
+  "mic-slash-filled": "\uE892",
+  "search": "\uE466",
+  "settings": "\uE560",
+  "sound": "\uE590",
+  "sound-filled": "\uE8A1",
+  "spinner-cycle": "\uE465",
+  "download-filled": "\uE8A4",
+  "personadd-filled": "\uE132",
+  "videocam-filled": "\uE8AF",
+  "personadd": "\uE102",
+  "upload": "\uE402",
+  "upload-filled": "\uE8B1",
+  "starhalf": "\uE463",
+  "star-filled": "\uE438",
+  "star": "\uE408",
+  "trash": "\uE401",
+  "phone-filled": "\uE230",
+  "compose": "\uE400",
+  "videocam": "\uE300",
+  "trash-filled": "\uE8DC",
+  "download": "\uE403",
+  "chatbubble-filled": "\uE232",
+  "chatbubble": "\uE202",
+  "cloud-download": "\uE8E4",
+  "cloud-upload-filled": "\uE8E5",
+  "cloud-upload": "\uE8E6",
+  "cloud-download-filled": "\uE8E9",
+  "headphones": "\uE8BF",
+  "shop": "\uE609" };exports.default = _default;
 
 /***/ }),
 
-/***/ 145:
-/*!********************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/colorui/icon.css ***!
-  \********************************************************************/
+/***/ 19:
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/service.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 管理账号信息
+var USERS_KEY = 'USERS_KEY';
+var STATE_KEY = 'STATE_KEY';
+
+var getUsers = function getUsers() {
+  var ret = '';
+  ret = uni.getStorageSync(USERS_KEY);
+  if (!ret) {
+    ret = '[]';
+  }
+  return JSON.parse(ret);
+};
+
+var addUser = function addUser(userInfo) {
+  var users = getUsers();
+  users.push({
+    account: userInfo.account,
+    password: userInfo.password });
+
+  uni.setStorageSync(USERS_KEY, JSON.stringify(users));
+};var _default =
+
+{
+  getUsers: getUsers,
+  addUser: addUser };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -8894,47 +8905,10 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 27:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/service.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 管理账号信息
-var USERS_KEY = 'USERS_KEY';
-var STATE_KEY = 'STATE_KEY';
-
-var getUsers = function getUsers() {
-  var ret = '';
-  ret = uni.getStorageSync(USERS_KEY);
-  if (!ret) {
-    ret = '[]';
-  }
-  return JSON.parse(ret);
-};
-
-var addUser = function addUser(userInfo) {
-  var users = getUsers();
-  users.push({
-    account: userInfo.account,
-    password: userInfo.password });
-
-  uni.setStorageSync(USERS_KEY, JSON.stringify(users));
-};var _default =
-
-{
-  getUsers: getUsers,
-  addUser: addUser };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 28:
-/*!*************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/config.js ***!
-  \*************************************************************/
+/***/ 20:
+/*!******************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/config.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8986,9 +8960,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/pages.json ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/pages.json ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8996,18 +8970,18 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 86:
+/***/ 63:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 87);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 64);
 
 /***/ }),
 
-/***/ 87:
+/***/ 64:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -9038,7 +9012,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 88);
+module.exports = __webpack_require__(/*! ./runtime */ 65);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -9055,7 +9029,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 88:
+/***/ 65:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -9787,15 +9761,15 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 89:
-/*!************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/mixins/list-mixin.js ***!
-  \************************************************************************/
+/***/ 66:
+/*!*****************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/mixins/list-mixin.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 86));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} /**
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 63));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} /**
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * uni-app上拉加载和下拉刷新混合
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @author maybe
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */var _default =
@@ -9807,7 +9781,7 @@ if (hadRuntime) {
       list: [], // 数据列表
       page: 0, // 由于分页一般页面要+1，所以为了方便分页查询，这里初始设置页码为0
       size: 15, // 每页显示的条数
-      total: 0 // 数据总条数
+      total: 10 // 数据总条数
     };
   },
   onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
@@ -9849,6 +9823,32 @@ if (hadRuntime) {
     // 数据请求方法需要在页面内重写
     _getList: function _getList() {return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:case "end":return _context5.stop();}}}, _callee5);}))();} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 67:
+/*!*************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/colorui/main.css ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 68:
+/*!*************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/colorui/icon.css ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
 
 /***/ })
 

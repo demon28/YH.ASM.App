@@ -121,7 +121,7 @@
 			//变量赋值
 			var myDate = new Date();
 			
-			this.datetime = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate();
+			this.datetime = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate() +" "+myDate.getHours()+":"+myDate.getMinutes()+":"+ myDate.getSeconds();
 			
 			
 			this.unionName = this.userName + "(" + this.workid + ")";

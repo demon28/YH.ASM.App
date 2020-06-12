@@ -5605,6 +5605,13 @@ scroll-view.cu-steps .cu-item {
 
 
 
+
+
+
+
+
+
+
 /*说明*/
 .notice {
 	font-size: 30rpx;
@@ -5615,14 +5622,14 @@ scroll-view.cu-steps .cu-item {
 /*展示上拉加载的数据列表*/
 .news-li {
 	font-size: 32rpx;
-	padding: 32rpx;
-	border-bottom: 1rpx solid #eee;
+	padding: 12rpx;
+	border-bottom: 1rpx solid #c5c5c5;
 	color: $uni;
 }
 .news-li .new-content {
 	font-size: 28rpx;
 	margin-top: 5rpx;
-	
+	border: 1rpx;
 	color: #666;
 }
 

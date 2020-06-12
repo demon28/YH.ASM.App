@@ -45,7 +45,9 @@
 
 					let params = requestParams;
 					let resload = res;
-
+					
+					console.log(params.page+"---"+params.total)
+				
 
 					uni.request({
 						url: this.LoginHost + "/api/Direction/List",
@@ -53,7 +55,7 @@
 							userId: _self.userId,
 							pageindex: params.page,
 							pagesize: params.size,
-							SigningKey: _self.ApiKey
+							SigningKey: _self.ApiKey 
 						},
 						method: "GET",
 						header: {
@@ -68,6 +70,10 @@
 								var str_type = re.data.Content[i].TYPE == 0 ? "早报" : "晚报";
 								var str_Date = re.data.Content[i].CREATETIME.substr(0, 10);;
 								var str_address = re.data.Content[i].ADDRESS;
+								if(str_address==null || str_address==""){
+									str_address="定位失败"
+								}		
+								
 								arry.push({
 									type: str_type,
 									date: str_Date,
@@ -103,7 +109,8 @@
 			async _getList() {
 				let result = await this.getData({
 					page: this.page,
-					size: this.size
+					size: this.size,
+					total:this.total
 				});
 				let self = this;
 				this.total = result.data.total;
@@ -127,8 +134,8 @@
 	/*展示上拉加载的数据列表*/
 	.news-li {
 		font-size: 32upx;
-		padding: 32upx;
-		border-bottom: 1upx solid #eee;
+		padding: 12upx;
+		border-bottom: 1upx solid #c5c5c5;
 		color: $uni;
 		
 	}
@@ -136,7 +143,7 @@
 	.news-li .new-content {
 		font-size: 28upx;
 		margin-top: 5upx;
-		
+		border: 1upx;
 		color: #666;
 	}
 </style>

@@ -10,7 +10,7 @@ export default {
 			list: [], // 数据列表
 			page: 0, // 由于分页一般页面要+1，所以为了方便分页查询，这里初始设置页码为0
 			size: 15, // 每页显示的条数
-			total: 0 // 数据总条数
+			total: 10 // 数据总条数
 		};
 	},
 	async onLoad() {
