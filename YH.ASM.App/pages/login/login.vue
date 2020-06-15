@@ -91,7 +91,9 @@
 				
 				
 								
-				
+				uni.showLoading({
+					title:"网络请求中.."
+				})
 				uni.request({
 				    url:this.LoginHost+"/api/Login/Login", //仅为示例，并非真实接口地址。
 				    data: {
@@ -105,11 +107,14 @@
 				    },
 				    success: (res) => {
 				  
-				        this.text = 'request success';
+				      	uni.hideLoading();
 					 console.log(JSON.stringify(res));
 			
 					 
 						 if (res.data.Success) {
+							 
+							 
+							 
 							 	console.log("======key"+res.data.Content.USER_ID);
 							 //登录信息写进本地数据库
 							 
@@ -148,6 +153,18 @@
 						 }
 						 
 				    }
+					,fail(re){
+						uni.hideLoading();
+						uni.showToast({
+							icon: 'none',
+							title: '网络请求失败！'
+						});
+						
+					}
+				
+				
+				
+				
 				});
 				
 				
