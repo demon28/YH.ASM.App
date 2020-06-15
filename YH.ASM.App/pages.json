@@ -44,7 +44,17 @@
 				"navigationBarTitleText": "查看日报",
 				"enablePullDownRefresh":true
 			}
+		},
+		
+		{
+			"path": "pages/report/reportPeople",
+			"style": {
+				"navigationBarTitleText": "售后人员",
+				         "enablePullDownRefresh": true
+				
+			}
 		}
+		
 	],
 	"tabBar": {
 		"color": "#7a7e83",

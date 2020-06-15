@@ -6,14 +6,14 @@
 	<view class="content">
 
 		<uni-list>
-			<uni-list-item title="姓名:" :show-arrow="false" :rightText="unionName"></uni-list-item>
-			<uni-list-item title="部门:" :show-arrow="false" :rightText="unionDtname"></uni-list-item>
-			<uni-list-item title="日期:" :show-arrow="false" :rightText="datetime"></uni-list-item>
-			<uni-list-item title="定位地址:" :show-arrow="false" :rightText="locatladdress"></uni-list-item>
+			<uni-list-item title="姓名:" :show-arrow="false" :rightText="unionName" style="min-height:80upx ; height: 80upx;"></uni-list-item>
+			<uni-list-item title="部门:" :show-arrow="false" :rightText="unionDtname" style="min-height:80upx ; height: 80upx;"></uni-list-item>
+			<uni-list-item title="日期:" :show-arrow="false" :rightText="datetime" style="min-height:80upx ; height: 80upx;"></uni-list-item>
+			<uni-list-item title="定位地址:" :show-arrow="false" :rightText="locatladdress" style="min-height:80upx ; height: 80upx;"></uni-list-item>
 		</uni-list>
 
 	 <view class="uni-list" style="margin-top: 30upx;">
-			<view class="uni-list-cell">
+			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					* 日报类型:
 				</view>
@@ -24,36 +24,54 @@
 					</picker>
 				</view>
 			</view>
-		</view>
-		<view class="uni-list">
-			<view class="uni-list-cell">
+	
+			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 当前项目:
+					* 项目名称:
 				</view>
 				<view class="uni-list-cell-db">
 					 <input class="uni-input"  placeholder="请输入当前项目名称" v-model="projectName" />
 				</view>
 			</view>
-		</view>
-		<view class="uni-list">
-			<view class="uni-list-cell">
+		
+			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 项目客户:
+					* 设备名称:
 				</view>
 				<view class="uni-list-cell-db">
-				 <input class="uni-input"  placeholder="请输入项目客户信息" v-model="customerName" />
+				 <input class="uni-input"  placeholder="请输入项目客户信息" v-model="machineName" />
 				</view>
 			</view>
-		</view>
-		<view class="uni-list">
-			<view class="uni-list-cell">
+	
+			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 问题工单:
+					* 工单序号:
 				</view>
 				<view class="uni-list-cell-db">
-				 <input class="uni-input"  placeholder="请输入处理的工单问题"  v-model="supportName" />
+				 <input class="uni-input"  placeholder="请输入处理的工单序号"  v-model="supportName" />
 				</view>
 			</view>
+	
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					* 设备数量:
+				</view>
+				<view class="uni-list-cell-db">
+				 <input class="uni-input"  placeholder="请输入设备数量"  v-model="machineCount"  type="number"  />
+				</view>
+			</view>
+	
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+				* 售后人员:
+				</view>
+				<view  class="uni-list-cell-navigate uni-navigate-right"  @click="onSelectPeople()" >
+					
+					<text @click="onSelectPeople()"> 请选择   </text>
+					
+				</view>
+			</view>
+			
 		</view>
  
 
@@ -97,22 +115,27 @@
 				arrayType: ['早报', '晚报'],
 
 				
-				indexType: 0,
-				indexProject: 0,
-				indexProjectkehu: 0,
-				indexSupport: 0,
-				locatladdress: "",
-				locatllongitude: "0",
-				locatllatitude: "0",
+				indexType: 0,          //日报类型，早报，晚报
+				indexProject: 0,       //项目外键id （已作废）
+				indexProjectkehu: 0,   //客户外键id （已作废）
+				indexSupport: 0,       //工单外键id （已作废） 
+				locatladdress: "",    //地址
+				locatllongitude: "0", //精度
+				locatllatitude: "0",  //纬度
 
-				unionName: "",
-				unionDtname: "",
-				datetime: "",
-				content:"",
+				unionName: "",     //用户
+				unionDtname: "",   //部门信息
+				datetime: "",    //时间
+				content:"",    //工单内容
 				
-				projectName:"",
-				customerName:"",
-				supportName:""
+				projectName:"",      //项目名称
+				customerName:"",   //客户名称   （已作废）
+				supportName:"",    //工单名称
+				
+				machineName:"",  //设备名称
+				machineCount:"", //设备数量
+				
+				maintenancePeople:{}  //售后维护人员外键userid
 			}
 		},
 
@@ -344,6 +367,7 @@
 						projectName:_self.projectName,
 						customerName:_self.customerName,
 						supportName:_self.supportName,
+						
 							
 					   SigningKey:Key
 				    },
@@ -391,7 +415,14 @@
 				
 
 			}
-
+			,
+			onSelectPeople(){
+		
+				uni.navigateTo({
+				
+					url: 'reportPeople'
+				});
+			}
 		}
 	}
 </script>

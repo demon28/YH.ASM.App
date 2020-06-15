@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniList: function() {
-    return __webpack_require__.e(/*! import() | components/uni-list/uni-list */ "components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/components/uni-list/uni-list.vue */ 92))
+    return __webpack_require__.e(/*! import() | components/uni-list/uni-list */ "components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/components/uni-list/uni-list.vue */ 98))
   },
   uniListItem: function() {
-    return __webpack_require__.e(/*! import() | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/components/uni-list-item/uni-list-item.vue */ 99))
+    return __webpack_require__.e(/*! import() | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/components/uni-list-item/uni-list-item.vue */ 105))
   }
 }
 var render = function() {
@@ -216,7 +216,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var unilist = function unilist() {__webpack_require__.e(/*! require.ensure | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list-item/uni-list-item.vue */ 99));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var unilist_item = function unilist_item() {__webpack_require__.e(/*! require.ensure | components/uni-list/uni-list */ "components/uni-list/uni-list").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list/uni-list.vue */ 92));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var unilist = function unilist() {__webpack_require__.e(/*! require.ensure | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list-item/uni-list-item.vue */ 105));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var unilist_item = function unilist_item() {__webpack_require__.e(/*! require.ensure | components/uni-list/uni-list */ "components/uni-list/uni-list").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list/uni-list.vue */ 98));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -236,23 +254,28 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
       arrayType: ['早报', '晚报'],
 
 
-      indexType: 0,
-      indexProject: 0,
-      indexProjectkehu: 0,
-      indexSupport: 0,
-      locatladdress: "",
-      locatllongitude: "0",
-      locatllatitude: "0",
+      indexType: 0, //日报类型，早报，晚报
+      indexProject: 0, //项目外键id （已作废）
+      indexProjectkehu: 0, //客户外键id （已作废）
+      indexSupport: 0, //工单外键id （已作废） 
+      locatladdress: "", //地址
+      locatllongitude: "0", //精度
+      locatllatitude: "0", //纬度
 
-      unionName: "",
-      unionDtname: "",
-      datetime: "",
-      content: "",
+      unionName: "", //用户
+      unionDtname: "", //部门信息
+      datetime: "", //时间
+      content: "", //工单内容
 
-      projectName: "",
-      customerName: "",
-      supportName: "" };
+      projectName: "", //项目名称
+      customerName: "", //客户名称   （已作废）
+      supportName: "", //工单名称
 
+      machineName: "", //设备名称
+      machineCount: "", //设备数量
+
+      maintenancePeople: {} //售后维护人员外键userid
+    };
   },
 
   mounted: function mounted() {
@@ -484,6 +507,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
           customerName: _self.customerName,
           supportName: _self.supportName,
 
+
           SigningKey: Key },
 
         method: "POST",
@@ -528,6 +552,14 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
 
 
 
+
+    },
+
+    onSelectPeople: function onSelectPeople() {
+
+      uni.navigateTo({
+
+        url: 'reportPeople' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

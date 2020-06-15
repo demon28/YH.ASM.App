@@ -6,7 +6,8 @@
     "pages/user/user",
     "pages/report/report",
     "pages/report/history",
-    "pages/report/reportHis"
+    "pages/report/reportHis",
+    "pages/report/reportPeople"
   ],
   "subPackages": [],
   "window": {
@@ -38,6 +39,5 @@
       "desc": "\"你的位置信息将用于小程序位置接口的效果展示\""
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap5.json"
+  "usingComponents": {}
 }
