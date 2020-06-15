@@ -12,19 +12,28 @@ const store = new Vuex.Store({
 		hasLogin: false,
 		userId:"",
 		userName: "",
-		workid:"12313213",
+		workid:"",
 		department:"",
 		dtname:"",
 		mobile:"",
-		useR_SEX:""
+		useR_SEX:"",
+		
+		maintainer:[]
+		
 	},
 	mutations: {
+		
+		setMaintainer(state,items){
+			state.maintainer={};
+			state.maintainer=items;
+			
+		},
+		
 		login(state, data) {
 			
 			state.userId = data.USER_ID;
 			state.userName = data.USER_NAME ;
 			state.hasLogin = true;
-			
 			state.workid= data.WORK_ID;
 			state.department= data.DEPARTMENT;
 			state.dtname= data.DTNAME;

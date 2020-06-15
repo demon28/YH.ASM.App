@@ -67,7 +67,7 @@
 				</view>
 				<view  class="uni-list-cell-navigate uni-navigate-right"  @click="onSelectPeople()" >
 					
-					<text @click="onSelectPeople()"> 请选择   </text>
+					<text @click="onSelectPeople()"> {{checks}}   </text>
 					
 				</view>
 			</view>
@@ -94,14 +94,13 @@
 	import unilist_item from '../../components/uni-list/uni-list.vue';
 
 	
-
-	import {
-		mapState
+import {
+		mapState,
+		mapMutations
 	} from 'vuex'
 
-
 	export default {
-		computed: { ...mapState(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname','userId'])
+		computed: { ...mapState(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname','userId',"maintainer"])
 		},
 
 		components: {
@@ -135,10 +134,30 @@
 				machineName:"",  //设备名称
 				machineCount:"", //设备数量
 				
-				maintenancePeople:{}  //售后维护人员外键userid
+				maintenancePeople:[],//售后维护人员外键userid
+				
+				checks:"请选择",
 			}
 		},
-
+		onShow(option) { 
+			
+			console.log("子窗体传参数量："+this.maintainer.length);
+		 let checkitem=this.maintainer;
+			
+			
+			if(checkitem==null ||checkitem.length<=0){
+				return;
+			}
+			this.checks="";
+			this.maintenancePeople={};
+			for(let i=0;i<checkitem.length;i++){
+				
+				this.checks+=checkitem[i].name+",";
+			}
+			
+			
+			
+		},
 		mounted() {
 
 			//变量赋值
@@ -300,11 +319,11 @@
 				}
 				
 				
-				if(_self.customerName==""){
+				if(_self.machineName==""){
 					
 					uni.showToast({
 						icon: 'none',
-						title: "请输入客户信息",
+						title: "请输入设备名称",
 					});
 					return
 				}
@@ -314,11 +333,30 @@
 					
 					uni.showToast({
 						icon: 'none',
-						title: "请输入工单名称",
+						title: "请输入工单序号",
 					});
 					return
 				}
 				
+				　if (parseFloat(_self.machineCount).toString() == "NaN") { 
+				　　　
+				 uni.showToast({
+				 	icon: 'none',
+				 	title: "设备数量为数字",
+				 });
+				 
+				　　　　return ; 
+				　　} 
+				
+				
+				if(_self.machineCount==""){
+					
+					uni.showToast({
+						icon: 'none',
+						title: "请输入设备数量",
+					});
+					return
+				}
 				
 				
 				if(this.indexType==1){
@@ -368,7 +406,9 @@
 						customerName:_self.customerName,
 						supportName:_self.supportName,
 						
-							
+						 machineName:_self.machineName,
+						 machineCount:_self.machineCount,
+							remarks:_self.checks  ,    //本来想用外键表的，这里涂简单，直接用的备注字段
 					   SigningKey:Key
 				    },
 					method :"POST",
@@ -401,7 +441,9 @@
 							success: (res) => {
 								if (res.confirm) {
 								
-											uni.navigateBack();
+											uni.navigateTo({
+												url:"../main/main"
+											});
 									
 								   }
 							    }

@@ -1694,9 +1694,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!***********************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/store/index.js ***!
-  \***********************************************************/
+/*!****************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/store/index.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1715,19 +1715,28 @@ var store = new _vuex.default.Store({
     hasLogin: false,
     userId: "",
     userName: "",
-    workid: "12313213",
+    workid: "",
     department: "",
     dtname: "",
     mobile: "",
-    useR_SEX: "" },
+    useR_SEX: "",
+
+    maintainer: [] },
+
 
   mutations: {
+
+    setMaintainer: function setMaintainer(state, items) {
+      state.maintainer = {};
+      state.maintainer = items;
+
+    },
+
     login: function login(state, data) {
 
       state.userId = data.USER_ID;
       state.userName = data.USER_NAME;
       state.hasLogin = true;
-
       state.workid = data.WORK_ID;
       state.department = data.DEPARTMENT;
       state.dtname = data.DTNAME;
@@ -2697,9 +2706,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 136:
-/*!**************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
-  \**************************************************************************/
+/*!*******************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2839,9 +2848,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 19:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/service.js ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/service.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8906,9 +8915,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!*************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/config.js ***!
-  \*************************************************************/
+/*!******************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/config.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8960,9 +8969,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/pages.json ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/pages.json ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9762,9 +9771,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 66:
-/*!************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/mixins/list-mixin.js ***!
-  \************************************************************************/
+/*!*****************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/mixins/list-mixin.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9827,9 +9836,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 67:
-/*!********************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/colorui/main.css ***!
-  \********************************************************************/
+/*!*************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/colorui/main.css ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9840,9 +9849,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 68:
-/*!********************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/colorui/icon.css ***!
-  \********************************************************************/
+/*!*************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/colorui/icon.css ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

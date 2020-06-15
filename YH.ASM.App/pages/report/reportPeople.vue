@@ -3,7 +3,7 @@
 	<view class="content">
 
 		<view>
-			<button class="uni-swipe_button">确定并返回</button>
+			<button class="uni-swipe_button" @click="onConfim">确定并返回</button>
 		</view>
 		
 		<view style="margin-top: 10px;">
@@ -36,10 +36,12 @@
 	import lvSelect from '../../components/lv-select/lv-select';
 
 	import {
-		mapState
-	} from 'vuex';
+		mapState,
+		mapMutations
+	} from 'vuex'
 
 	export default {
+	
 		components: {
 			lvSelect
 		},
@@ -53,7 +55,8 @@
 				pagesize: 20,
 				pagecount: 10,
 				keywords:'', //关键字搜索
-				items: [] //用户列表
+				items: [] ,//用户列表
+			
 			}
 		},
 		created() {
@@ -76,7 +79,22 @@
 			this.LoadUserList();
 		},
 		methods: {
-			
+				...mapMutations(['setMaintainer']),
+			onConfim(){
+				
+				let checkitems=[];
+				for(let i=0 ;i<this.items.length;i++){
+					
+					if(this.items[i].checked==true){
+						checkitems.push(this.items[i]);
+					}
+				}
+				
+				this.setMaintainer(checkitems);
+				
+				uni.navigateBack();
+				
+			},
 			  handleSearch() {
 			                    console.log("搜索执行:"+this.keywords);
 			                   this.pageindex=1;
@@ -90,8 +108,8 @@
 				for (var i = 0, lenI = items.length; i < lenI; ++i) {
 					const item = items[i]
 					if (values.includes(item.value)) {
-						this.$set(item, 'checked', true)
-					} else {
+						this.$set(item, 'checked', true);
+				     } else {
 						this.$set(item, 'checked', false)
 					}
 				}
