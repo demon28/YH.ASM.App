@@ -234,7 +234,7 @@
 		// background-color: $uni-color-primary;
 	}
 	.uni-shadow-blur{
-		box-shadow: 0rpx 2rpx 10rpx #F8F8F8;
+		box-shadow: 0rpx 1rpx 10rpx #F8F8F8;
 	}
 	.uni-round{
 		border-radius: 100rpx;

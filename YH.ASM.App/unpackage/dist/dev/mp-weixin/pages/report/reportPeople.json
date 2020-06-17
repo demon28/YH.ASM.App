@@ -2,6 +2,7 @@
   "navigationBarTitleText": "售后人员",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "lv-select": "/components/lv-select/lv-select"
+    "lv-select": "/components/lv-select/lv-select",
+    "lvselect": "/components/lv-select/lv-select"
   }
 }

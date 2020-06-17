@@ -60,6 +60,18 @@
 				 <input class="uni-input"  placeholder="请输入设备数量"  v-model="machineCount"  type="number"  />
 				</view>
 			</view>
+			
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					* 需求协助:
+				</view>
+				<view class="uni-list-cell-db">
+				 <input class="uni-input"  placeholder="请输入需求协助"  v-model="machineAssist"    />
+				</view>
+			</view>
+			
+			
+			
 	
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
@@ -135,6 +147,8 @@ import {
 				machineCount:"", //设备数量
 				
 				maintenancePeople:[],//售后维护人员外键userid
+				
+				machineAssist:"",
 				
 				checks:"请选择",
 			}
@@ -359,18 +373,18 @@ import {
 				}
 				
 				
-				if(this.indexType==1){
+				// if(this.indexType==1){
 					
-					if(_self.content==""||_self.content.length<10)
-					{
-						uni.showToast({
-							icon: 'none',
-							title: "请输入写今日简报的内容，字数不低于10个字",
-						});
-						return
+				// 	if(_self.content==""||_self.content.length<10)
+				// 	{
+				// 		uni.showToast({
+				// 			icon: 'none',
+				// 			title: "请输入写今日简报的内容，字数不低于10个字",
+				// 		});
+				// 		return
 						
-					}
-				}
+				// 	}
+				// }
 				
 				
 				
@@ -385,9 +399,10 @@ import {
 				 console.log(_self.projectName);
 				 console.log(_self.customerName);
 				 console.log(_self.supportName);
+				 console.log(_self.content);
 				 
-				 
-				 
+				  console.log("打印售后人员："+_self.checks);
+				   
 				uni.request({
 				    url:this.LoginHost+"/api/Direction/Put", //仅为示例，并非真实接口地址。
 				    data: {
@@ -409,6 +424,8 @@ import {
 						 machineName:_self.machineName,
 						 machineCount:_self.machineCount,
 							remarks:_self.checks  ,    //本来想用外键表的，这里涂简单，直接用的备注字段
+					  machineAssist:_self.machineAssist,
+					
 					   SigningKey:Key
 				    },
 					method :"POST",
@@ -440,16 +457,27 @@ import {
 							showCancel: true,
 							success: (res) => {
 								if (res.confirm) {
-								
-											uni.navigateTo({
-												url:"../main/main"
-											});
-									
+								 
+								console.log("回到首页");
+								uni.reLaunch({
+										url:"../main/main"
+								});
+											
 								   }
 							    }
 					     	});
 						 
 				    }
+				
+				    ,fail(error){
+						 console.log(error);
+							uni.showToast({
+								title:"网络请求失败！"
+							})	
+						
+					}
+				
+				
 				});
 				
 				
