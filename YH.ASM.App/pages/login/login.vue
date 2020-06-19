@@ -154,6 +154,9 @@
 						 
 				    }
 					,fail(re){
+						
+						console.log(re);
+						
 						uni.hideLoading();
 						uni.showToast({
 							icon: 'none',

@@ -18,7 +18,7 @@ app.$mount();
 //通讯加密key
 Vue.prototype.ApiKey="58b59b3ae5d0ec0629950ebdd4dabe39"
 
-  
+       
 
 //开发环境  devops
 //Vue.prototype.LoginHost="http://www.asm.cn:50428";

@@ -286,6 +286,9 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
         },
         fail: function fail(re) {
+
+          console.log(re);
+
           uni.hideLoading();
           uni.showToast({
             icon: 'none',
