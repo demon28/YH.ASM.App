@@ -2,7 +2,7 @@
 	
 		<view class="content">
 			<uni-list loadmoreoffset="1" >
-				<uni-list-item  :title="item.type" :note="item.date"  v-for="(item,index) in list"  :rightText="item.address" :show-arrow="false"  >
+				<uni-list-item  :title="item.type" :note="item.date"  v-bind:key="item.traid" v-for="(item,index) in list"  :rightText="item.address" :show-arrow="false"  >
 				</uni-list-item>
 			</uni-list>
 			
@@ -31,19 +31,32 @@
 			}
 	    },
 		 created(){
-		    this.pageindex=0;
+		 
 			 this.loadData();
 		}, 
-		
+		onReachBottom() {
+			console.log("上拉加载");
+			this.pageindex = this.pageindex + 1;
+			
+			this.loadData();
+		},onPullDownRefresh() {
+			console.log("下拉刷新");
+			this.pageindex = 1;
+			
+			this.loadData();
+			uni.stopPullDownRefresh();
+
+		},
 	    methods: {
 	     
 		   loadData(){
 			   
 			   
 			     var _self=this;
-			      _self.pageindex+=1;
-				  
-				  if( _self.pageindex>=_self.pageTotal){
+			     
+				    console.log( "当前页码："+this.pageindex +"===当前总数量"+_self.pageTotal);
+					
+				  if( _self.pageindex>_self.pageTotal){
 					  
 					  uni.showToast({
 					  	icon: 'none',
@@ -52,7 +65,7 @@
 					  return ;
 				  }
 				  
-			   console.log( "页码："+this.pageindex);
+			 
 			 
 			   var Key=this.ApiKey;
 			   
@@ -88,7 +101,7 @@
 			   			
 			   			return;
 			   	   }
-			   	   console.log(JSON.stringify(res.data));
+			   	  // console.log(JSON.stringify(res.data));
 			   	   _self.pageTotal=res.data.PageTotal;
 				   
 				   
@@ -97,12 +110,10 @@
 			   		   var str_type=res.data.Content[i].TYPE==0?"早报":"晚报";
 			   		   var str_Date= res.data.Content[i].CREATETIME.substr(0,10);;
 			   		   var str_address=res.data.Content[i].ADDRESS;
-			   		   _self.list.push({type:str_type,date:str_Date,address:str_address});
+					   var str_traid=res.data.Content[i].TRAID;
+			   		   _self.list.push({type:str_type,date:str_Date,address:str_address,traid:str_traid});
 			   		   
 			   	   }
-			   	   
-			   		
-			   	
 			   		 
 			       }
 			   });

@@ -490,7 +490,7 @@ import {
 		
 				uni.navigateTo({
 				
-					url: 'reportPeople'
+					url: 'person'
 				});
 			}
 		}

@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "查看日报",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "m-loading": "/components/m-loading"
-  }
-}

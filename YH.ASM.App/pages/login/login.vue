@@ -2,7 +2,10 @@
 	<view class="content">
 		
 		
-		
+		    <view class="image-content" style="text-align: center;margin-top: 40upx;">
+		        <image style="width: 100px; height: 100px; background-color: #eeeeee;" :src="src" mode="aspectFill"
+		                     ></image>
+		     </view>
 		
 		<view class="input-group">
 			<view class="input-row border">
@@ -42,6 +45,7 @@
 				password: '',
 				positionTop: 0,
 				isDevtools: false,
+				src:"../../static/img/logo.png"
 			}
 		},
 		computed: mapState(['forcedLogin']),
@@ -69,6 +73,7 @@
 					});
 					return;
 				}
+				
 				if (this.password.length < 6) {
 					uni.showToast({
 						icon: 'none',
@@ -78,7 +83,7 @@
 				}
 				
 				
-			  console.log("======"+ this.LoginHost+"/api/Login/Login");
+			    console.log("======"+ this.LoginHost+"/api/Login/Login");
 				
 			
 				
@@ -116,12 +121,11 @@
 							 
 							 
 							 	console.log("======key"+res.data.Content.USER_ID);
+								
 							 //登录信息写进本地数据库
-							 
 						 	this.login(res.data.Content);
 							
-							//用户信息需要持久话存储。
-							
+							//用户信息需要持久化存储。
 							uni.setStorage({
 							    key: 'loginfo',
 							    data: res.data.Content,
@@ -130,7 +134,7 @@
 							    },
 							});
 							
-							
+							//持久化存储已登录
 							uni.setStorage({
 							    key: 'IsLogined',
 							    data: true,
@@ -139,10 +143,7 @@
 							    },
 							});
 													
-							
-						
-								
-								//跳转本地数据库
+							//跳转本地数据库
 								this.toMain();
 									
 						 } else {

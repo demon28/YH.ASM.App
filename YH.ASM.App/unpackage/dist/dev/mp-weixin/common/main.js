@@ -30,11 +30,11 @@ _vue.default.prototype.ApiKey = "58b59b3ae5d0ec0629950ebdd4dabe39";
 
 
 //开发环境  devops
-//Vue.prototype.LoginHost="http://www.asm.cn:50428";
+_vue.default.prototype.LoginHost = "http://www.asm.cn:50428";
 
 
 //正式环境  product
-_vue.default.prototype.LoginHost = "https://asm.yhwins.com:52420";
+//Vue.prototype.LoginHost="https://asm.yhwins.com:52420";
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
 
 /***/ }),
@@ -77,7 +77,7 @@ var component = Object(_D_HBuilderX_2_7_9_20200527_full_HBuilderX_plugins_uniapp
   renderjs
 )
 
-component.options.__file = "E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/App.vue"
+component.options.__file = "App.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),

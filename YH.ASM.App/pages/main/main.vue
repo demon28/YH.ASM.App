@@ -9,58 +9,64 @@
 		
 		</view>
 			
-					<uni-grid :column="3" :highlight="true">
-						<uni-grid-item  >
-							<view class="grid-item-box" @click="AddReport">
-								<image src="../../static/img/report.png" class="image" mode="aspectFill" />
-								<text class="text">提交日报</text>
-							</view>
-						</uni-grid-item>
+			<view >
+				<view style="margin-left: 15upx;">日报</view> 
+				<uni-grid :column="4" :highlight="true" style="background-color: #F5F5F5;">
+					<uni-grid-item >
+						<view class="grid-item-box" @click="AddReport"  >
+							<image src="../../static/img/report.png" class="image" mode="aspectFill" />
+							<text class="text">提交日报</text>
+						</view>
+					</uni-grid-item>
+					
+					<uni-grid-item >
+						<view class="grid-item-box"  @click="ViewReportHis" >
+							<image src="../../static/img/reporthis.png" class="image" mode="aspectFill" />
+							<text class="text">日报记录</text>
+						</view>
+					</uni-grid-item>
+					
+					<uni-grid-item >
+					
+					</uni-grid-item>
+					<uni-grid-item >
 						
-						<uni-grid-item >
-							<view class="grid-item-box"  @click="ViewReportHis">
-								<image src="../../static/img/reporthis.png" class="image" mode="aspectFill" />
-								<text class="text">日报记录</text>
-							</view>
-						</uni-grid-item>
+					</uni-grid-item>
+				</uni-grid>
+			</view>
+			
+			<view >
+				<view style="margin-left: 15upx;margin-top: 15px;">工单</view> 
+				<uni-grid :column="4" :highlight="true" style="background-color: #F5F5F5;">
+					<uni-grid-item >
+						<view class="grid-item-box" @click="AddReport"  >
+							<image src="../../static/img/createSupport.png" class="image" mode="aspectFill" />
+							<text class="text">创建工单 </text>
+						</view>
+					</uni-grid-item>
+					
+					<uni-grid-item >
+						<view class="grid-item-box"  @click="ViewReportHis" >
+							<image src="../../static/img/mySupprot.png" class="image" mode="aspectFill" />
+							<text class="text">我的任务</text>
+						</view>
+					</uni-grid-item>
+					
+					<uni-grid-item >
+					<view class="grid-item-box"  @click="ViewReportHis" >
+						<image src="../../static/img/allSupport.png" class="image" mode="aspectFill" />
+						<text class="text">工单汇总</text>
+					</view>
+					</uni-grid-item>
+					
+					
+					<uni-grid-item >
 						
-						<uni-grid-item>
-							<view class="grid-item-box">
-						
-							</view>
-						</uni-grid-item>
-						<uni-grid-item>
-							<view class="grid-item-box">
-						
-							</view>
-						</uni-grid-item>
-						<uni-grid-item>
-							<view class="grid-item-box">
-								
-							</view>
-						</uni-grid-item>
-						<uni-grid-item>
-							<view class="grid-item-box">
-								
-							</view>
-						</uni-grid-item>
-						<uni-grid-item>
-							<view class="grid-item-box">
-								
-							</view>
-						</uni-grid-item>
-						<uni-grid-item>
-							<view class="grid-item-box">
-								
-							</view>
-						</uni-grid-item>
-						
-						<uni-grid-item>
-							<view class="grid-item-box">
-								
-							</view>
-						</uni-grid-item>
-					</uni-grid>
+					</uni-grid-item>
+				</uni-grid>
+			</view>
+			
+			
 				
 		
 	</view>
@@ -158,8 +164,8 @@
 			ViewReportHis(){
 				console.log("日报记录");
 				uni.navigateTo({
-					//url: '../report/history'
-			    	url: '../report/reportHis'
+					url: '../report/history'
+			    	//url: '../report/reportHis'
 				});
 				
 			}
@@ -171,13 +177,13 @@
 
 <style>
 	.hello {
-	    margin-top: 10upx;
+	  
 		margin-bottom: 30upx;
 	}
 
 	.title {
 		color: #8f8f94;
-		margin-top: 25px;
+	
 	}
 
 	.ul {
