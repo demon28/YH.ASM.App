@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      result = 1;
+      return 1;
     } else {
-      result = 0.5;
+      return 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,10 +421,7 @@ var protocols = {
 
 
 var todos = [
-'vibrate',
-'preloadPage',
-'unPreloadPage',
-'loadSubPackage'];
+'vibrate'];
 
 var canIUses = [];
 
@@ -760,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1697,9 +1694,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!***********************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/store/index.js ***!
-  \***********************************************************/
+/*!****************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/store/index.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1758,9 +1755,9 @@ store;exports.default = _default;
 /***/ }),
 
 /***/ 111:
-/*!**************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
-  \**************************************************************************/
+/*!*******************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2850,10 +2847,131 @@ var index_esm = {
 
 /***/ }),
 
+/***/ 152:
+/*!****************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/Enum.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.Power_Typelist = Power_Typelist;exports.Support_Typelist = Support_Typelist;exports.Support_Prioritylist = Support_Prioritylist;exports.Support_Statuslist = Support_Statuslist;exports.Support_Severitylist = Support_Severitylist;exports.Support_State = Support_State;exports.EnumGetSingle = EnumGetSingle;
+
+
+
+//工单类型
+function Power_Typelist() {
+
+  var Typelist = [];
+
+  Typelist.push({ value: 1, text: "页面访问" });
+  Typelist.push({ value: 2, text: "功能操作" });
+
+
+  return Typelist;
+
+}
+
+
+
+//工单类型
+function Support_Typelist() {
+
+  var Typelist = [];
+
+  Typelist.push({ value: 0, text: "操作调试" });
+  Typelist.push({ value: 1, text: "来料质量" });
+  Typelist.push({ value: 2, text: "商务问题" });
+  Typelist.push({ value: 3, text: "设计问题" });
+  Typelist.push({ value: 4, text: "装配误差" });
+
+  return Typelist;
+
+}
+
+//工单优先级
+function Support_Prioritylist() {
+
+  var Prioritylist = [];
+  Prioritylist.push({ value: 0, text: "紧急" });
+  Prioritylist.push({ value: 1, text: "高" });
+  Prioritylist.push({ value: 2, text: "中" });
+  Prioritylist.push({ value: 3, text: "低" });
+
+  return Prioritylist;
+}
+
+//流程节点
+function Support_Statuslist() {
+
+  var Statuslist = [];
+
+  Statuslist.push({ value: 0, text: "创建工单-->技术分析" });
+  Statuslist.push({ value: 1, text: "分析完成-->PMC跟进" });
+  Statuslist.push({ value: 2, text: "分析完成-->现场处理" });
+  Statuslist.push({ value: 3, text: "PMC完成-->现场处理" });
+  Statuslist.push({ value: 4, text: "现场处理-->负责人审核" });
+  Statuslist.push({ value: 5, text: "负责人审核-->未完成" });
+  Statuslist.push({ value: 6, text: "负责人审核-->已完成" });
+  Statuslist.push({ value: 7, text: "已拒绝" });
+
+
+  return Statuslist;
+}
+
+//工单严重度
+function Support_Severitylist() {
+
+  var Severitylist = [];
+
+
+
+  Severitylist.push({ value: 0, text: "五级" });
+  Severitylist.push({ value: 1, text: "四级" });
+  Severitylist.push({ value: 2, text: "三级" });
+  Severitylist.push({ value: 3, text: "二级" });
+  Severitylist.push({ value: 4, text: "一级" });
+
+
+  return Severitylist;
+}
+
+//工单状态
+function Support_State() {
+  var list = [];
+
+
+
+  list.push({ value: 0, text: "待办" });
+  list.push({ value: 1, text: "处理中" });
+  list.push({ value: 2, text: "已完成" });
+
+
+
+  return list;
+
+}
+
+
+//取值工单类型
+function EnumGetSingle(value, Array) {
+
+  var res = "";
+
+  Array.forEach(function (element) {
+    if (element.value == value) {
+      res = element.text;
+    }
+  });
+  return res;
+}
+
+/***/ }),
+
 /***/ 19:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/service.js ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/service.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3521,10 +3639,12 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    if (vm.$root === vm) {
-      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
-        return ('') + vm.$options.__file
+    {
+      if(vm.$scope && vm.$scope.is){
+        return vm.$scope.is
       }
+    }
+    if (vm.$root === vm) {
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -3559,7 +3679,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm && vm.$options.name !== 'PageBody') {
+      while (vm) {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -3571,7 +3691,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        !vm.$options.isReserved && tree.push(vm);
+        tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -8417,7 +8537,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8438,14 +8558,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8521,7 +8641,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8691,10 +8811,9 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue ) {
+function internalMixin(Vue) {
 
-  Vue.config.errorHandler = function(err, vm, info) {
-    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
+  Vue.config.errorHandler = function(err) {
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -8917,9 +9036,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!*************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/config.js ***!
-  \*************************************************************/
+/*!******************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/config.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8971,9 +9090,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/pages.json ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/pages.json ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

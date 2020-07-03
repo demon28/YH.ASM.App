@@ -2,7 +2,7 @@
 
 	<view class="content">
 
-		<view  v-if="checks!=''" class="uni-textarea" style="min-height: 100upx;margin-top: 10upx; ">
+		<view  v-if="checks!=''" class="uni-textarea" style="min-height: 60upx;margin-top: 10upx; ">
 			
 			
 			<textarea v-model="checks"  ></textarea>

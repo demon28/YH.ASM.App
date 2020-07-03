@@ -5,6 +5,9 @@
     "pages/user/user",
     "pages/report/report",
     "pages/report/history",
+    "pages/support/create",
+    "pages/support/mysupport",
+    "pages/support/list",
     "pages/report/person"
   ],
   "subPackages": [],

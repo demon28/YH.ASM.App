@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "创建工单",
+  "usingComponents": {
+    "unilist": "/components/uni-list-item/uni-list-item",
+    "unilist_item": "/components/uni-list/uni-list"
+  }
+}
