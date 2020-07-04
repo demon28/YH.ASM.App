@@ -6,7 +6,7 @@
 
 		<view v-if="checked" class="uni-list" style="margin-top: 20upx;">
 			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in checkItem"
-			 :key="item.value">
+			 :key="item.id">
 				<view>
 					<view> {{item.name}} </view>
 				</view>
@@ -14,7 +14,8 @@
 					<button class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="unCheck(item)">取消</button>
 				</view>
 			</label>
-			<button type="primary" class="mini-btn" @click="onConfim" style="margin-top: 15upx; margin-bottom: 15upx; margin-right: 15px; max-width: 300upx;max-height: 100upx; font-size: 14upx;" >确定并返回</button>
+		<button type="primary" size="mini" class="mini-btn" @click="onConfim" style="margin-right: 15upx;margin-top: 10upx; margin-bottom: 10upx;" >确定并返回</button>
+		
 		</view>
 
 		<view style="margin-top: 15upx;">
@@ -22,7 +23,7 @@
 		</view>
 
 		<view class="uni-list" style="margin-top: 20upx;">
-			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in list" :key="item.value">
+			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in list" :key="item.id">
 				<view>
 					<view> {{item.name}}</view>
 				</view>

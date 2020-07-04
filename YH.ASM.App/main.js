@@ -21,7 +21,7 @@ Vue.prototype.ApiKey="58b59b3ae5d0ec0629950ebdd4dabe39"
        
 
 //开发环境  devops
-//Vue.prototype.LoginHost="http://www.asm.cn:50428";
+Vue.prototype.LoginHost="http://www.asm.cn:50428";
 
 
 
@@ -30,6 +30,4 @@ Vue.prototype.ApiKey="58b59b3ae5d0ec0629950ebdd4dabe39"
 
 
 //内网环境
-
-
-Vue.prototype.LoginHost="http://192.168.105.250:50428";
+//Vue.prototype.LoginHost="http://192.168.105.250:50428";

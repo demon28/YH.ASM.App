@@ -68,7 +68,7 @@
 					抄送人员:
 				</view>
 				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillCopy">
-					<text>  <text  v-for="item in copy">{{item.name+","}}</text>  </text>
+					<text>  <text  v-for="item in copy" :key="item.uuid">{{item.name+","}}</text>  </text>
 				</view>
 			</view>
 			
@@ -84,10 +84,17 @@
 				</view>
 			</view>
 			
-			
-			<view class="uni-list-cell-right" style="min-height:80upx ;" v-for="file in uploadfile" >
-				<text> {{file.name}}  </text>
+			<view class="uni-list-cell" style="min-height:80upx ;" v-for="file in uploadfile" :key="file.tempFilePath">
+				<view class="uni-list-cell-left">
+				 {{file.type}} 
+				</view>
+				<view >
+				<text style="margin-right: 30upx; color: #0FAEFF;" >{{fileStatus}}</text> 
+				</view>
 			</view>
+			
+			
+			
 			
 		</view>
 		
@@ -137,7 +144,9 @@
 				conductor:{},
 				finddate: currentDate,
 				copy:[],
-				uploadfile:{}
+				uploadfile:[],
+				fileid:0,
+				fileStatus:""
 			}
 		},
 		onShow(option){
@@ -149,7 +158,7 @@
 				  _self.project=checkproject[0];
 			  }else{
 				    console.log("=========== this.project.name");
-				  _self.project.name="请选择";
+				  _self.project={name:"请选择"};
 			  }  
 			  
 			  	  let checkconductor=_self.supportConductor;
@@ -157,7 +166,7 @@
 			  		  _self.conductor=checkconductor[0];
 			  	  }else{
 					     console.log("=========== this.conductor.name");
-					  _self.conductor.name="请选择";
+					  _self.conductor={name:"请选择"};;
 					  
 				  }
 				  
@@ -173,7 +182,6 @@
 				console.log("我是可以获取到值的："+this.supportProject);
 		},
 		methods: {
-		
 		Support_Severitylist,
 		onSubmit(){},
 		bindPickerChange(e){
@@ -216,17 +224,73 @@
 			});
 		},
 		onUpload(){
-			
+			var _self=this;
 			uni.chooseMedia({
-			  count: 9,
+			  count: 1,
 			  mediaType: ['image','video'],
 			  sourceType: ['album', 'camera'],
 			  maxDuration: 30,
 			  camera: 'back',
 			  success(res) {
-			    console.log(res.tempFilest)
+			  
+				console.log("选择的文件====="+JSON.stringify(res));
+				let type=res.type=="image"?"图片":"视频";
+				
+				_self.uploadfile=res.tempFiles;
+				_self.uploadfile[0].type=type;
+				_self.fileStatus="上传中...";
+				
+				//上传文件
+				uni.showLoading({
+					title:type+"，上传中..."
+				});
+				
+				console.log("我要上传的文件路径"+_self.uploadfile[0].tempFilePath);
+				 
+				 let params={
+					 SigningKey: _self.ApiKey,
+					 userid:_self.userId
+				 }
+				 
+				 console.log("上传参数："+JSON.stringify(params));
+				 
+				 uni.uploadFile({
+				            url:  _self.LoginHost + "/api/Upload/UploadFile",
+				            filePath: _self.uploadfile[0].tempFilePath,
+				            name: 'file',
+				            formData: params,
+							header:{"Content-Type": "multipart/form-data"},
+				            success: (uploadFileRes) => {
+				                console.log(uploadFileRes.data);
+									_self.fileStatus="上传成功";
+								
+								uni.hideLoading();
+								uni.showToast({
+									title:"上传成功！"
+								});
+								
+								_self.fileid=uploadFileRes.data.ID;
+								
+								
+				            },fail(e) {
+								console.log("上传文件失败====="+JSON.stringify(e))
+									_self.fileStatus="上传失败";
+				            	uni.hideLoading();
+								uni.showToast({
+									title:"上传失败！",
+									icon:"none"
+								});
+									
+				            }
+				        });
+				
+				
+				
 			  }
-			})
+			});
+			
+		
+			
 			
 		}
 		

@@ -79,7 +79,7 @@
 				</view>
 				<view  class="uni-list-cell-navigate uni-navigate-right"  @click="onSelectPeople()" >
 					
-					<text>  <text  v-for="item in checks">{{item.name+","}}</text>  </text>
+				 	<text>  <text  v-for="(item, i) in checks" :key="item.uuid">{{item.name+","}}</text>  </text> 
 				</view>
 			</view>
 			
@@ -311,9 +311,9 @@ import {
 				var _self=this;
 				
 				
-				console.log(_self.projectName);
-				console.log(_self.customerName);
-				console.log(_self.projectName);
+				// console.log(_self.projectName);
+				// console.log(_self.customerName);
+				// console.log(_self.projectName);
 				
 				if(_self.projectName==""){
 					

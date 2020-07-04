@@ -9,7 +9,7 @@
     "postcss": true
   },
   "compileType": "miniprogram",
-  "libVersion": "",
+  "libVersion": "2.9.2",
   "appid": "wxda6a631dceee5d1f",
   "projectname": "YH.ASM.App",
   "condition": {
@@ -26,15 +26,8 @@
       "list": []
     },
     "miniprogram": {
-      "current": 0,
-      "list": [
-        {
-          "id": 0,
-          "name": "pages/report/report",
-          "pathName": "pages/report/report",
-          "query": ""
-        }
-      ]
+      "current": -1,
+      "list": []
     }
   }
 }

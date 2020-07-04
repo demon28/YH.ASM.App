@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      result = 1;
+      return 1;
     } else {
-      result = 0.5;
+      return 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,10 +421,7 @@ var protocols = {
 
 
 var todos = [
-'vibrate',
-'preloadPage',
-'unPreloadPage',
-'loadSubPackage'];
+'vibrate'];
 
 var canIUses = [];
 
@@ -1697,9 +1694,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!***********************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/store/index.js ***!
-  \***********************************************************/
+/*!****************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/store/index.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2728,9 +2725,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 130:
-/*!**************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
-  \**************************************************************************/
+/*!*******************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2870,9 +2867,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 19:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/service.js ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/service.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3540,10 +3537,12 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    if (vm.$root === vm) {
-      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
-        return ('') + vm.$options.__file
+    {
+      if(vm.$scope && vm.$scope.is){
+        return vm.$scope.is
       }
+    }
+    if (vm.$root === vm) {
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -3578,7 +3577,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm && vm.$options.name !== 'PageBody') {
+      while (vm) {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -3590,7 +3589,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        !vm.$options.isReserved && tree.push(vm);
+        tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -8710,10 +8709,9 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue ) {
+function internalMixin(Vue) {
 
-  Vue.config.errorHandler = function(err, vm, info) {
-    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
+  Vue.config.errorHandler = function(err) {
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -8936,9 +8934,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!*************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/config.js ***!
-  \*************************************************************/
+/*!******************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/config.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8990,9 +8988,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/pages.json ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/pages.json ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9001,9 +8999,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 71:
-/*!***********************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/common/Enum.js ***!
-  \***********************************************************/
+/*!****************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/common/Enum.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
