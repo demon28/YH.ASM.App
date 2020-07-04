@@ -2,30 +2,36 @@
 
 	<view class="content">
 
-		<view  v-if="checks!=''" class="uni-textarea" style="min-height: 60upx;margin-top: 10upx; ">
-			
-			
-			<textarea v-model="checks"  ></textarea>
-		</view>
 
-		<view v-if="checks!=''">
-			<button class="uni-swipe_button" @click="onConfim" style="margin-top: 15upx;">确定并返回</button>
-		</view>
 
-		<view style="margin-top: 10px;">
-			<lv-select @handleSearch="handleSearch" @change="change" placeholder="姓名 \ 工号 \ 部门" :infoList="infoList" :showValue="showValue"
-			 v-model="keywords" :loading="loading" type="primary" :uniShadow="true" :isShowSelect="false"></lv-select>
-		</view>
-
-		<view class="uni-list" style="margin-top: 30upx;">
-			<checkbox-group @change="checkboxChange">
-				<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in items" :key="item.value">
-					<view>
-						<checkbox :value="item.value" :checked="item.checked" />
-					</view>
+		<view v-if="checked" class="uni-list" style="margin-top: 20upx;">
+			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in checkItem"
+			 :key="item.value">
+				<view>
 					<view> {{item.name}} ({{item.workid}})</view>
-				</label>
-			</checkbox-group>
+				</view>
+				<view>
+					<button class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="unCheck(item)">取消</button>
+				</view>
+			</label>
+			<button type="primary" class="mini-btn" @click="onConfim" style="margin-top: 15upx; margin-bottom: 15upx; margin-right: 15px; max-width: 300upx;max-height: 100upx; font-size: 14upx;" >确定并返回</button>
+		</view>
+
+		<view style="margin-top: 15upx;">
+			<uni-search-bar :radius="100" @input="Search" v-model="words"></uni-search-bar>
+		</view>
+
+		<view class="uni-list" style="margin-top: 20upx;">
+			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in list" :key="item.value">
+				<view>
+					<view> {{item.name}} ({{item.workid}})</view>
+				</view>
+				<view>
+					<button v-if="!isSingle" class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="onCheckMany(item)">选中</button>
+				<button v-if="isSingle" class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="onCheckSingle(item)">选中</button>
+				
+				</view>
+			</label>
 		</view>
 
 	</view>
@@ -35,8 +41,6 @@
 </template>
 
 <script>
-	import lvselect from '../../components/lv-select/lv-select';
-
 	import {
 		mapState,
 		mapMutations
@@ -45,136 +49,67 @@
 	export default {
 
 		components: {
-			lvselect
+
 		},
 		data() {
 			return {
-				loading: false,
-				showValue: 'name', // 需要显示的数据，必须与infoList中的name对应
-				searchValue: '',
-				infoList: [], //搜索框快捷提示
-				pageindex: 0,
+				list: [],
+				pageindex: 1,
 				pagesize: 20,
 				pagecount: 10,
-				keywords: '', //关键字搜索
-				items: [], //用户列表
-				checks: "", //显示的选择用户string
-				checkitems: [], //被选中的人员集合
+				words: "",
+				keywords: "",
+				checked: false,
+				checkItem: [],
+				isSingle: false, // 页面取值是 选择单用户，还是多用户
 			}
 		},
 		created() {
 			this.pageindex = 1; //显示第一页
-			this.LoadUserList(); //第一次加载
+			this.Init(); //第一次加载
 
 		},
 		onPullDownRefresh() {
 			console.log("下拉刷新");
 			this.pageindex = 1;
-			this.items = [];
-			this.keywords = "";
-			this.checkitems=[];
-			this.checks="";
-			this.LoadUserList();
+			this.checkItem=[];
+			this.checked=false;
+			
+			this.Init();
 			uni.stopPullDownRefresh();
 
 		},
 		onReachBottom() {
 			console.log("上拉加载");
 			this.pageindex = this.pageindex + 1;
-			this.LoadUserList();
+			this.Init();
+		},
+		onLoad(option) {
+		
+			if(option.isSingle!=null && option.isSingle!="")
+			{	console.log(option.isSingle);  //接收URL参数
+				this.isSingle=option.isSingle==="true"?true:false;
+				
+				//console.log("====类型："+this.isSingle);  //接收URL参数
+			}
+		
 		},
 		methods: {
-			...mapMutations(['setMaintainer']),
-			onConfim() {
-
-				//将选择好的用户回传父页面 并跳转
-				this.setMaintainer(this.checkitems);
-
-				uni.navigateBack();
-
-			},
-			handleSearch() {
-				console.log("搜索执行:" + this.keywords);
-				this.pageindex = 1;
-				this.items = [];
-				this.LoadUserList();
-			},
-			IsHasitem: function(items, item) {
-
-				//集合对象 是否包含 该对象
-
-				for (var j = 0; j < items.length; j++) {
-					if (items[j].value == item.value) {
-						return true;
-					}
-				}
-
-				return false;
-
-			},
-			checkboxChange: function(e) {
-				var items = this.items,
-					checkitems = this.checkitems,
-					values = e.detail.value;
-
-				console.log(e);
-				this.checks = "";
-				for (var i = 0; i < items.length; i++) {
-					let item = items[i]
-					if (values.includes(item.value)) {
-						//被勾选的选项 是否包含当前 Item 包含则 添加
-
-						//判断是否被添加过这个对象，没有则添加对象，避免重复添加
-
-						if (!this.IsHasitem(checkitems, item)) {
-							this.checkitems.push(item);
-							//console.log("被添加的对象：" + JSON.stringify(checkitems))
-						}
-					} else {
-						// else中 是未被选中的 item，
-						// 如果 checkitems 中有包含这些选项 ，则需要删除这些item
-
-						if (this.IsHasitem(checkitems, item)) {
-								//删除方法，用for
-								
-								for(var l=0;l<this.checkitems.length;l++){
-									if(this.checkitems[l].value==item.value){
-										this.checkitems.splice(l,1);
-									}
-								}
-						}
-
-					}
-				}
-				
-				
-				//最后根据checkitems 显示用户名
-				for (var k = 0; k < checkitems.length; k++) {
-
-					this.checks += checkitems[k].name + ","
-				}
-
-
-
-
-			},
-			LoadUserList() {
+				...mapMutations(['setSupportConductor','setSupportCopy',"setMaintainer"]),
+			Init() {
 				var _self = this;
 
 				if (_self.pageindex > _self.pagecount) {
-					// uni.showToast({
-					// 	title: "没有更多了..."
-					// });
 					return;
 				}
 
 				uni.showLoading({
 					title: "数据加载中..."
 				})
-
+				console.log("关键字搜索:" + this.keywords);
 
 				uni.request({
-					url: this.LoginHost + "/api/Direction/UserList",
+					url: this.LoginHost + "/api/User/UserList",
 					data: {
 						keywords: _self.keywords,
 						pageindex: _self.pageindex,
@@ -189,8 +124,7 @@
 					success: (res) => {
 						uni.hideLoading();
 
-
-						// console.log(JSON.stringify( res));
+						//console.log(JSON.stringify( res));
 
 						//服务的返回信息不为true
 						if (!res.data.Success) {
@@ -210,9 +144,8 @@
 							let dept = res.data.Content[i].DEPARTMENT;
 							let workid = res.data.Content[i].WORK_ID
 
-
-							_self.items.push({
-								value: uuid,
+							_self.list.push({
+								uuid: uuid,
 								name: name,
 								dept: dept,
 								workid: workid,
@@ -220,7 +153,6 @@
 
 
 						}
-
 
 						//console.log(JSON.stringify(_self.items));
 					},
@@ -232,12 +164,65 @@
 						});
 					}
 				});
+			},
+			Search() {
 
+				this.keywords = this.words.value;
 
+				this.pageindex = 1;
+				this.list = [];
+				this.Init();
+			},
+			onCheckMany(item) {
+				this.checked = true;
 
+				//如果存在则不添加
 
+				console.log("被选中的用户="+JSON.stringify(item));
+				console.log("被选中的用户集合=="+JSON.stringify(this.checkItem));
+
+				for (let i = 0; i < this.checkItem.length; i++) {
+					if (this.checkItem[i].uuid == item.uuid) {
+						uni.showToast({
+							title: "已存在..."
+						});
+						return;
+					}
+				}
+
+				this.checkItem.push(item);
+				
+				
+
+			},onCheckSingle(item){
+				this.checkItem.push(item);
+				this.setMaintainer(this.checkItem);
+				uni.navigateBack();
+				
+			},
+			unCheck(item) {
+
+				// console.log("被选中的用户="+JSON.stringify(item));
+				// console.log("被选中的用户集合=="+JSON.stringify(this.checkItem));
+
+				for (let i = 0; i < this.checkItem.length; i++) {
+					if (this.checkItem[i].uuid == item.uuid) {
+						this.checkItem.splice(i, 1); // 将使后面的元素依次前移，数组长度减1
+						i--; // 如果不减，将漏掉一个元素
+					}
+				}
+
+				if (this.checkItem.length == 0) {
+
+					this.checked = false;
+				}
+
+			},
+			onConfim(){
+				
+				this.setMaintainer(this.checkItem);
+				uni.navigateBack();
 			}
-
 		}
 	}
 </script>

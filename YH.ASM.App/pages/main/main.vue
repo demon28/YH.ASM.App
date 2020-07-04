@@ -179,7 +179,7 @@
 			ViewSupporMy(){
 				
 					uni.navigateTo({
-						url: '../support/mysupport'
+						url: '../support/mySupport'
 					});
 			},
 			ViewSupporCreate(){

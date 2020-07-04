@@ -79,8 +79,7 @@
 				</view>
 				<view  class="uni-list-cell-navigate uni-navigate-right"  @click="onSelectPeople()" >
 					
-					<text @click="onSelectPeople()"> {{checks}}   </text>
-					
+					<text>  <text  v-for="item in checks">{{item.name+","}}</text>  </text>
 				</view>
 			</view>
 			
@@ -150,23 +149,16 @@ import {
 				
 				machineAssist:"",
 				
-				checks:"请选择",
+				checks:[],
 			}
 		},
 		onShow(option) { 
 			
 			console.log("子窗体传参数量："+this.maintainer.length);
-		 let checkitem=this.maintainer;
-			
-			
-			if(checkitem==null ||checkitem.length<=0){
-				return;
-			}
-			this.checks="";
-			this.maintenancePeople={};
-			for(let i=0;i<checkitem.length;i++){
-				
-				this.checks+=checkitem[i].name+",";
+		    
+			let checkitem=this.maintainer;
+			if(checkitem!=null && checkitem.length>0){
+				this.checks=checkitem;
 			}
 			
 			
@@ -393,15 +385,22 @@ import {
 				});
 				
 				var Key=this.ApiKey;
-				 console.log(_self.userId);
-				 console.log(this.indexType);
+				 // console.log(_self.userId);
+				 // console.log(this.indexType);
 				 
-				 console.log(_self.projectName);
-				 console.log(_self.customerName);
-				 console.log(_self.supportName);
-				 console.log(_self.content);
+				 // console.log(_self.projectName);
+				 // console.log(_self.customerName);
+				 // console.log(_self.supportName);
+				 // console.log(_self.content);
 				 
-				  console.log("打印售后人员："+_self.checks);
+				 
+				 let afterUser="";
+				 
+				 for (let i = 0; i < _self.checks.length; i++) {
+				 	afterUser+=_self.checks[i].name+","
+				 }
+				 
+				console.log("打印售后人员："+_self.checks);
 				   
 				uni.request({
 				    url:this.LoginHost+"/api/Direction/Put", //仅为示例，并非真实接口地址。
@@ -423,7 +422,7 @@ import {
 						
 						 machineName:_self.machineName,
 						 machineCount:_self.machineCount,
-							remarks:_self.checks  ,    //本来想用外键表的，这里涂简单，直接用的备注字段
+							remarks: afterUser  ,    //本来想用外键表的，这里tu简单，直接用的备注字段
 					  machineAssist:_self.machineAssist,
 					
 					   SigningKey:Key
@@ -490,7 +489,7 @@ import {
 		
 				uni.navigateTo({
 				
-					url: 'person'
+					url: 'person?isSingle=false'
 				});
 			}
 		}

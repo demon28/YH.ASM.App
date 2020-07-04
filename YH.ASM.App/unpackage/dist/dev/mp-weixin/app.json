@@ -6,9 +6,11 @@
     "pages/report/report",
     "pages/report/history",
     "pages/support/create",
-    "pages/support/mysupport",
+    "pages/support/mySupport",
     "pages/support/list",
-    "pages/report/person"
+    "pages/report/person",
+    "pages/support/fillProject",
+    "pages/support/fillUser"
   ],
   "subPackages": [],
   "window": {

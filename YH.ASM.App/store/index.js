@@ -18,10 +18,29 @@ const store = new Vuex.Store({
 		mobile:"",
 		useR_SEX:"",
 		
-		maintainer:[]
-		
+		maintainer:[],   //创建日报时 的 人员集合   ...全局参数统一为集合
+		supportProject:[], //创建工单时 的 集合
+		supportConductor:[], //创建工单时 集合
+		supportCopy:[],  //创建工单时的抄送对象
 	},
 	mutations: {
+		
+		setSupportCopy(state,items){
+			state.supportCopy=[];
+			state.supportCopy=items;
+			
+		},
+		setSupportConductor(state,items){
+			state.supportConductor=[];
+			state.supportConductor=items;
+			
+		},
+		
+		setSupportProject(state,items){
+			state.supportProject=[];
+			state.supportProject=items;
+			
+		},
 		
 		setMaintainer(state,items){
 			state.maintainer={};
