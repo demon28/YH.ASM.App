@@ -77,7 +77,7 @@
 	import uniGridItem from "@/components/uni-grid-item/uni-grid-item.vue"
 	
 	import service from '../../service.js';
-	import config from'../../common/config.js';
+	
 	
 	import {
 		mapState,
