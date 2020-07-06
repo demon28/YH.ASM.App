@@ -238,16 +238,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);
 var _uniListItem = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-list-item/uni-list-item.vue */ 57));
 var _uniList = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-list/uni-list.vue */ 64));
+
 var _Enum = __webpack_require__(/*! ../../common/Enum.js */ 71);
 
 
-var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+var _ApiSingin = _interopRequireDefault(__webpack_require__(/*! ../../common/ApiSingin.js */ 159));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
 
 {
-  computed: _objectSpread({}, (0, _vuex.mapState)(['userId', 'supportProject', 'supportConductor', 'supportCopy']), {
+  computed: _objectSpread({},
 
+  (0, _vuex.mapState)(['userId', 'supportProject', 'supportConductor', 'supportCopy']), {
     endDate: function endDate() {
       return this.getDate('end');
     } }),
@@ -269,7 +281,9 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
       conductor: {},
       finddate: currentDate,
       copy: [],
-      uploadfile: {} };
+      uploadfile: [],
+      filelist: [],
+      fileStatus: "" };
 
   },
   onShow: function onShow(option) {
@@ -281,7 +295,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
       _self.project = checkproject[0];
     } else {
       console.log("=========== this.project.name");
-      _self.project.name = "请选择";
+      _self.project = { name: "请选择" };
     }
 
     var checkconductor = _self.supportConductor;
@@ -289,7 +303,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
       _self.conductor = checkconductor[0];
     } else {
       console.log("=========== this.conductor.name");
-      _self.conductor.name = "请选择";
+      _self.conductor = { name: "请选择" };;
 
     }
 
@@ -305,9 +319,120 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
     console.log("我是可以获取到值的：" + this.supportProject);
   },
   methods: {
-
     Support_Severitylist: _Enum.Support_Severitylist,
-    onSubmit: function onSubmit() {},
+    onSubmit: function onSubmit() {
+      var _self = this;
+      var supportModel = {};
+      supportModel.CreatorId = _self.userId;
+      supportModel.ConductorId = _self.conductor.uuid;
+      supportModel.ProjectId = _self.project.id;
+      supportModel.Severity = _self.Severity;
+      supportModel.FindDate = _self.finddate;
+      supportModel.Title = _self.machineName;
+      supportModel.Content = _self.content;
+      supportModel.Filelist = _self.filelist;
+
+      var ccValue = "";
+      if (_self.copy.length > 0) {
+
+        //循环拼接推送人员
+        for (var i = 0; i < _self.copy.length; i++) {
+          ccValue += _self.copy[i].uuid + ",";
+        }
+        ccValue = ccValue.substring(0, ccValue.length - 1); //去掉最后一个逗号
+
+        //有推送则添加推送消息，没有则不添加
+        supportModel.Push = { CONDUCTOR: _self.conductor.uuid, CC: ccValue, POINT: 0 };
+      }
+
+
+
+
+      var jsonString = JSON.stringify(supportModel);
+      var path = "/api/Support/Create";
+      var apikey = this.ApiKey;
+
+      var timestamp = Math.round(new Date().getTime() / 1000);
+      var Singinkey = _ApiSingin.default.Singin(path, jsonString, apikey, timestamp);
+
+      uni.showLoading({
+        title: '提交中' });
+
+
+      console.log("请求参数jsonString:" + jsonString);
+      console.log("请求参数path:" + path);
+      console.log("请求参数apikey:" + apikey);
+      console.log("请求参数timestamp:" + timestamp);
+      console.log("请求参数Singinkey:" + Singinkey);
+
+      uni.request({
+        url: this.LoginHost + path, //仅为示例，并非真实接口地址。
+        data: supportModel,
+        method: "POST",
+        header: {
+          'content-type': 'application/json', //自定义请求头信息
+          'timestamp': timestamp,
+          'SigningKey': Singinkey },
+
+        success: function success(res) {
+
+          uni.hideLoading();
+          console.log(JSON.stringify(res));
+
+          if (res.statusCode != 200) {
+            uni.showToast({
+              icon: 'none',
+              title: "请填写正确的参数信息" });
+
+            return;
+          }
+          if (!res.data.Success) {
+            uni.showToast({
+              icon: 'none',
+              title: res.data.Message });
+
+            return;
+          }
+
+
+          uni.showModal({
+            content: '提交成功，返回首页！',
+            showCancel: false,
+            success: function success(res)
+            {
+              if (res.confirm)
+              {
+                console.log("回到首页");
+                uni.reLaunch({ url: "../main/main" });
+
+              }
+            } });
+
+
+
+
+        },
+        fail: function fail(re) {
+
+          console.log(re);
+
+          uni.hideLoading();
+          uni.showToast({
+            icon: 'none',
+            title: '网络请求失败！' });
+
+
+        } });
+
+
+
+
+
+
+
+
+
+    },
     bindPickerChange: function bindPickerChange(e) {
       this.Severity = e.target.value;
     },
@@ -348,16 +473,72 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
     },
     onUpload: function onUpload() {
-
+      var _self = this;
       uni.chooseMedia({
-        count: 9,
+        count: 1,
         mediaType: ['image', 'video'],
         sourceType: ['album', 'camera'],
         maxDuration: 30,
         camera: 'back',
         success: function success(res) {
-          console.log(res.tempFilest);
+
+          console.log("选择的文件=====" + JSON.stringify(res));
+          var type = res.type == "image" ? "图片" : "视频";
+
+          _self.uploadfile = res.tempFiles;
+          _self.uploadfile[0].type = type;
+          _self.fileStatus = "上传中...";
+
+          //上传文件
+          uni.showLoading({
+            title: type + "，上传中..." });
+
+
+          console.log("我要上传的文件路径" + _self.uploadfile[0].tempFilePath);
+
+          var params = {
+            SigningKey: _self.ApiKey,
+            userid: _self.userId };
+
+
+          console.log("上传参数：" + JSON.stringify(params));
+
+          uni.uploadFile({
+            url: _self.LoginHost + "/api/Upload/UploadFile",
+            filePath: _self.uploadfile[0].tempFilePath,
+            name: 'file',
+            formData: params,
+            header: { "Content-Type": "multipart/form-data" },
+            success: function success(uploadFileRes) {
+              console.log(uploadFileRes.data);
+              _self.fileStatus = "上传成功";
+
+              uni.hideLoading();
+              uni.showToast({
+                title: "上传成功！" });
+
+              _self.filelist = []; //单文件上传，清空
+              _self.filelist.push({ ID: uploadFileRes.data.ID, FILENAME: uploadFileRes.data.FILENAME });
+
+
+            }, fail: function fail(e) {
+              console.log("上传文件失败=====" + JSON.stringify(e));
+              _self.fileStatus = "上传失败";
+              uni.hideLoading();
+              uni.showToast({
+                title: "上传失败！",
+                icon: "none" });
+
+
+            } });
+
+
+
+
         } });
+
+
+
 
 
     } } };exports.default = _default;

@@ -30,7 +30,7 @@ _vue.default.prototype.ApiKey = "58b59b3ae5d0ec0629950ebdd4dabe39";
 
 
 //开发环境  devops
-//Vue.prototype.LoginHost="http://www.asm.cn:50428";
+_vue.default.prototype.LoginHost = "http://www.asm.cn:50428";
 
 
 
@@ -39,9 +39,7 @@ _vue.default.prototype.ApiKey = "58b59b3ae5d0ec0629950ebdd4dabe39";
 
 
 //内网环境
-
-
-_vue.default.prototype.LoginHost = "http://192.168.105.250:50428";
+//Vue.prototype.LoginHost="http://192.168.105.250:50428";
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
 
 /***/ }),

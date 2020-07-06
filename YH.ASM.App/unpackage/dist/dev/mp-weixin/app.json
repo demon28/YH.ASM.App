@@ -6,7 +6,7 @@
     "pages/report/report",
     "pages/report/history",
     "pages/support/create",
-    "pages/support/mySupport",
+    "pages/support/mysupport",
     "pages/support/list",
     "pages/report/person",
     "pages/support/fillProject",

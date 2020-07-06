@@ -62,36 +62,43 @@
 
 				</view>
 			</view>
-			
+
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					抄送人员:
 				</view>
 				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillCopy">
-					<text>  <text  v-for="item in copy">{{item.name+","}}</text>  </text>
+					<text> <text v-for="item in copy" :key="item.uuid">{{item.name+","}}</text> </text>
 				</view>
 			</view>
-			
+
 		</view>
-		
+
 		<view class="uni-list" style="margin-top: 30upx;">
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					上传附件:
 				</view>
-				<view >
+				<view>
 					<button @click="onUpload" size="mini" type="default" class="mini-btn" style="margin-right: 15upx;margin-top: 5upx; ">添加</button>
 				</view>
 			</view>
-			
-			
-			<view class="uni-list-cell-right" style="min-height:80upx ;" v-for="file in uploadfile" >
-				<text> {{file.name}}  </text>
+
+			<view class="uni-list-cell" style="min-height:80upx ;" v-for="file in uploadfile" :key="file.tempFilePath">
+				<view class="uni-list-cell-left">
+					{{file.type}}
+				</view>
+				<view>
+					<text style="margin-right: 30upx; color: #0FAEFF;">{{fileStatus}}</text>
+				</view>
 			</view>
-			
+
+
+
+
 		</view>
-		
-		
+
+
 		<view class="uni-textarea" style="margin-top: 30upx;">
 			<textarea placeholder="请输入问题描述" v-model="content" />
 			</view>
@@ -106,16 +113,21 @@
 </template>
 
 <script>
+	import {mapState,mapMutations} from 'vuex';
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
-	import {Support_Prioritylist,Support_Severitylist} from "../../common/Enum.js";
-
 	
-     import {mapState,mapMutations} from 'vuex'
+	import {
+		Support_Prioritylist,
+	 Support_Severitylist} from "../../common/Enum.js";
+	
+	import ApiSingin from "../../common/ApiSingin.js";
+	
 
 	export default {
-		computed: { ...mapState(['userId','supportProject','supportConductor','supportCopy'])
-		,  
+		computed:
+		{ 
+		...mapState(['userId','supportProject','supportConductor','supportCopy']),  
         endDate() {
             return this.getDate('end');
         }
@@ -137,7 +149,9 @@
 				conductor:{},
 				finddate: currentDate,
 				copy:[],
-				uploadfile:{}
+				uploadfile:[],
+				filelist:[],
+				fileStatus:""
 			}
 		},
 		onShow(option){
@@ -149,7 +163,7 @@
 				  _self.project=checkproject[0];
 			  }else{
 				    console.log("=========== this.project.name");
-				  _self.project.name="请选择";
+				  _self.project={name:"请选择"};
 			  }  
 			  
 			  	  let checkconductor=_self.supportConductor;
@@ -157,7 +171,7 @@
 			  		  _self.conductor=checkconductor[0];
 			  	  }else{
 					     console.log("=========== this.conductor.name");
-					  _self.conductor.name="请选择";
+					  _self.conductor={name:"请选择"};;
 					  
 				  }
 				  
@@ -173,9 +187,120 @@
 				console.log("我是可以获取到值的："+this.supportProject);
 		},
 		methods: {
-		
 		Support_Severitylist,
-		onSubmit(){},
+		onSubmit(){
+			var _self=this;
+			let supportModel={};
+			supportModel.CreatorId=_self.userId;
+			supportModel.ConductorId=_self.conductor.uuid;
+			supportModel.ProjectId=_self.project.id;
+			supportModel.Severity=_self.Severity;
+			supportModel.FindDate=_self.finddate;
+			supportModel.Title=_self.machineName;
+			supportModel.Content=_self.content;
+			supportModel.Filelist=_self.filelist;
+			
+			let ccValue="";
+			if(_self.copy.length>0){
+				
+				//循环拼接推送人员
+				for (var i = 0; i < _self.copy.length; i++) {
+					ccValue+=_self.copy[i].uuid+",";
+				}
+				ccValue = ccValue.substring(0, ccValue.length - 1);   //去掉最后一个逗号
+				
+				//有推送则添加推送消息，没有则不添加
+				supportModel.Push={CONDUCTOR:_self.conductor.uuid,CC:ccValue,POINT:0};
+			}
+			
+			
+		
+			
+			let jsonString=JSON.stringify(supportModel);
+			let path="/api/Support/Create";
+			let apikey=this.ApiKey;
+			
+			let timestamp=Math.round(new Date().getTime()/1000);
+		 	let Singinkey= ApiSingin.Singin(path,jsonString,apikey,timestamp);
+			
+			uni.showLoading({
+			    title: '提交中'
+			});
+			
+			console.log("请求参数jsonString:"+jsonString);
+			console.log("请求参数path:"+path);
+			console.log("请求参数apikey:"+apikey);
+			console.log("请求参数timestamp:"+timestamp);
+			console.log("请求参数Singinkey:"+Singinkey);
+			
+			uni.request({
+			    url:this.LoginHost+path, //仅为示例，并非真实接口地址。
+			    data: supportModel,
+				method :"POST",
+			    header: {
+			        'content-type': 'application/json' ,//自定义请求头信息
+					 'timestamp':timestamp,
+					 'SigningKey':Singinkey
+			    },
+			    success: (res) => {
+			  
+			     uni.hideLoading();
+				 console.log(JSON.stringify(res));
+				 		
+				if(res.statusCode!=200){
+					uni.showToast({
+						icon: 'none',
+						title: "请填写正确的参数信息"
+					});
+					return;
+				}		
+				 if (!res.data.Success) {
+				 	uni.showToast({
+				 		icon: 'none',
+				 		title: res.data.Message
+				 	});
+					return;
+				 }
+				 
+				 
+				 uni.showModal({
+				 	        content: '提交成功，返回首页！',
+				 	        showCancel: false,
+				 	        success: (res) => 
+					        			{
+					        				if (res.confirm) 
+					        				{
+					        					console.log("回到首页");
+					        					uni.reLaunch({url:"../main/main"});
+				 	        				
+					        				}
+					        			}
+				  	});
+					
+					
+					 
+			    }
+				,fail(re){
+					
+					console.log(re);
+					
+					uni.hideLoading();
+					uni.showToast({
+						icon: 'none',
+						title: '网络请求失败！'
+					});
+					
+				}
+			
+			
+			});
+			
+			
+			
+			
+			
+			
+		},
 		bindPickerChange(e){
 			this.Severity = e.target.value
 		}, 
@@ -216,17 +341,73 @@
 			});
 		},
 		onUpload(){
-			
+			var _self=this;
 			uni.chooseMedia({
-			  count: 9,
+			  count: 1,
 			  mediaType: ['image','video'],
 			  sourceType: ['album', 'camera'],
 			  maxDuration: 30,
 			  camera: 'back',
 			  success(res) {
-			    console.log(res.tempFilest)
+			  
+				console.log("选择的文件====="+JSON.stringify(res));
+				let type=res.type=="image"?"图片":"视频";
+				
+				_self.uploadfile=res.tempFiles;
+				_self.uploadfile[0].type=type;
+				_self.fileStatus="上传中...";
+				
+				//上传文件
+				uni.showLoading({
+					title:type+"，上传中..."
+				});
+				
+				console.log("我要上传的文件路径"+_self.uploadfile[0].tempFilePath);
+				 
+				 let params={
+					 SigningKey: _self.ApiKey,
+					 userid:_self.userId
+				 }
+				 
+				 console.log("上传参数："+JSON.stringify(params));
+				 
+				 uni.uploadFile({
+				            url:  _self.LoginHost + "/api/Upload/UploadFile",
+				            filePath: _self.uploadfile[0].tempFilePath,
+				            name: 'file',
+				            formData: params,
+							header:{"Content-Type": "multipart/form-data"},
+				            success: (uploadFileRes) => {
+				                console.log(uploadFileRes.data);
+									_self.fileStatus="上传成功";
+								
+								uni.hideLoading();
+								uni.showToast({
+									title:"上传成功！"
+								});
+								_self.filelist=[]; //单文件上传，清空
+								_self.filelist.push({ID:uploadFileRes.data.ID,FILENAME:uploadFileRes.data.FILENAME});
+								
+								
+				            },fail(e) {
+								console.log("上传文件失败====="+JSON.stringify(e))
+									_self.fileStatus="上传失败";
+				            	uni.hideLoading();
+								uni.showToast({
+									title:"上传失败！",
+									icon:"none"
+								});
+									
+				            }
+				        });
+				
+				
+				
 			  }
-			})
+			});
+			
+		
+			
 			
 		}
 		

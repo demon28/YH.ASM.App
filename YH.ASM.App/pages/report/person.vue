@@ -5,33 +5,34 @@
 
 
 		<view v-if="checked" class="uni-list" style="margin-top: 20upx;">
-			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in checkItem"
-			 :key="item.value">
+			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="(item,index) in checkItem"
+			 :key="item.uuid">
 				<view>
 					<view> {{item.name}} ({{item.workid}})</view>
 				</view>
 				<view>
-					<button class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="unCheck(item)">取消</button>
+					<button class="mini-btn" type="default" size="mini" style="margin-top: 10upx;min-height: 60upx; height: 60upx;" @click="unCheck(item)">取消</button>
 				</view>
 			</label>
-			<button type="primary" class="mini-btn" @click="onConfim" style="margin-top: 15upx; margin-bottom: 15upx; margin-right: 15px; max-width: 300upx;max-height: 100upx; font-size: 14upx;" >确定并返回</button>
-		</view>
+			
+			<button type="primary" size="mini" class="mini-btn" @click="onConfim" style="margin-right: 15upx;margin-top: 10upx; margin-bottom: 10upx;" >确定并返回</button>
 
+		</view>
 		<view style="margin-top: 15upx;">
 			<uni-search-bar :radius="100" @input="Search" v-model="words"></uni-search-bar>
 		</view>
 
 		<view class="uni-list" style="margin-top: 20upx;">
-			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in list" :key="item.value">
+			<view class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="(item,index) in list" :key="item.uuid">
 				<view>
 					<view> {{item.name}} ({{item.workid}})</view>
 				</view>
 				<view>
 					<button v-if="!isSingle" class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="onCheckMany(item)">选中</button>
-				<button v-if="isSingle" class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="onCheckSingle(item)">选中</button>
+				    <button v-if="isSingle" class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="onCheckSingle(item)">选中</button>
 				
 				</view>
-			</label>
+			</view>
 		</view>
 
 	</view>

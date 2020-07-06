@@ -40,7 +40,7 @@
 			}
 		},
 		{
-			"path": "pages/support/mySupport",
+			"path": "pages/support/mysupport",
 			"style": {
 				"navigationBarTitleText": "我的任务",
 				         "enablePullDownRefresh": true

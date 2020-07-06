@@ -450,9 +450,9 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
       var _self = this;
 
 
-      console.log(_self.projectName);
-      console.log(_self.customerName);
-      console.log(_self.projectName);
+      // console.log(_self.projectName);
+      // console.log(_self.customerName);
+      // console.log(_self.projectName);
 
       if (_self.projectName == "") {
 

@@ -25,7 +25,7 @@
 
 <script>
 	import service from '../../service.js';
-	import config from'../../common/config.js';
+	
 	
 	import {
 		mapState,
@@ -85,10 +85,7 @@
 				
 			    console.log("======"+ this.LoginHost+"/api/Login/Login");
 				
-			
 				
-				
-				//var Key=config.Singin(array,this.ApiKey);
 				var Key=this.ApiKey;
 				
 				console.log("======key"+Key);
