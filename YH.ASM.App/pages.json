@@ -39,17 +39,11 @@
 				"navigationBarTitleText": "创建工单"
 			}
 		},
-		{
-			"path": "pages/support/mySupport",
-			"style": {
-				"navigationBarTitleText": "我的任务",
-				         "enablePullDownRefresh": true
-			}
-		},
+		
 		{
 			"path": "pages/support/list",
 			"style": {
-				"navigationBarTitleText": "工单汇总",
+				"navigationBarTitleText": "工作清单",
 				         "enablePullDownRefresh": true
 			}
 		},

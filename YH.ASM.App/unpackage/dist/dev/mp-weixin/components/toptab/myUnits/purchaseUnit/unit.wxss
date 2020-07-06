@@ -45,10 +45,6 @@
   -webkit-flex-wrap: wrap;
           flex-wrap: wrap;
 }
-.my-unit .unit-body text {
-  font-size: 28rpx;
-  line-height: 55rpx;
-}
 .my-unit .unit-foot {
   height: 88rpx;
   padding: 0 20rpx;

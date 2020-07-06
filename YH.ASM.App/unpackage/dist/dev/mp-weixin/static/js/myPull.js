@@ -99,7 +99,9 @@ export default({getList="getList",listData="listData",page="page",initIndex="ini
 			 */
 			swipeleft(){
 				if(this[initIndex]<this[modelData].length-1)this[initIndex]++
-				console.log("左滑");
+				console.log("左滑"+this[initIndex]);
+				
+					this.refresh();
 			},
 			
 			/**
@@ -107,7 +109,9 @@ export default({getList="getList",listData="listData",page="page",initIndex="ini
 			 */
 			swiperight(){
 				if(this[initIndex]>0)this[initIndex]--
-				console.log("右滑");
+				console.log("右滑"+this[initIndex]);
+				
+					this.refresh();
 			},
 		}
 	}

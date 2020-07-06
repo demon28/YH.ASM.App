@@ -1,9 +1,10 @@
 {
-  "navigationBarTitleText": "工单汇总",
+  "navigationBarTitleText": "工作清单",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "my-tabs": "/components/toptab/myTabs/myTabs",
     "my-unit": "/components/toptab/myUnits/purchaseUnit/unit",
-    "my-loading": "/components/toptab/myLoading/myLoading"
+    "my-loading": "/components/toptab/myLoading/myLoading",
+    "uni-rate": "/components/uni-rate/uni-rate"
   }
 }

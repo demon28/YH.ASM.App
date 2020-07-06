@@ -6,7 +6,6 @@
     "pages/report/report",
     "pages/report/history",
     "pages/support/create",
-    "pages/support/mySupport",
     "pages/support/list",
     "pages/report/person",
     "pages/support/fillProject",
@@ -42,5 +41,6 @@
       "desc": "\"你的位置信息将用于小程序位置接口的效果展示\""
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap30.json"
 }

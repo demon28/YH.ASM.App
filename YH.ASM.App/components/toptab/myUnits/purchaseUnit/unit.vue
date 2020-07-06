@@ -1,110 +1,194 @@
 <template>
-    <view class='my-unit'>
+	<view class='my-unit'>
 		<view class="unit-head">
-			<text>工单编号：15</text><text class="fr color-999">2020-07-05：17:23</text>
+			<text>工单编号：{{info.SID}}</text><text class="fr color-999">{{info.CREATETIME}}</text>
 		</view>
 		<view class="unit-body">
-			 
-		
-		
-					 <view class="uni-flex uni-column uni-padding-wrap">
-					                <view class="flex-item flex-item-V uni-bg-red">A</view>
-					                <view class="flex-item flex-item-V uni-bg-green">B</view>
-					                <view class="flex-item flex-item-V uni-bg-blue">    <view class="uni-flex uni-row">
-					                   <view class="flex-item flex-item-V uni-bg-red" style="width: 50%;">A</view>
-					                   <view class="flex-item flex-item-V uni-bg-bule"  style="width: 50%;">B</view>
-									</view>
-							  </view>
-					   </view>
-					   
-					   
-			 
-			  
+
+
+
+			<view class="uni-flex uni-column uni-padding-wrap">
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
+					项目名称： {{info.PROJECTNAME}}
+
+				</view>
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
+					<text class="uni-text">问题机型： {{info.TITLE}} </text>
+				</view>
+
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">流程节点： {{SetStatus(info.STATUS)}}</view>
+
+
+				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
+					<view class="uni-flex uni-row">
+
+						<view class="flex-item flex-item-V">严重程度： </view>
+						<view class="flex-item flex-item-V" style="display:flex; align-items:center">
+							<uni-rate size="15" disabled="true" :value="SetStar(info.SEVERITY)"></uni-rate>
+						</view>
+
+
+					</view>
+				</view>
+
+
+				<view class="flex-item flex-item-V ">
+					<view class="uni-flex uni-row">
+
+						<view class="flex-item flex-item-V">工单状态： </view>
+						<view class="flex-item flex-item-V">
+							<uni-tag :text="SetState(info.STATE)" type="primary" size="small" />
+						</view>
+
+
+					</view>
+				</view>
+
+
+
+
+				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
+					<view class="uni-flex uni-row">
+						<view class="flex-item flex-item-V" style="width: 50%;">创建人： {{info.CREATORNAME}}</view>
+						<view class="flex-item flex-item-V" style="width: 50%;">处理人： {{info.CONDUCTORNAME}}</view>
+					</view>
+				</view>
+				
+				
+				<view class="flex-item flex-item-V ">
+					<view class="uni-flex uni-row">
+				
+						<view class="flex-item flex-item-V" style="min-width: 25%;">问题描述： </view>
+						<view class="flex-item flex-item-V">
+						 {{info.CONTENT}}
+						</view>
+				
+				
+					</view>
+				</view>
+			
+				
+				
+			</view>
+
+				
+
 		</view>
 		<view class="unit-foot">
-			<view>
-			
-			<button class="fr btn" type="primary" @click="Dispose"  >处理工单</button>
+
+			<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
+				<view class="uni-flex uni-row">
+					<view class="flex-item flex-item-V" style="width: 50%; ">
+						<button class="btn" type="default" style="float: left;">查看附件</button>
+					</view>
+
+					<view class="flex-item flex-item-V" style="width: 50%;">
+						<button class="btn" type="default" style=" float: right;">处理工单</button>
+					</view>
+				</view>
 			</view>
+
 		</view>
-    </view>
+	</view>
 </template>
-	
+
 <script>
 	import uniRate from '@/components/uni-rate/uni-rate.vue'
 	import uniSection from '@/components/uni-section/uni-section.vue'
-	
-    export default{
+	import uniTag from "@/components/uni-tag/uni-tag.vue"
+	import {
+		Support_Prioritylist,
+		Support_Severitylist,
+		Support_Statuslist,
+		Support_State,
+		EnumGetSingle
+	} from "@/static/js/Enum.js";
+
+	export default {
 		components: {
 			uniRate,
-			uniSection
+			uniSection,
+			uniTag
 		},
-        data() {
-            return {
-				unitModel1:[
-					{prop:"",label:"项目名称"},
-					{prop:"",label:"问题设备"},
-					{prop:"",label:"创建人",class:"color-green"},
-					{prop:"",label:"处理人",class:"color-red"},
-					{prop:"",label:"问题类型",class:"color-999"},
-					{prop:"",label:"流程节点",class:"color-999"},
-					{prop:"",label:"问题描述",class:"color-999"},
-					{prop:"",label:"严重程度",class:"color-999"},
-				]
-            }
-        },
-        methods:{
-			Dispose(){
-				this.$store.commit("switch_loading")
+		data() {
+			return {
+
 			}
-        },
-		computed:{
-			
+		},
+		methods: {
+			Support_State,
+			Support_Statuslist,
+			Support_Severitylist,
+			EnumGetSingle,
+			Dispose() {
+				this.$store.commit("switch_loading")
+			},
+			SetStatus(value) {
+
+				return this.EnumGetSingle(value, this.Support_Statuslist());
+			},
+			SetState(value) {
+
+				return this.EnumGetSingle(value, this.Support_State());
+			},
+			SetStar(value) {
+
+				return (5 - parseInt(value)).toString();
+
+			}
+		},
+		computed: {
+
+		},
+		props: {
+
+			item: {},
+			info: {}
 		},
 		created() {
-			
+
 		},
-    }
+	}
 </script>
 <style lang='scss'>
-    .my-unit{
+	.my-unit {
 		margin: 20upx 0;
 		background-color: #ffffff;
 		font-size: 28upx;
 		transform: all 1s;
-		
-		.unit-head{
+
+		.unit-head {
 			padding: 20upx;
 			height: 80upx;
 			box-sizing: border-box;
 			border-bottom: 2upx solid #f5f5f5;
 		}
-		.unit-body{
+
+		.unit-body {
 			padding: 20upx;
 			display: flex;
 			flex-wrap: wrap;
-			
-			text{
-			
-				font-size: 28upx;
-				line-height: 55upx;
-			}
+
+
 		}
-		.unit-foot{
+
+		.unit-foot {
 			height: 88upx;
 			padding: 0 20upx;
 			border-top: 2upx solid #f5f5f5;
 			border-bottom: none;
 			line-height: 88upx;
-			
-			.btn{
+
+			.btn {
 				height: 60upx;
 				font-size: 28upx;
 				line-height: 60upx;
 				margin: 14upx 0;
 			}
 		}
-	}/* 头条小程序组件内不能引入字体 */
+	}
+
+	/* 头条小程序组件内不能引入字体 */
 	/* #ifdef MP-TOUTIAO */
 	@font-face {
 		font-family: uniicons;
