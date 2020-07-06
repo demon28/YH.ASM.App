@@ -1,5 +1,9 @@
 {
   "navigationBarTitleText": "工单汇总",
   "enablePullDownRefresh": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "my-tabs": "/components/toptab/myTabs/myTabs",
+    "my-unit": "/components/toptab/myUnits/purchaseUnit/unit",
+    "my-loading": "/components/toptab/myLoading/myLoading"
+  }
 }

@@ -117,12 +117,11 @@
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
 	
-	import {
-		Support_Prioritylist,
-	 Support_Severitylist} from "../../common/Enum.js";
+	import {Support_Prioritylist, Support_Severitylist} from "../../static/js/Enum.js";
 	
-	import ApiSingin from "../../common/ApiSingin.js";
 	
+	import ApiSingin from '../../static/js/ApiSingin.js';
+	import Verificat from '../../static/js/Verificat.js';
 
 	export default {
 		computed:
@@ -190,6 +189,16 @@
 		Support_Severitylist,
 		onSubmit(){
 			var _self=this;
+			var paramsCheck=_self.verifyParameters();
+			if(!paramsCheck.res)
+			{
+				uni.showToast({
+					icon:"none",
+					title:paramsCheck.message
+				})
+				return;
+			}
+			
 			let supportModel={};
 			supportModel.CreatorId=_self.userId;
 			supportModel.ConductorId=_self.conductor.uuid;
@@ -198,7 +207,11 @@
 			supportModel.FindDate=_self.finddate;
 			supportModel.Title=_self.machineName;
 			supportModel.Content=_self.content;
+			
+			console.log(_self.filelist);
 			supportModel.Filelist=_self.filelist;
+			
+			
 			
 			let ccValue="";
 			if(_self.copy.length>0){
@@ -213,9 +226,6 @@
 				supportModel.Push={CONDUCTOR:_self.conductor.uuid,CC:ccValue,POINT:0};
 			}
 			
-			
-		
-			
 			let jsonString=JSON.stringify(supportModel);
 			let path="/api/Support/Create";
 			let apikey=this.ApiKey;
@@ -227,12 +237,16 @@
 			    title: '提交中'
 			});
 			
+			
+			
 			console.log("请求参数jsonString:"+jsonString);
 			console.log("请求参数path:"+path);
 			console.log("请求参数apikey:"+apikey);
 			console.log("请求参数timestamp:"+timestamp);
 			console.log("请求参数Singinkey:"+Singinkey);
+		
 			
+			 
 			uni.request({
 			    url:this.LoginHost+path, //仅为示例，并非真实接口地址。
 			    data: supportModel,
@@ -245,7 +259,8 @@
 			    success: (res) => {
 			  
 			     uni.hideLoading();
-				 console.log(JSON.stringify(res));
+				 console.log(res);
+				 console.log("看看json字符串"+JSON.stringify(res));
 				 		
 				if(res.statusCode!=200){
 					uni.showToast({
@@ -378,15 +393,22 @@
 				            formData: params,
 							header:{"Content-Type": "multipart/form-data"},
 				            success: (uploadFileRes) => {
-				                console.log(uploadFileRes.data);
-									_self.fileStatus="上传成功";
+								
+								console.log(uploadFileRes);
+				                console.log("文件上传成功，返回值："+JSON.stringify(uploadFileRes.data));
+									
+								_self.fileStatus="上传成功";
 								
 								uni.hideLoading();
 								uni.showToast({
 									title:"上传成功！"
 								});
 								_self.filelist=[]; //单文件上传，清空
-								_self.filelist.push({ID:uploadFileRes.data.ID,FILENAME:uploadFileRes.data.FILENAME});
+								
+								let json=JSON.parse(uploadFileRes.data);
+								let file={ID:json.Content.ID,FILENAME:json.Content.FILENAME};
+								console.log("填充文件列表：" + JSON.stringify(file));
+								_self.filelist.push(file);
 								
 								
 				            },fail(e) {
@@ -409,6 +431,36 @@
 		
 			
 			
+		},
+		verifyParameters(){
+			
+			let _self=this;
+			let result={res:true,message:""};
+			
+			 console.log("项目："+JSON.stringify(_self.project));
+			if(!Verificat.itemHasKeyVer(_self.project,"id")){
+				result.res=false;
+				result.message="请选择项目";
+			}
+			
+			if(!Verificat.isNotNullTrim(_self.machineName)){
+				result.res=false;
+				result.message="请填写问题机型";
+			}
+			  
+			 console.log("处理人："+JSON.stringify(_self.conductor));
+			if(!Verificat.itemHasKeyVer(_self.conductor,"uuid"))
+			{
+				result.res=false;
+				result.message="请选择处理人";
+			}
+	     
+			if(!Verificat.isNotNullTrim(_self.content)){
+				result.res=false;
+				result.message="请填写问题描述";
+			}
+			 
+			return result;
 		}
 		
 		}
