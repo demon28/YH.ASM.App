@@ -26,15 +26,8 @@
       "list": []
     },
     "miniprogram": {
-      "current": 0,
-      "list": [
-        {
-          "id": 0,
-          "name": "pages/report/report",
-          "pathName": "pages/report/report",
-          "query": ""
-        }
-      ]
+      "current": -1,
+      "list": []
     }
   }
 }
