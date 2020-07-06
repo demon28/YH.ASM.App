@@ -48,7 +48,7 @@
 					<uni-grid-item >
 						<view class="grid-item-box"  @click="ViewSupporMy" >
 							<image src="../../static/img/mySupprot.png" class="image" mode="aspectFill" />
-							<text class="text">我的任务</text>
+							<text class="text">工作清单</text>
 						</view>
 					</uni-grid-item>
 					
@@ -179,7 +179,7 @@
 			ViewSupporMy(){
 				
 					uni.navigateTo({
-						url: '../support/mysupport'
+						url: '../support/mySupport'
 					});
 			},
 			ViewSupporCreate(){

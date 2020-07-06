@@ -4,6 +4,11 @@ import App from './App'
 
 import store from './store'
 
+
+import '@/static/css/reset.scss'
+import '@/static/iconfont/iconfont.css' //使用字体图标
+import '@/static/js/constant.js'
+
 Vue.config.productionTip = false
 
 Vue.prototype.$store = store

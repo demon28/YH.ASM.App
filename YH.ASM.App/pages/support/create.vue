@@ -117,12 +117,11 @@
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
 	
-	import {
-		Support_Prioritylist,
-	 Support_Severitylist} from "../../common/Enum.js";
+	import {Support_Prioritylist, Support_Severitylist} from "../../static/js/Enum.js";
 	
-	import ApiSingin from "../../common/ApiSingin.js";
-	import Verificat from "../../common/Verificat.js";
+	
+	import ApiSingin from '../../static/js/ApiSingin.js';
+	import Verificat from '../../static/js/Verificat.js';
 
 	export default {
 		computed:
