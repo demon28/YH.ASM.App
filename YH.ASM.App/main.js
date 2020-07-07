@@ -5,9 +5,9 @@ import App from './App'
 import store from './store'
 
 
-import '@/static/css/reset.scss'
-import '@/static/iconfont/iconfont.css' //使用字体图标
-import '@/static/js/constant.js'
+
+
+
 
 Vue.config.productionTip = false
 
@@ -33,6 +33,3 @@ Vue.prototype.LoginHost="http://www.asm.cn:50428";
 //正式环境  product
 //Vue.prototype.LoginHost="https://asm.yhwins.com:52420";
 
-
-//内网环境
-//Vue.prototype.LoginHost="http://192.168.105.250:50428";

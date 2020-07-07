@@ -73,7 +73,22 @@
 				         "enablePullDownRefresh": true
 				
 			}
+		},{
+			"path": "pages/support/attachment",
+			"style": {
+				"navigationBarTitleText": "工单附件"
+				
+			}
+		},
+		{
+			"path": "pages/support/media",
+			"style": {
+				"navigationBarTitleText": "预览"
+			}
 		}
+		
+		
+		
 		
 	],
 	"tabBar": {

@@ -79,7 +79,7 @@
 			<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
 				<view class="uni-flex uni-row">
 					<view class="flex-item flex-item-V" style="width: 50%; ">
-						<button class="btn" type="default" style="float: left;">查看附件</button>
+						<button class="btn" type="default" style="float: left;" @click="ViewAttachment(info.SID)">查看附件</button>
 					</view>
 
 					<view class="flex-item flex-item-V" style="width: 50%;">
@@ -93,6 +93,9 @@
 </template>
 
 <script>
+	import '@/static/iconfont/iconfont.css'
+	import '@/static/js/constant.js'
+	import '@/static/css/reset.scss'
 	import uniRate from '@/components/uni-rate/uni-rate.vue'
 	import uniSection from '@/components/uni-section/uni-section.vue'
 	import uniTag from "@/components/uni-tag/uni-tag.vue"
@@ -124,17 +127,18 @@
 				this.$store.commit("switch_loading")
 			},
 			SetStatus(value) {
-
 				return this.EnumGetSingle(value, this.Support_Statuslist());
 			},
 			SetState(value) {
-
 				return this.EnumGetSingle(value, this.Support_State());
 			},
 			SetStar(value) {
-
 				return (5 - parseInt(value)).toString();
-
+			},
+			ViewAttachment(sid){
+				uni.navigateTo({
+					url: 'attachment?sid='+sid
+				})
 			}
 		},
 		computed: {

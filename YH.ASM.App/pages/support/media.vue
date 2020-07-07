@@ -1,0 +1,54 @@
+<template>
+	
+	<view class="content">
+		
+		          <image v-if="type=='img'"  :src="url"></image>
+				  <video v-if="type!=='img'" id="myVideo" :src="url"  enable-danmu danmu-btn controls></video>
+		
+	</view>
+	
+</template>
+
+<script>
+	
+		export default {
+			
+			data(){
+				return {
+					type:'img',
+					url:""
+				}
+				
+			},
+			onLoad(pramse){
+				
+			
+				
+				if(pramse.url==null ||pramse.url==""){
+					return;	
+				}
+				
+				this.url=this.LoginHost+pramse.url;
+				var index= this.url.lastIndexOf(".");
+				var ext = this.url.substr(index+1);
+				
+				console.log(this.url);
+				
+				if( ['png', 'jpg', 'jpeg'].indexOf(ext.toLowerCase()) !== -1){
+					this.type='img'
+				}
+				
+				if(['mp4', 'mov', 'AVI'].indexOf(ext.toLowerCase()) !== -1){
+					this.type='videp'
+				}
+				
+				
+			}
+			
+		} 
+	
+	
+</script>
+
+<style>
+</style>

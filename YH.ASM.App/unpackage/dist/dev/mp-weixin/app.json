@@ -9,7 +9,9 @@
     "pages/support/list",
     "pages/report/person",
     "pages/support/fillProject",
-    "pages/support/fillUser"
+    "pages/support/fillUser",
+    "pages/support/attachment",
+    "pages/support/media"
   ],
   "subPackages": [],
   "window": {
@@ -41,6 +43,5 @@
       "desc": "\"你的位置信息将用于小程序位置接口的效果展示\""
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap30.json"
+  "usingComponents": {}
 }

@@ -2,7 +2,7 @@
 	<view class='purchase-list'>
 		<my-tabs @change="tapChange" :modelData="modelData" :initIndex="initIndex"></my-tabs>
 		<scroll-view class="purchase-body" scroll-y="true" @scrolltolower="scrolltolower" @scrolltoupper="scrolltoupper" @scroll="scroll" @touchstart="touchstart" @touchend="touchend">
-			<my-unit v-for="(item,index) in list" :key="index" :info="item"></my-unit>
+			<my-unit v-for="(item,index) in listData" :key="index" :info="item"></my-unit>
 		</scroll-view>
 		<my-loading></my-loading>
 	</view>
@@ -41,11 +41,12 @@
 			...EnumGetSingle,
 			getList(page,done){
 				 console.log(`获取第${page}页数据`);
-				 done([1])
+			
 				  var _self=this;
+				  
+				  
 				 if(page==1){
-					 
-					 	_self.list=[];
+					 _self.list=[];
 				 }
 				
 			
@@ -68,6 +69,11 @@
 				 let timestamp=_self.$timestamp();
 				 let path="/api/Support/List";
 				 let Singinkey=ApiSingin.Singin(path,jsonString,_self.ApiKey,timestamp);
+				 
+				 //加载提示
+				 uni.showLoading({
+				     title: '加载中...'
+				 });
 				 
 				 uni.request({
 				     url:_self.LoginHost+path, 
@@ -99,15 +105,7 @@
 				 		return;
 				 	 }
 					 
-					 
-					 
-					 
-					 for (var i = 0; i < res.data.Content.length; i++) {
-					 
-					 	_self.list.push(res.data.Content[i]);
-					 }
-					 
-					 
+					  done(res.data.Content);
 					 
 				 	
 				 		 
@@ -157,6 +155,7 @@
 			tapChange(val){
 				this.initIndex=val
 				
+				console.log("tab变化"+this.initIndex);
 				this.refresh();
 			}
 		},
@@ -164,6 +163,8 @@
 		
 	}
 </script>
+
+
 <style lang='scss'>
 	.purchase-list {
 		background-color: #f5f5f5;
