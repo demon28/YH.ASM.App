@@ -57,9 +57,8 @@
 				
 			}
 		},
-		
 		{
-			"path": "pages/support/fillProject",
+			"path": "pages/machine/fillMachine",
 			"style": {
 				"navigationBarTitleText": "选择项目",
 				         "enablePullDownRefresh": true
@@ -67,7 +66,15 @@
 			}
 		},
 		{
-			"path": "pages/support/fillUser",
+			"path": "pages/project/fillProject",
+			"style": {
+				"navigationBarTitleText": "选择项目",
+				         "enablePullDownRefresh": true
+				
+			}
+		},
+		{
+			"path": "pages/user/fillUser",
 			"style": {
 				"navigationBarTitleText": "选择人员",
 				         "enablePullDownRefresh": true

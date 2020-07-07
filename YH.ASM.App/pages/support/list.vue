@@ -67,7 +67,7 @@
 				 };
 				 let jsonString=JSON.stringify(model);
 				 let timestamp=_self.$timestamp();
-				 let path="/api/Support/List";
+				 let path="/api/Support/ListPersonal";
 				 let Singinkey=ApiSingin.Singin(path,jsonString,_self.ApiKey,timestamp);
 				 
 				 //加载提示

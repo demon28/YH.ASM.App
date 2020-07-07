@@ -1,7 +1,7 @@
 <template>
 	<view class='my-unit'>
 		<view class="unit-head">
-			<text>工单编号：{{info.SID}}</text><text class="fr color-999">{{info.CREATETIME}}</text>
+			<text>编号：{{info.CODE}}</text><text class="fr color-999">{{info.CREATETIME}}</text>
 		</view>
 		<view class="unit-body">
 
@@ -13,10 +13,10 @@
 
 				</view>
 				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
-					<text class="uni-text">问题机型： {{info.TITLE}} </text>
+					<text class="uni-text">问题机型： {{info.MACHINENAME}}-{{info.MACHINESERIAL}} </text>
 				</view>
 
-				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">流程节点： {{SetStatus(info.STATUS)}}</view>
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">流程节点： {{SetStatus(info.PSTATUS)}}</view>
 
 
 				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
@@ -83,7 +83,7 @@
 					</view>
 
 					<view class="flex-item flex-item-V" style="width: 50%;">
-						<button class="btn" type="default" style=" float: right;">处理工单</button>
+						<button class="btn" type="default" style=" float: right;">受理工单</button>
 					</view>
 				</view>
 			</view>

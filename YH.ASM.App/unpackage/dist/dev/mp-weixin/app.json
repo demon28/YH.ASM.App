@@ -8,8 +8,9 @@
     "pages/support/create",
     "pages/support/list",
     "pages/report/person",
-    "pages/support/fillProject",
-    "pages/support/fillUser",
+    "pages/machine/fillMachine",
+    "pages/project/fillProject",
+    "pages/user/fillUser",
     "pages/support/attachment",
     "pages/support/media"
   ],

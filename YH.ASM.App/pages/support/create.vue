@@ -24,11 +24,10 @@
 				<view class="uni-list-cell-left">
 					* 问题机型:
 				</view>
-				<view class="uni-list-cell-db">
-					<input class="uni-input" placeholder="请输入问题机型" v-model="machineName" />
+				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillMachine">
+					<text> {{machine.name}}-{{machine.serial}} </text>
 				</view>
 			</view>
-
 
 
 			<view class="uni-list-cell" style="min-height:80upx ;">
@@ -126,7 +125,7 @@
 	export default {
 		computed:
 		{ 
-		...mapState(['userId','supportProject','supportConductor','supportCopy']),  
+		...mapState(['userId','supportProject','supportConductor','supportCopy','supportMachine']),  
         endDate() {
             return this.getDate('end');
         }
@@ -141,7 +140,7 @@
 			return {
 					list:[],
 				project:{},
-				machineName:"",
+				machine:{},
 				content:"",
 				Severity:0,
 				SeverityList:this.Support_Severitylist(),
@@ -174,6 +173,21 @@
 					  
 				  }
 				  
+				  
+				  let checkMid=_self.supportMachine;
+				  if(checkMid!=null && checkMid.length>0){
+				  			  		  _self.machine=checkMid[0];
+				  }else{
+				  					     console.log("=========== this.conductor.name");
+				  					  _self.machine={name:"请选择",serial:""};;
+				  					  
+				  }
+				  
+				  
+				  
+				  
+				  
+				  
 				let checkCopy=_self.supportCopy;
 				if(checkCopy!=null && checkCopy.length>0){
 					_self.copy=checkCopy;
@@ -205,9 +219,9 @@
 			supportModel.ProjectId=_self.project.id;
 			supportModel.Severity=_self.Severity;
 			supportModel.FindDate=_self.finddate;
-			supportModel.Title=_self.machineName;
+			supportModel.Title="";
 			supportModel.Content=_self.content;
-			
+			supportModel.Mid=_self.machine.id;
 			console.log(_self.filelist);
 			supportModel.Filelist=_self.filelist;
 			
@@ -340,21 +354,27 @@
 		},
 		onFillUser(){
 			uni.navigateTo({
-				url: 'fillUser?isSingle=true'
+				url: '../user/fillUser?isSingle=true&type=conductor'
 			});
 		},
 		onFillProject(){
 			
 			uni.navigateTo({
-				url: 'fillProject?isSingle=true'
+				url: '../project/fillProject?isSingle=true'
 			});
 			
 		},
 		onFillCopy(){
 			uni.navigateTo({
-				url: 'fillUser?isSingle=false'
+				url: '../user/fillUser?isSingle=false&type=copy'
 			});
 		},
+		onFillMachine(){
+			uni.navigateTo({
+				url: '../machine/fillMachine?isSingle=true'
+			});
+		},
+		
 		onUpload(){
 			var _self=this;
 			uni.chooseMedia({
@@ -443,7 +463,7 @@
 				result.message="请选择项目";
 			}
 			
-			if(!Verificat.isNotNullTrim(_self.machineName)){
+			if(!Verificat.itemHasKeyVer(_self.machine,"id")){
 				result.res=false;
 				result.message="请填写问题机型";
 			}

@@ -22,7 +22,7 @@ const store = new Vuex.Store({
 		supportProject:[], //创建工单时 的 集合
 		supportConductor:[], //创建工单时 集合
 		supportCopy:[],  //创建工单时的抄送对象
-		
+		supportMachine:[],
 		loading:false,
 	},
 	mutations: {
@@ -44,6 +44,12 @@ const store = new Vuex.Store({
 		setSupportProject(state,items){
 			state.supportProject=[];
 			state.supportProject=items;
+			
+		},
+		
+		setSupportMachine(state,items){
+			state.supportMachine=[];
+			state.supportMachine=items;
 			
 		},
 		

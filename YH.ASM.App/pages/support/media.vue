@@ -2,8 +2,8 @@
 	
 	<view class="content">
 		
-		          <image v-if="type=='img'"  :src="url"></image>
-				  <video v-if="type!=='img'" id="myVideo" :src="url"  enable-danmu danmu-btn controls></video>
+		          <image v-if="type=='img'"  :src="url" style="width: 100%;"></image>
+				  <video v-if="type!=='img'" id="myVideo" :src="url" style="width: 100%;" autoplay="true"   controls="true"></video>
 		
 	</view>
 	
@@ -27,8 +27,8 @@
 				if(pramse.url==null ||pramse.url==""){
 					return;	
 				}
-				
-				this.url=this.LoginHost+pramse.url;
+				let deurl=decodeURIComponent(pramse.url)
+				this.url=this.LoginHost+deurl;
 				var index= this.url.lastIndexOf(".");
 				var ext = this.url.substr(index+1);
 				

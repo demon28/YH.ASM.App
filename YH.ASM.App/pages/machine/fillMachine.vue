@@ -6,16 +6,16 @@
 
 		<view v-if="checked" class="uni-list" style="margin-top: 20upx;">
 			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in checkItem"
-			 :key="item.uuid">
+			 :key="item.id">
 				<view>
-					<view> {{item.name}} ({{item.workid}})</view>
+					<view> {{item.name}}-{{item.serial}} </view>
 				</view>
 				<view>
 					<button class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="unCheck(item)">取消</button>
 				</view>
 			</label>
-			<button type="primary" size="mini" class="mini-btn" @click="onConfim" style="margin-right: 15upx;margin-top: 10upx; margin-bottom: 10upx;" >确定并返回</button>
-			
+		<button type="primary" size="mini" class="mini-btn" @click="onConfim" style="margin-right: 15upx;margin-top: 10upx; margin-bottom: 10upx;" >确定并返回</button>
+		
 		</view>
 
 		<view style="margin-top: 15upx;">
@@ -23,9 +23,9 @@
 		</view>
 
 		<view class="uni-list" style="margin-top: 20upx;">
-			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in list" :key="item.uuid">
+			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in list" :key="item.id">
 				<view>
-					<view> {{item.name}} ({{item.workid}})</view>
+					<view> {{item.name}}-{{item.serial}}</view>
 				</view>
 				<view>
 					<button v-if="!isSingle" class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="onCheckMany(item)">选中</button>
@@ -42,16 +42,13 @@
 </template>
 
 <script>
-	import {
-		mapState,
-		mapMutations
-	} from 'vuex'
-
+	import {mapState,mapMutations} from 'vuex'
+	import ApiSingin from '../../static/js/ApiSingin.js';
+	
 	export default {
 
-		components: {
-
-		},
+		computed: mapState(['supportMachine']),
+		components: {},
 		data() {
 			return {
 				list: [],
@@ -60,9 +57,9 @@
 				pagecount: 10,
 				words: "",
 				keywords: "",
-				checked: false,
-				checkItem: [],
-				isSingle: false, // 页面取值是 选择单用户，还是多用户
+				checked: false,   //是否显示被选中的集合
+				checkItem: [],    //被选中的人
+				isSingle: false, // 单对象 还是 多对象
 			}
 		},
 		created() {
@@ -91,12 +88,11 @@
 			{	console.log(option.isSingle);  //接收URL参数
 				this.isSingle=option.isSingle==="true"?true:false;
 				
-				//console.log("====类型："+this.isSingle);  //接收URL参数
 			}
 		
 		},
 		methods: {
-				...mapMutations(['setSupportConductor','setSupportCopy']),
+			  ...mapMutations(['setSupportMachine']) , 
 			Init() {
 				var _self = this;
 
@@ -109,19 +105,26 @@
 				})
 				console.log("关键字搜索:" + this.keywords);
 
-				uni.request({
-					url: this.LoginHost + "/api/User/UserList",
-					data: {
-						keywords: _self.keywords,
-						pageindex: _self.pageindex,
-						pagesize: _self.pagesize,
-						SigningKey: _self.ApiKey,
+				let model={
+					pageindex: _self.pageindex,
+					pagesize: _self.pagesize,
+				
+				 };
+				 let jsonString=JSON.stringify(model);
+				 let timestamp=_self.$timestamp();
+				 let path="/api/Machine/List";
+				 let Singinkey=ApiSingin.Singin(path,jsonString,_self.ApiKey,timestamp);
 
-					},
-					method: "GET",
-					header: {
-						'content-type': 'application/text'
-					},
+
+				uni.request({
+					url:_self.LoginHost+path,
+					 data: model,
+					method :"POST",
+					 header: {
+					    // 'content-type': 'application/json' ,//自定义请求头信息
+						 'timestamp':timestamp,
+						 'SigningKey':Singinkey
+					 },
 					success: (res) => {
 						uni.hideLoading();
 
@@ -140,16 +143,13 @@
 
 						for (var i = 0; i < res.data.Content.length; i++) {
 
-							let name = res.data.Content[i].USER_NAME;
-							let uuid = res.data.Content[i].USER_ID.toString();
-							let dept = res.data.Content[i].DEPARTMENT;
-							let workid = res.data.Content[i].WORK_ID
-
+							let name = res.data.Content[i].NAME;
+							let id = res.data.Content[i].MID;
+							let serial= res.data.Content[i].SERIAL;
 							_self.list.push({
-								uuid: uuid,
+								id: id,
 								name: name,
-								dept: dept,
-								workid: workid,
+								serial:serial,
 							});
 
 
@@ -177,13 +177,9 @@
 			onCheckMany(item) {
 				this.checked = true;
 
-				//如果存在则不添加
-
-				console.log("被选中的用户="+JSON.stringify(item));
-				console.log("被选中的用户集合=="+JSON.stringify(this.checkItem));
 
 				for (let i = 0; i < this.checkItem.length; i++) {
-					if (this.checkItem[i].uuid == item.uuid) {
+					if (this.checkItem[i].id == item.id) {
 						uni.showToast({
 							title: "已存在..."
 						});
@@ -195,19 +191,18 @@
 				
 				
 
-			},onCheckSingle(item){
-				this.checkItem.push(item);
-				this.setSupportConductor(this.checkItem);
-				uni.navigateBack();
+			},
+			onCheckSingle(item){
 				
+				this.checkItem.push(item);
+				this.setSupportMachine(this.checkItem);
+				console.log("选中了一个项目"+JSON.stringify(this.supportProject));
+				uni.navigateBack();
 			},
 			unCheck(item) {
 
-				// console.log("被选中的用户="+JSON.stringify(item));
-				// console.log("被选中的用户集合=="+JSON.stringify(this.checkItem));
-
 				for (let i = 0; i < this.checkItem.length; i++) {
-					if (this.checkItem[i].uuid == item.uuid) {
+					if (this.checkItem[i].id == item.id) {
 						this.checkItem.splice(i, 1); // 将使后面的元素依次前移，数组长度减1
 						i--; // 如果不减，将漏掉一个元素
 					}
@@ -220,8 +215,8 @@
 
 			},
 			onConfim(){
-				
-				this.setSupportCopy(this.checkItem);
+				//多对象返回
+				this.setSupportMachine(this.checkItem);
 				uni.navigateBack();
 			}
 		}
