@@ -179,14 +179,14 @@
 				personal:0,
 				ordershow:false,
 				
-				ordertime:"",    //下单时间
+				ordertime:this.currentDate,    //下单时间
 				responsible:"",  //责任方
 				duty:"",
 				bom:"",
 				orderman:"",
 				analyze:"",
 				solution:"",
-				isorder:""
+				isorder:0
 			}
 		},
 		onLoad(pramse){
@@ -247,13 +247,17 @@
 			this.model.RESPONSIBLE=this.responsible;
 			this.model.DUTY=this.duty;
 			this.model.BOM=this.bom;
-			this.model.ORDERMAN=this.orderman;
-			this.model.ORDERTIME=this.ordertime;
 			this.model.ISORDER=this.isorder
 			
+			if(this.model.ISORDER!=0 &&this.model.ISORDER!="0" ){
+				this.model.ORDERMAN=this.orderman;
+				this.model.ORDERTIME=this.ordertime;
+			}
+			
 			this.model.NEXTUSER=this.conductor.uuid;
-			this.model.SUPPORTSTATUS=1;
+			this.model.SUPPORTSTATUS=this.isorder=="0"?"2":"1";
 			this.model.PERSONALID=this.personal;
+			
 			
 			let ccValue="";
 			if(_self.copy.length>0){
@@ -276,10 +280,11 @@
 					content: '处理成功，返回首页！',
 					showCancel: false,
 					success: (re) => {
-						if (re.confirm) {
-							uni.navigateTo({
-								url: '../main/main'
-							});
+						if (re.confirm)
+						{
+							console.log("回到首页");
+							uni.reLaunch({url:"../main/main"});
+						
 						}
 					}
 				})
@@ -292,6 +297,7 @@
 				console.log("是否需要下单:"+ evt.target.value) 
 		   this.isorder= evt.target.value;
 		   this.ordershow=this.isorder=="1";
+		   this.ordertime=  this.endDate;
 		}, 
 		getDate(type) {
             const date = new Date();
