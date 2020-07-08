@@ -12,7 +12,11 @@
     "pages/project/fillProject",
     "pages/user/fillUser",
     "pages/support/attachment",
-    "pages/support/media"
+    "pages/support/media",
+    "pages/support/checkByDisporer",
+    "pages/support/checkByPmc",
+    "pages/support/checkBySite",
+    "pages/support/checkByPrincipal"
   ],
   "subPackages": [],
   "window": {

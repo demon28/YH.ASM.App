@@ -16,7 +16,7 @@
 					<text class="uni-text">问题机型： {{info.MACHINENAME}}-{{info.MACHINESERIAL}} </text>
 				</view>
 
-				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">流程节点： {{SetStatus(info.PSTATUS)}}</view>
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">流程节点： {{SetStatus(info.STATUS)}}</view>
 
 
 				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
@@ -37,7 +37,7 @@
 
 						<view class="flex-item flex-item-V">工单状态： </view>
 						<view class="flex-item flex-item-V">
-							<uni-tag :text="SetState(info.STATE)" type="primary" size="small" />
+							<uni-tag :text="SetState(info.PSTATUS)" type="primary" size="small" />
 						</view>
 
 
@@ -83,7 +83,10 @@
 					</view>
 
 					<view class="flex-item flex-item-V" style="width: 50%;">
-						<button class="btn" type="default" style=" float: right;">受理工单</button>
+						<button v-if="info.PSTATUS==0" class="btn" type="primary" style=" float: right;" @click="Dispose(info)">受理工单</button>
+						
+						
+						<button v-if="info.PSTATUS==1" class="btn" type="primary" style=" float: right;" @click="TodoSupport(info)">处理工单</button>
 					</view>
 				</view>
 			</view>
@@ -107,6 +110,8 @@
 		EnumGetSingle
 	} from "@/static/js/Enum.js";
 
+
+
 	export default {
 		components: {
 			uniRate,
@@ -115,7 +120,7 @@
 		},
 		data() {
 			return {
-
+				childe:{}
 			}
 		},
 		methods: {
@@ -123,8 +128,11 @@
 			Support_Statuslist,
 			Support_Severitylist,
 			EnumGetSingle,
-			Dispose() {
-				this.$store.commit("switch_loading")
+			Dispose(item) {
+				this.$emit('child-say',item);
+			},
+			TodoSupport(item){
+				this.$emit('child-do',item)
 			},
 			SetStatus(value) {
 				return this.EnumGetSingle(value, this.Support_Statuslist());
@@ -142,7 +150,7 @@
 			}
 		},
 		computed: {
-
+			
 		},
 		props: {
 

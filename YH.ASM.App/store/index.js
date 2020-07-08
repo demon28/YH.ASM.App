@@ -22,12 +22,18 @@ const store = new Vuex.Store({
 		supportProject:[], //创建工单时 的 集合
 		supportConductor:[], //创建工单时 集合
 		supportCopy:[],  //创建工单时的抄送对象
-		supportMachine:[],
+		supportMachine:[],//工单设备
+		disporseAnalyzeuser:[],//技术处理，分析人员
 		loading:false,
 	},
 	mutations: {
 		switch_loading(state){
 			state.loading = !state.loading
+		},
+		
+		setDisporseAnalyzeuser(state,items){
+			state.disporseAnalyzeuser=[];
+			state.disporseAnalyzeuser=items;
 		},
 		
 		setSupportCopy(state,items){

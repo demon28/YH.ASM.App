@@ -92,8 +92,32 @@
 			"style": {
 				"navigationBarTitleText": "预览"
 			}
+		},
+		{
+			"path": "pages/support/checkByDisporer",
+			"style": {
+				"navigationBarTitleText": "技术处理"
+			}
+		},
+		{
+			"path": "pages/support/checkByPmc",
+			"style": {
+				"navigationBarTitleText": "PMC跟进"
+			}
+		},
+		{
+			"path": "pages/support/checkBySite",
+			"style": {
+				"navigationBarTitleText": "现场人员处理"
+			}
 		}
-		
+		,
+		{
+			"path": "pages/support/checkByPrincipal",
+			"style": {
+				"navigationBarTitleText": "负责人审核"
+			}
+		}
 		
 		
 		

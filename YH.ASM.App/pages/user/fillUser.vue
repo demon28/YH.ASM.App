@@ -19,7 +19,7 @@
 		</view>
 
 		<view style="margin-top: 15upx;">
-			<uni-search-bar :radius="100" @input="Search" v-model="words"></uni-search-bar>
+			<uni-search-bar :radius="100" @input="Search" v-model="words" clearButton="auto"></uni-search-bar>
 		</view>
 
 		<view class="uni-list" style="margin-top: 20upx;">
@@ -103,7 +103,7 @@
 		
 		},
 		methods: {
-				...mapMutations(['setSupportConductor','setSupportCopy']),
+				...mapMutations(['setSupportConductor','setSupportCopy','setDisporseAnalyzeuser']),
 			Init() {
 				var _self = this;
 
@@ -174,9 +174,8 @@
 				});
 			},
 			Search() {
-
 				this.keywords = this.words.value;
-
+				
 				this.pageindex = 1;
 				this.list = [];
 				this.Init();
@@ -213,6 +212,9 @@
 					this.setSupportCopy(this.checkItem);
 					
 				}
+				if(_self.type=="analyzeuser"){
+					this.setDisporseAnalyzeuser(this.checkItem);
+				}
 				
 				uni.navigateBack();
 				
@@ -242,8 +244,11 @@
 			}
 			if(_self.type=="copy"){
 				this.setSupportCopy(this.checkItem);
-				
 			}
+			if(_self.type=="analyzeuser"){
+					this.setDisporseAnalyzeuser(this.checkItem);
+			}
+				
 				uni.navigateBack();
 			}
 		}

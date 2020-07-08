@@ -22,7 +22,7 @@
 
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 问题机型:
+					* 责任方:
 				</view>
 				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillMachine">
 					<text> {{machine.name}}-{{machine.serial}} </text>

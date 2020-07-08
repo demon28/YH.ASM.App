@@ -8,7 +8,7 @@
 			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in checkItem"
 			 :key="item.id">
 				<view>
-					<view> {{item.name}} </view>
+					<view> {{item.name}} [{{item.code}} ] </view>
 				</view>
 				<view>
 					<button class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="unCheck(item)">取消</button>
@@ -25,7 +25,7 @@
 		<view class="uni-list" style="margin-top: 20upx;">
 			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in list" :key="item.id">
 				<view>
-					<view> {{item.name}}</view>
+					<view> {{item.name}} [{{item.code}} ] </view>
 				</view>
 				<view>
 					<button v-if="!isSingle" class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="onCheckMany(item)">选中</button>
@@ -137,11 +137,12 @@
 
 							let name = res.data.Content[i].NAME;
 							let id = res.data.Content[i].PID;
-						
+						    let code= res.data.Content[i].CODE;
 
 							_self.list.push({
 								id: id,
 								name: name,
+								code:code
 							});
 
 
