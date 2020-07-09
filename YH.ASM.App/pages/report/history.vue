@@ -13,7 +13,7 @@
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
 	import {mapState} from 'vuex';
-	
+	import config from '../../static/js/Config.js';
 	
 	 export default {
 		 computed: { ...mapState(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname','userId'])
@@ -67,7 +67,7 @@
 				  
 			 
 			 
-			   var Key=this.ApiKey;
+			   var Key=config.Parameters.ApiKey;
 			   
 			   //加载提示
 			   uni.showLoading({
@@ -75,7 +75,7 @@
 			   });
 			   
 			   uni.request({
-			       url:this.LoginHost+"/api/Direction/List", //仅为示例，并非真实接口地址。
+			       url:config.Parameters.LoginHost()+"/api/Direction/List", //仅为示例，并非真实接口地址。
 			       data: {
 			   		userId:_self.userId,
 			   	    pageindex:_self.pageindex,

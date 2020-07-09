@@ -32,6 +32,7 @@
 		mapMutations
 	} from 'vuex'
 	import mInput from '../../components/m-input.vue'
+	import config from '../../static/js/Config.js';
 
 	export default {
 		components: {
@@ -83,12 +84,13 @@
 				}
 				
 				
-			    console.log("======"+ this.LoginHost+"/api/Login/Login");
+			    console.log("======"+ config.Parameters.LoginHost()+"/api/Login/Login");
 				
 				
-				var Key=this.ApiKey;
+				var Key=config.Parameters.ApiKey;
+				var path=config.Parameters.LoginHost()+"/api/Login/Login";
 				
-				console.log("======key"+Key);
+				console.log("======key:"+Key);
 				
 				
 				
@@ -97,7 +99,7 @@
 					title:"网络请求中.."
 				})
 				uni.request({
-				    url:this.LoginHost+"/api/Login/Login", //仅为示例，并非真实接口地址。
+				    url:path, //仅为示例，并非真实接口地址。
 				    data: {
 				       Username: this.account,
 				       Password: this.password,
@@ -117,7 +119,7 @@
 							 
 							 
 							 
-							 	console.log("======key"+res.data.Content.USER_ID);
+							 	console.log("======uuid"+res.data.Content.USER_ID);
 								
 							 //登录信息写进本地数据库
 						 	this.login(res.data.Content);

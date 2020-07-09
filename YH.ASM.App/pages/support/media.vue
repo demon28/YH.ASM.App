@@ -11,6 +11,7 @@
 
 <script>
 	
+	import config from '../../static/js/Config.js';
 		export default {
 			
 			data(){
@@ -28,7 +29,7 @@
 					return;	
 				}
 				let deurl=decodeURIComponent(pramse.url)
-				this.url=this.LoginHost+deurl;
+				this.url=config.Parameters.LoginHost()+deurl;
 				var index= this.url.lastIndexOf(".");
 				var ext = this.url.substr(index+1);
 				

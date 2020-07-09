@@ -44,7 +44,8 @@
 <script>
 	import {mapState,mapMutations} from 'vuex'
 	import ApiSingin from '../../static/js/ApiSingin.js';
-	
+		import config from '../../static/js/Config.js';
+		
 	export default {
 
 		computed: mapState(['supportMachine']),
@@ -111,13 +112,13 @@
 				
 				 };
 				 let jsonString=JSON.stringify(model);
-				 let timestamp=_self.$timestamp();
+				 let timestamp=Math.round(new Date().getTime()/1000);
 				 let path="/api/Machine/List";
-				 let Singinkey=ApiSingin.Singin(path,jsonString,_self.ApiKey,timestamp);
-
+				 let Singinkey=ApiSingin.Singin(path,jsonString,config.Parameters.ApiKey,timestamp);
+                
 
 				uni.request({
-					url:_self.LoginHost+path,
+					url:config.Parameters.LoginHost()+path,
 					 data: model,
 					method :"POST",
 					 header: {

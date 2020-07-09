@@ -43,7 +43,7 @@
 
 <script>
 	import {mapState,mapMutations} from 'vuex'
-
+		import config from '../../static/js/Config.js';
 	export default {
 
 		computed: mapState(['supportProject']),
@@ -105,12 +105,12 @@
 				console.log("关键字搜索:" + this.keywords);
 
 				uni.request({
-					url: this.LoginHost + "/api/Project/ProjectList",
+					url: config.Parameters.LoginHost() + "/api/Project/ProjectList",
 					data: {
 						keywords: _self.keywords,
 						pageindex: _self.pageindex,
 						pagesize: _self.pagesize,
-						SigningKey: _self.ApiKey,
+						SigningKey: config.Parameters.ApiKey,
 
 					},
 					method: "GET",

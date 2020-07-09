@@ -46,7 +46,7 @@
 		mapState,
 		mapMutations
 	} from 'vuex'
-
+  import config from '../../static/js/Config.js';
 	export default {
 
 		components: {
@@ -110,12 +110,12 @@
 				console.log("关键字搜索:" + this.keywords);
 
 				uni.request({
-					url: this.LoginHost + "/api/User/UserList",
+					url: config.Parameters.LoginHost() + "/api/User/UserList",
 					data: {
 						keywords: _self.keywords,
 						pageindex: _self.pageindex,
 						pagesize: _self.pagesize,
-						SigningKey: _self.ApiKey,
+						SigningKey: config.Parameters.ApiKey,
 
 					},
 					method: "GET",

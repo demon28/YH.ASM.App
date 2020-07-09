@@ -78,7 +78,6 @@
 				* 售后人员:
 				</view>
 				<view  class="uni-list-cell-navigate uni-navigate-right"  @click="onSelectPeople()" >
-					
 				 	<text>  <text  v-for="(item, i) in checks" :key="item.uuid">{{item.name+","}}</text>  </text> 
 				</view>
 			</view>
@@ -103,7 +102,7 @@
 <script>
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
-
+ import config from '../../static/js/Config.js';
 	
 import {
 		mapState,
@@ -384,7 +383,7 @@ import {
 				    title: '提交中'
 				});
 				
-				var Key=this.ApiKey;
+				var Key=config.Parameters.ApiKey;
 				 // console.log(_self.userId);
 				 // console.log(this.indexType);
 				 
@@ -403,7 +402,7 @@ import {
 				console.log("打印售后人员："+_self.checks);
 				   
 				uni.request({
-				    url:this.LoginHost+"/api/Direction/Put", //仅为示例，并非真实接口地址。
+				    url:config.Parameters.LoginHost()+"/api/Direction/Put", //仅为示例，并非真实接口地址。
 				    data: {
 						userId:_self.userId,
 						projecId:_self.indexProject,
@@ -422,7 +421,7 @@ import {
 						
 						 machineName:_self.machineName,
 						 machineCount:_self.machineCount,
-							remarks: afterUser  ,    //本来想用外键表的，这里tu简单，直接用的备注字段
+						remarks: afterUser  ,    //本来想用外键表的，这里tu简单，直接用的备注字段
 					  machineAssist:_self.machineAssist,
 					
 					   SigningKey:Key

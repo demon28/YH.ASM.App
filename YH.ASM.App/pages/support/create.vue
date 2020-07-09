@@ -242,7 +242,7 @@
 			
 			let jsonString=JSON.stringify(supportModel);
 			let path="/api/Support/Create";
-			let apikey=this.ApiKey;
+			let apikey=config.Parameters.ApiKey;
 			
 			let timestamp=Math.round(new Date().getTime()/1000);
 		 	let Singinkey= ApiSingin.Singin(path,jsonString,apikey,timestamp);
@@ -262,7 +262,7 @@
 			
 			 
 			uni.request({
-			    url:this.LoginHost+path, //仅为示例，并非真实接口地址。
+			    url:config.Parameters.LoginHost()+path, //仅为示例，并非真实接口地址。
 			    data: supportModel,
 				method :"POST",
 			    header: {

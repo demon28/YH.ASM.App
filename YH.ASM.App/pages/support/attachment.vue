@@ -25,7 +25,7 @@
 	
 	import {mapState,mapMutations} from 'vuex';
 	import ApiSingin from '../../static/js/ApiSingin.js';
-
+	import config from '../../static/js/Config.js';
 	export default {
 		computed:	{
 			...mapState(['userId'])
@@ -54,6 +54,12 @@
 			},
 			Init(){
 				
+				console.log("sid"+this.sid)
+				if(this.sid==0 || this.sid==""|| this.sid.toString()=="undefined"){
+					return;
+				}
+				
+				
 				 var _self=this;
 				
 				 let model={
@@ -62,9 +68,9 @@
 					pagesize:20
 				 };
 				 let jsonString=JSON.stringify(model);
-				 let timestamp=_self.$timestamp();
+				 let timestamp=Math.round(new Date().getTime()/1000);
 				 let path="/api/Support/LisAttachmentt";
-				 let Singinkey=ApiSingin.Singin(path,jsonString,_self.ApiKey,timestamp);
+				 let Singinkey=ApiSingin.Singin(path,jsonString,config.Parameters.ApiKey,timestamp);
 				 
 				 console.log("请求内容是："+JSON.stringify(model));
 				 
@@ -74,7 +80,7 @@
 				 });
 				  
 				 uni.request({
-				     url:_self.LoginHost+path, 
+				     url:config.Parameters.LoginHost()+path, 
 				     data: model,
 				 	 method :"POST",
 				     header: {

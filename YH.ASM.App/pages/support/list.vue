@@ -24,7 +24,9 @@
 		Support_Statuslist,
 		EnumGetSingle
 	} from "../../static/js/Enum.js";
-	import uniRate from '@/components/uni-rate/uni-rate.vue'
+	import uniRate from '@/components/uni-rate/uni-rate.vue';
+	import config from '../../static/js/Config.js';
+		
 	export default {
 		computed: {
 			...mapState(['userId']),
@@ -78,9 +80,9 @@
 					WatchType: _self.WatchType
 				};
 				let jsonString = JSON.stringify(model);
-				let timestamp = _self.$timestamp();
+				let timestamp =  Math.round(new Date().getTime()/1000); 
 				let path = "/api/Support/ListPersonal";
-				let Singinkey = ApiSingin.Singin(path, jsonString, _self.ApiKey, timestamp);
+				let Singinkey = ApiSingin.Singin(path, jsonString, config.Parameters.ApiKey, timestamp);
 
 				//加载提示
 				uni.showLoading({
@@ -88,7 +90,7 @@
 				});
 
 				uni.request({
-					url: _self.LoginHost + path,
+					url: config.Parameters.LoginHost() + path,
 					data: model,
 					method: "POST",
 					header: {

@@ -213,19 +213,14 @@
 				let checkconductor=_self.supportConductor;
 				if(checkconductor!=null && checkconductor.length>0){
 				_self.conductor=checkconductor[0];
-				
-				
 				}else{
 				_self.conductor={name:"请选择"};;
 				}
-
 			
 				let checkCopy=_self.supportCopy;
 				if(checkCopy!=null && checkCopy.length>0){
 				_self.copy=checkCopy;
 				}
-				
-			
 		},
 		methods: {
 		onSubmit(){
