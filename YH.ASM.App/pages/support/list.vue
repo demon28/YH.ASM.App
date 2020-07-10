@@ -1,6 +1,9 @@
 <template>
 	<view class='purchase-list'>
+
+		
 		<my-tabs @change="tapChange" :modelData="modelData" :initIndex="initIndex"></my-tabs>
+					<view style="text-align: center;margin-top: 30upx;" v-if="listData.length<=0">暂无数据</view>
 		<scroll-view class="purchase-body" scroll-y="true" @scrolltolower="scrolltolower" @scrolltoupper="scrolltoupper"
 		 @scroll="scroll" @touchstart="touchstart" @touchend="touchend">
 			<my-unit v-for="(item,index) in listData" :key="index" :info="item" v-on:child-say="accept" v-on:child-do="handle"></my-unit>
@@ -171,9 +174,10 @@
 					id: item.ID,
 					status: 1
 				}
-
+    
 				_self.$SugarRequest.Post(model, path, (data, res) => {
 
+					console.log(res);
 					if (!res.data.Success) {
 						uni.showToast({
 							icon: 'none',

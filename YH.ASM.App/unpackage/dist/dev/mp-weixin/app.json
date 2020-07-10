@@ -16,7 +16,8 @@
     "pages/support/checkByDisporer",
     "pages/support/checkByPmc",
     "pages/support/checkBySite",
-    "pages/support/checkByPrincipal"
+    "pages/support/checkByPrincipal",
+    "pages/support/workfolw"
   ],
   "subPackages": [],
   "window": {

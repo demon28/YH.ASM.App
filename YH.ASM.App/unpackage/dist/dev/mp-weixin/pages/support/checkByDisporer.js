@@ -288,6 +288,7 @@ var _uniList = _interopRequireDefault(__webpack_require__(/*! ../../components/u
 var _SugarRequest = _interopRequireDefault(__webpack_require__(/*! ../../static/js/SugarRequest.js */ 13));
 var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Verificat.js */ 78));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
+
 {
   computed: _objectSpread({},
   (0, _vuex.mapState)(['userId', 'disporseAnalyzeuser', 'supportConductor', 'supportCopy']), {
@@ -311,7 +312,7 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
       personal: 0,
       ordershow: false,
 
-      ordertime: this.currentDate, //下单时间
+      ordertime: currentDate, //下单时间
       responsible: "", //责任方
       duty: "",
       bom: "",
@@ -424,7 +425,7 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
       console.log("是否需要下单:" + evt.target.value);
       this.isorder = evt.target.value;
       this.ordershow = this.isorder == "1";
-      this.ordertime = this.endDate;
+
     },
     getDate: function getDate(type) {
       var date = new Date();
@@ -492,7 +493,7 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
           console.log("上传参数：" + JSON.stringify(params));
 
           uni.uploadFile({
-            url: _self.LoginHost + "/api/Upload/UploadFile",
+            url: config.Parameters.LoginHost() + "/api/Upload/UploadFile",
             filePath: _self.uploadfile[0].tempFilePath,
             name: 'file',
             formData: params,
@@ -690,10 +691,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniIcons: function() {
-    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 173))
+    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 175))
   },
   uniBadge: function() {
-    return __webpack_require__.e(/*! import() | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! @/components/uni-badge/uni-badge.vue */ 181))
+    return __webpack_require__.e(/*! import() | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! @/components/uni-badge/uni-badge.vue */ 183))
   }
 }
 var render = function() {
@@ -733,7 +734,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! ../uni-icons/uni-icons.vue */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniBadge = function uniBadge() {__webpack_require__.e(/*! require.ensure | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then((function () {return resolve(__webpack_require__(/*! ../uni-badge/uni-badge.vue */ 181));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! ../uni-icons/uni-icons.vue */ 175));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniBadge = function uniBadge() {__webpack_require__.e(/*! require.ensure | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then((function () {return resolve(__webpack_require__(/*! ../uni-badge/uni-badge.vue */ 183));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 

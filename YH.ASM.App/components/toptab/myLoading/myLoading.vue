@@ -10,6 +10,9 @@
 </template>
  
 <script>
+	import '@/static/iconfont/iconfont.css'
+	import '@/static/js/constant.js'
+	import '@/static/css/reset.scss'
 	export default {
 		data() {
 			return {

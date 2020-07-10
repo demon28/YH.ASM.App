@@ -2760,7 +2760,57 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ./Config.js */ 19))
 
 var Get = function Get(model, path, callback) {
 
-  callback("data");
+
+  var jsonString = JSON.stringify(model);
+  var timestamp = Math.round(new Date().getTime() / 1000);
+
+  var Singinkey = _ApiSingin.default.Singin(path, "", _Config.default.Parameters.ApiKey, timestamp);
+
+  //加载提示
+  uni.showLoading({
+    title: '加载中...' });
+
+
+  uni.request({
+    url: _Config.default.Parameters.LoginHost() + path,
+    data: model,
+    method: "Get",
+    header: {
+      // 'content-type': 'application/json' ,//自定义请求头信息
+      'timestamp': timestamp,
+      'SigningKey': Singinkey },
+
+    success: function success(res) {
+
+      uni.hideLoading();
+
+
+
+      if (res.statusCode != 200) {
+        uni.showToast({
+          icon: 'none',
+          title: "服务器内部错误！" });
+
+        return;
+      }
+      callback(res.data, res);
+
+
+    },
+    fail: function fail(re) {
+      callback({}, re);
+      uni.hideLoading();
+      uni.showToast({
+        icon: 'none',
+        title: '网络请求失败！' });
+
+
+    } });
+
+
+
+
+
 };
 
 
@@ -2778,7 +2828,7 @@ var Post = function Post(model, path, callback) {
 
 
   uni.request({
-    url: _Config.default.Parameters.LoginHost + path,
+    url: _Config.default.Parameters.LoginHost() + path,
     data: model,
     method: "POST",
     header: {
@@ -2799,13 +2849,7 @@ var Post = function Post(model, path, callback) {
 
         return;
       }
-      if (!res.data.Success) {
-        uni.showToast({
-          icon: 'none',
-          title: res.data.Message });
 
-        return;
-      }
 
 
 
@@ -2814,9 +2858,7 @@ var Post = function Post(model, path, callback) {
 
     },
     fail: function fail(re) {
-
-      console.log(re);
-
+      callback({}, re);
       uni.hideLoading();
       uni.showToast({
         icon: 'none',
@@ -3251,7 +3293,21 @@ var substr = 'ab'.substr(-1) === 'b'
 
 /***/ }),
 
-/***/ 178:
+/***/ 18:
+/*!****************************************!*\
+  !*** (webpack)/buildin/amd-options.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
+module.exports = __webpack_amd_options__;
+
+/* WEBPACK VAR INJECTION */}.call(this, {}))
+
+/***/ }),
+
+/***/ 180:
 /*!**************************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
   \**************************************************************************/
@@ -3393,20 +3449,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 18:
-/*!****************************************!*\
-  !*** (webpack)/buildin/amd-options.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
-module.exports = __webpack_amd_options__;
-
-/* WEBPACK VAR INJECTION */}.call(this, {}))
-
-/***/ }),
-
 /***/ 19:
 /*!****************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Config.js ***!
@@ -3433,8 +3475,175 @@ var Parameters = {
 
 
 
+
 {
   Parameters: Parameters };exports.default = _default;
+
+/***/ }),
+
+/***/ 195:
+/*!*************************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/iconfont/iconfont.css ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 196:
+/*!******************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/constant.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+
+
+var _global = _interopRequireDefault(__webpack_require__(/*! ./global.js */ 197));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // Vue继承
+copyFuns();
+/**
+             * @name 复制对象到Vue的原型上
+             */
+function copyFuns() {
+  var keys = Object.keys(_global.default);
+  keys.forEach(function (ele) {
+    _vue.default.prototype[ele] = _global.default[ele];
+  });
+}
+
+
+// 注册全局组件
+// import myIconfont from '@/components/myIconfont/myIconfont.vue'
+// Vue.component("my-iconfont",myIconfont)
+// 
+// import myLoading from '@/components/myLoading/myLoading.vue'
+// Vue.component("my-loading",myLoading)
+
+/***/ }),
+
+/***/ 197:
+/*!****************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/global.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 198));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 常量
+if (!globalThis) var globalThis = {};
+globalThis.PATH = "/geomantic/";
+
+/**
+                                  *  @name 请求
+                                  */function
+apiPost(_x, _x2) {return _apiPost.apply(this, arguments);}function _apiPost() {_apiPost = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(url, params) {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+            if (!params) console.warn("没有传入参数params");_context.next = 3;return (
+              new Promise(function (resolve, reject) {
+                uni.request({
+                  url: PATH + url,
+                  method: "POST",
+                  header: {
+                    "content-type": "application/x-www-form-urlencoded" },
+
+                  data: params,
+                  success: function success(res) {
+                    resolve(res.data);
+                  },
+                  fail: function fail(err) {
+                    reject(err);
+                  } });
+
+              }));case 3:return _context.abrupt("return", _context.sent);case 4:case "end":return _context.stop();}}}, _callee);}));return _apiPost.apply(this, arguments);}function
+
+
+showLoading() {return _showLoading.apply(this, arguments);}
+
+
+
+
+
+
+/**
+                                                             * @name 显示toast
+                                                             * @param res {status:"0",(msg||data):""}
+                                                             */function _showLoading() {_showLoading = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:uni.showLoading({ title: "请等待", mask: true });case 1:case "end":return _context2.stop();}}}, _callee2);}));return _showLoading.apply(this, arguments);}function
+showToast(_x3) {return _showToast.apply(this, arguments);}function _showToast() {_showToast = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(res) {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+            uni.showToast({
+              title: (res.msg || res.data).toString().slice(0, 7),
+              mask: true,
+              icon: res.status == 0 ? "success" : "",
+              duration: 1500 });case 1:case "end":return _context3.stop();}}}, _callee3);}));return _showToast.apply(this, arguments);}var _default =
+
+
+
+{
+  apiPost: apiPost };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 198:
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 199);
+
+/***/ }),
+
+/***/ 199:
+/*!************************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// This method of obtaining a reference to the global object needs to be
+// kept identical to the way it is obtained in runtime.js
+var g = (function() {
+  return this || (typeof self === "object" && self);
+})() || Function("return this")();
+
+// Use `getOwnPropertyNames` because not all browsers support calling
+// `hasOwnProperty` on the global `self` object in a worker. See #183.
+var hadRuntime = g.regeneratorRuntime &&
+  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
+
+// Save the old regeneratorRuntime in case it needs to be restored later.
+var oldRuntime = hadRuntime && g.regeneratorRuntime;
+
+// Force reevalutation of runtime.js.
+g.regeneratorRuntime = undefined;
+
+module.exports = __webpack_require__(/*! ./runtime */ 200);
+
+if (hadRuntime) {
+  // Restore the original runtime.
+  g.regeneratorRuntime = oldRuntime;
+} else {
+  // Remove the global property added by runtime.js.
+  try {
+    delete g.regeneratorRuntime;
+  } catch(e) {
+    g.regeneratorRuntime = undefined;
+  }
+}
+
 
 /***/ }),
 
@@ -9468,172 +9677,6 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 200:
-/*!*************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/iconfont/iconfont.css ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-
-/***/ 201:
-/*!******************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/constant.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-
-
-var _global = _interopRequireDefault(__webpack_require__(/*! ./global.js */ 202));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // Vue继承
-copyFuns();
-/**
-             * @name 复制对象到Vue的原型上
-             */
-function copyFuns() {
-  var keys = Object.keys(_global.default);
-  keys.forEach(function (ele) {
-    _vue.default.prototype[ele] = _global.default[ele];
-  });
-}
-
-
-// 注册全局组件
-// import myIconfont from '@/components/myIconfont/myIconfont.vue'
-// Vue.component("my-iconfont",myIconfont)
-// 
-// import myLoading from '@/components/myLoading/myLoading.vue'
-// Vue.component("my-loading",myLoading)
-
-/***/ }),
-
-/***/ 202:
-/*!****************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/global.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 203));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 常量
-if (!globalThis) var globalThis = {};
-globalThis.PATH = "/geomantic/";
-
-/**
-                                  *  @name 请求
-                                  */function
-apiPost(_x, _x2) {return _apiPost.apply(this, arguments);}function _apiPost() {_apiPost = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(url, params) {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-            if (!params) console.warn("没有传入参数params");_context.next = 3;return (
-              new Promise(function (resolve, reject) {
-                uni.request({
-                  url: PATH + url,
-                  method: "POST",
-                  header: {
-                    "content-type": "application/x-www-form-urlencoded" },
-
-                  data: params,
-                  success: function success(res) {
-                    resolve(res.data);
-                  },
-                  fail: function fail(err) {
-                    reject(err);
-                  } });
-
-              }));case 3:return _context.abrupt("return", _context.sent);case 4:case "end":return _context.stop();}}}, _callee);}));return _apiPost.apply(this, arguments);}function
-
-
-showLoading() {return _showLoading.apply(this, arguments);}
-
-
-
-
-
-
-/**
-                                                             * @name 显示toast
-                                                             * @param res {status:"0",(msg||data):""}
-                                                             */function _showLoading() {_showLoading = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:uni.showLoading({ title: "请等待", mask: true });case 1:case "end":return _context2.stop();}}}, _callee2);}));return _showLoading.apply(this, arguments);}function
-showToast(_x3) {return _showToast.apply(this, arguments);}function _showToast() {_showToast = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(res) {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-            uni.showToast({
-              title: (res.msg || res.data).toString().slice(0, 7),
-              mask: true,
-              icon: res.status == 0 ? "success" : "",
-              duration: 1500 });case 1:case "end":return _context3.stop();}}}, _callee3);}));return _showToast.apply(this, arguments);}var _default =
-
-
-
-{
-  apiPost: apiPost };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 203:
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 204);
-
-/***/ }),
-
-/***/ 204:
-/*!************************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// This method of obtaining a reference to the global object needs to be
-// kept identical to the way it is obtained in runtime.js
-var g = (function() {
-  return this || (typeof self === "object" && self);
-})() || Function("return this")();
-
-// Use `getOwnPropertyNames` because not all browsers support calling
-// `hasOwnProperty` on the global `self` object in a worker. See #183.
-var hadRuntime = g.regeneratorRuntime &&
-  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
-
-// Save the old regeneratorRuntime in case it needs to be restored later.
-var oldRuntime = hadRuntime && g.regeneratorRuntime;
-
-// Force reevalutation of runtime.js.
-g.regeneratorRuntime = undefined;
-
-module.exports = __webpack_require__(/*! ./runtime */ 205);
-
-if (hadRuntime) {
-  // Restore the original runtime.
-  g.regeneratorRuntime = oldRuntime;
-} else {
-  // Remove the global property added by runtime.js.
-  try {
-    delete g.regeneratorRuntime;
-  } catch(e) {
-    g.regeneratorRuntime = undefined;
-  }
-}
-
-
-/***/ }),
-
-/***/ 205:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -10365,7 +10408,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 206:
+/***/ 201:
 /*!******************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/css/reset.scss ***!
   \******************************************************************/

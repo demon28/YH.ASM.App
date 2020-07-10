@@ -3,6 +3,9 @@
 </template>
 
 <script>
+	import '@/static/iconfont/iconfont.css' //使用字体图标
+	import '@/static/js/constant.js'
+	import '@/static/css/reset.scss'
 	export default {
 		data() {
 			return {

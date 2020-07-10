@@ -244,6 +244,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 12);
 var _uniListItem = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-list-item/uni-list-item.vue */ 63));
 var _uniList = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-list/uni-list.vue */ 70));
@@ -252,7 +263,8 @@ var _Enum = __webpack_require__(/*! ../../static/js/Enum.js */ 77);
 
 
 var _ApiSingin = _interopRequireDefault(__webpack_require__(/*! ../../static/js/ApiSingin.js */ 14));
-var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Verificat.js */ 78));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Verificat.js */ 78));
+var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Config.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
 {
   computed: _objectSpread({},
@@ -276,12 +288,14 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
       content: "",
       Severity: 0,
       SeverityList: this.Support_Severitylist(),
+      SupportTypelist: this.Support_Typelist(),
       conductor: {},
       finddate: currentDate,
       copy: [],
       uploadfile: [],
       filelist: [],
-      fileStatus: "" };
+      fileStatus: "",
+      type: 0 };
 
   },
   onShow: function onShow(option) {
@@ -333,6 +347,7 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
   },
   methods: {
     Support_Severitylist: _Enum.Support_Severitylist,
+    Support_Typelist: _Enum.Support_Typelist,
     onSubmit: function onSubmit() {
       var _self = this;
       var paramsCheck = _self.verifyParameters();
@@ -356,7 +371,7 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
       supportModel.Mid = _self.machine.id;
       console.log(_self.filelist);
       supportModel.Filelist = _self.filelist;
-
+      supportModel.Type = _self.type;
 
 
       var ccValue = "";
@@ -374,7 +389,7 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
 
       var jsonString = JSON.stringify(supportModel);
       var path = "/api/Support/Create";
-      var apikey = config.Parameters.ApiKey;
+      var apikey = _Config.default.Parameters.ApiKey;
 
       var timestamp = Math.round(new Date().getTime() / 1000);
       var Singinkey = _ApiSingin.default.Singin(path, jsonString, apikey, timestamp);
@@ -394,7 +409,7 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
 
 
       uni.request({
-        url: config.Parameters.LoginHost() + path, //仅为示例，并非真实接口地址。
+        url: _Config.default.Parameters.LoginHost() + path, //仅为示例，并非真实接口地址。
         data: supportModel,
         method: "POST",
         header: {
@@ -464,6 +479,10 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
     },
     bindPickerChange: function bindPickerChange(e) {
       this.Severity = e.target.value;
+    },
+    bindPickerChangeType: function bindPickerChangeType(e) {
+      this.type = e.target.value;
+
     },
     getDate: function getDate(type) {
       var date = new Date();
@@ -539,7 +558,7 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
           console.log("上传参数：" + JSON.stringify(params));
 
           uni.uploadFile({
-            url: _self.LoginHost + "/api/Upload/UploadFile",
+            url: _Config.default.Parameters.LoginHost() + "/api/Upload/UploadFile",
             filePath: _self.uploadfile[0].tempFilePath,
             name: 'file',
             formData: params,
@@ -696,10 +715,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniIcons: function() {
-    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 173))
+    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 175))
   },
   uniBadge: function() {
-    return __webpack_require__.e(/*! import() | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! @/components/uni-badge/uni-badge.vue */ 181))
+    return __webpack_require__.e(/*! import() | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! @/components/uni-badge/uni-badge.vue */ 183))
   }
 }
 var render = function() {
@@ -739,7 +758,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! ../uni-icons/uni-icons.vue */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniBadge = function uniBadge() {__webpack_require__.e(/*! require.ensure | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then((function () {return resolve(__webpack_require__(/*! ../uni-badge/uni-badge.vue */ 181));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! ../uni-icons/uni-icons.vue */ 175));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniBadge = function uniBadge() {__webpack_require__.e(/*! require.ensure | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then((function () {return resolve(__webpack_require__(/*! ../uni-badge/uni-badge.vue */ 183));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 

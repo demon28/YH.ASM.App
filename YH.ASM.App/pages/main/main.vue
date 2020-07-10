@@ -58,8 +58,8 @@
 						<text class="text">工单汇总</text>
 					</view>
 					</uni-grid-item>
-					
-					
+					 
+					  
 					<uni-grid-item >
 						
 					</uni-grid-item>
@@ -77,7 +77,7 @@
 	import uniGridItem from "@/components/uni-grid-item/uni-grid-item.vue"
 	
 	import service from '../../service.js';
-	
+
 	
 	import {
 		mapState,

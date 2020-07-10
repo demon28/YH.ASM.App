@@ -94,7 +94,9 @@
 			  ...mapMutations(['setSupportProject']) , 
 			Init() {
 				var _self = this;
-
+				if(_self.pagecount==0){
+					_self.pagecount=10;
+				}
 				if (_self.pageindex > _self.pagecount) {
 					return;
 				}

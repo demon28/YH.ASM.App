@@ -87,7 +87,7 @@
 			<!--抄送人员以及处理人 操作开始，不用动 -->
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 处理人:
+					* 下一处理人:
 				</view>
 				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillUser">
 					<text> {{conductor.name}} </text>
@@ -155,7 +155,8 @@
 
 	import SugarRequest from '../../static/js/SugarRequest.js';
 	import Verificat from '../../static/js/Verificat.js';
-
+	
+	
 	export default {
 		computed:{ 
 		...mapState(['userId','disporseAnalyzeuser','supportConductor','supportCopy']),  
@@ -179,7 +180,7 @@
 				personal:0,
 				ordershow:false,
 				
-				ordertime:this.currentDate,    //下单时间
+				ordertime:currentDate,    //下单时间
 				responsible:"",  //责任方
 				duty:"",
 				bom:"",
@@ -292,7 +293,7 @@
 				console.log("是否需要下单:"+ evt.target.value) 
 		   this.isorder= evt.target.value;
 		   this.ordershow=this.isorder=="1";
-		   this.ordertime=  this.endDate;
+		  
 		}, 
 		getDate(type) {
             const date = new Date();
@@ -360,7 +361,7 @@
 				 console.log("上传参数："+JSON.stringify(params));
 				 
 				 uni.uploadFile({
-				            url:  _self.LoginHost + "/api/Upload/UploadFile",
+				            url:  config.Parameters.LoginHost() + "/api/Upload/UploadFile",
 				            filePath: _self.uploadfile[0].tempFilePath,
 				            name: 'file',
 				            formData: params,

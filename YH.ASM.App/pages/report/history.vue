@@ -37,12 +37,12 @@
 		onReachBottom() {
 			console.log("上拉加载");
 			this.pageindex = this.pageindex + 1;
-			
 			this.loadData();
+			
 		},onPullDownRefresh() {
 			console.log("下拉刷新");
 			this.pageindex = 1;
-			
+			this.list=[];
 			this.loadData();
 			uni.stopPullDownRefresh();
 

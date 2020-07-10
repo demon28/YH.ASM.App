@@ -379,22 +379,27 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
           _self.locatllatitude = res.latitude.toString();
           _self.locatllongitude = res.longitude.toString();
 
+          if (_self.locatllatitude == "" || _self.locatllongitude == "")
+          {
+            uni.showToast({
+              title: "定位失败！" });
 
+            return;
+          }
 
 
           uni.request({
             header: {
               "Content-Type": "application/text" },
 
-            url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + res.latitude + ',' + res.longitude +
-            '&key=MVGBZ-R2U3U-W5CVY-2PQID-AT4VZ-PDF35',
+            url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + res.latitude + ',' + res.longitude + '&key=6BPBZ-FESKP-LA6DK-V2BXY-ZNCOE-WZBYW',
+
             success: function success(re) {
-
-
 
               //关闭加载框
               uni.hideLoading();
 
+              console.log(JSON.stringify(re));
               console.log(re.data.result.address);
 
               if (re.statusCode === 200) {
@@ -409,6 +414,11 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
 
               }
+            }, fail: function fail(e) {
+
+              uni.showToast({
+                title: "微信定位失败！" });
+
             } });
 
 

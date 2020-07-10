@@ -39,8 +39,6 @@
 						<view class="flex-item flex-item-V">
 							<uni-tag :text="SetState(info.PSTATUS)" type="primary" size="small" />
 						</view>
-
-
 					</view>
 				</view>
 
@@ -53,7 +51,15 @@
 						<view class="flex-item flex-item-V" style="width: 50%;">处理人： {{info.CONDUCTORNAME}}</view>
 					</view>
 				</view>
+				<view class="flex-item flex-item-V ">
+					<view class="uni-flex uni-row">
 				
+						<view class="flex-item flex-item-V">查看附件： </view>
+						<view class="flex-item flex-item-V">
+							<uni-tag text="附件信息" type="warning" size="small"  @click="ViewAttachment(info.SID)"/>
+						</view>
+					</view>
+				</view>
 				
 				<view class="flex-item flex-item-V ">
 					<view class="uni-flex uni-row">
@@ -67,6 +73,8 @@
 					</view>
 				</view>
 			
+			
+			
 				
 				
 			</view>
@@ -79,13 +87,12 @@
 			<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
 				<view class="uni-flex uni-row">
 					<view class="flex-item flex-item-V" style="width: 50%; ">
-						<button class="btn" type="default" style="float: left;" @click="ViewAttachment(info.SID)">查看附件</button>
+					<button class="btn" type="default" style="float: left;" @click="ViewWorkFlow(info.SID)">查看详情</button>
+					
 					</view>
 
 					<view class="flex-item flex-item-V" style="width: 50%;">
 						<button v-if="info.PSTATUS==0" class="btn" type="primary" style=" float: right;" @click="Dispose(info)">受理工单</button>
-						
-						
 						<button v-if="info.PSTATUS==1" class="btn" type="primary" style=" float: right;" @click="TodoSupport(info)">处理工单</button>
 					</view>
 				</view>
@@ -109,7 +116,6 @@
 		Support_State,
 		EnumGetSingle
 	} from "@/static/js/Enum.js";
-
 
 
 	export default {
@@ -147,6 +153,12 @@
 				uni.navigateTo({
 					url: 'attachment?sid='+sid
 				})
+			},
+			ViewWorkFlow(sid){
+				uni.navigateTo({
+					url: 'workfolw?sid='+sid
+				})
+				
 			}
 		},
 		computed: {

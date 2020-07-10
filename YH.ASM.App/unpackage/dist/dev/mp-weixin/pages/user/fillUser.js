@@ -92,7 +92,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniSearchBar: function() {
-    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 223))
+    return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 225))
   }
 }
 var render = function() {
@@ -242,8 +242,12 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
   (0, _vuex.mapMutations)(['setSupportConductor', 'setSupportCopy', 'setDisporseAnalyzeuser']), {
     Init: function Init() {
       var _self = this;
-
+      if (_self.pagecount == 0) {
+        _self.pagecount = 10;
+      }
       if (_self.pageindex > _self.pagecount) {
+
+        console.log("被返回:" + _self.pageindex + ":" + _self.pagecount);
         return;
       }
 
@@ -311,7 +315,7 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
     },
     Search: function Search() {
       this.keywords = this.words.value;
-
+      console.log("触动搜搜：" + this.keywords);
       this.pageindex = 1;
       this.list = [];
       this.Init();

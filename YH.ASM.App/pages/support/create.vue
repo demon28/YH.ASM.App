@@ -29,6 +29,17 @@
 				</view>
 			</view>
 
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					* 问题类型:
+				</view>
+				<view class="uni-list-cell-db">
+					<picker @change="bindPickerChangeType" :value="type" :range="SupportTypelist" :range-key="'text'">
+						<view class="uni-input">{{SupportTypelist[type].text}}</view>
+					</picker>
+				</view>
+			</view>
+
 
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
@@ -116,11 +127,12 @@
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
 	
-	import {Support_Prioritylist, Support_Severitylist} from "../../static/js/Enum.js";
+	import {Support_Prioritylist, Support_Severitylist,Support_Typelist} from "../../static/js/Enum.js";
 	
 	
 	import ApiSingin from '../../static/js/ApiSingin.js';
 	import Verificat from '../../static/js/Verificat.js';
+import config from '../../static/js/Config.js';
 
 	export default {
 		computed:
@@ -144,12 +156,14 @@
 				content:"",
 				Severity:0,
 				SeverityList:this.Support_Severitylist(),
+				SupportTypelist:this.Support_Typelist(),
 				conductor:{},
 				finddate: currentDate,
 				copy:[],
 				uploadfile:[],
 				filelist:[],
-				fileStatus:""
+				fileStatus:"",
+				type:0,
 			}
 		},
 		onShow(option){
@@ -201,6 +215,7 @@
 		},
 		methods: {
 		Support_Severitylist,
+		Support_Typelist,
 		onSubmit(){
 			var _self=this;
 			var paramsCheck=_self.verifyParameters();
@@ -224,7 +239,7 @@
 			supportModel.Mid=_self.machine.id;
 			console.log(_self.filelist);
 			supportModel.Filelist=_self.filelist;
-			
+			supportModel.Type=_self.type;
 			
 			
 			let ccValue="";
@@ -331,8 +346,12 @@
 			
 		},
 		bindPickerChange(e){
-			this.Severity = e.target.value
+			this.Severity = e.target.value;
 		}, 
+		bindPickerChangeType(e){
+			this.type=e.target.value;
+			
+		},
 		getDate(type) {
             const date = new Date();
             let year = date.getFullYear();
@@ -407,7 +426,7 @@
 				 console.log("上传参数："+JSON.stringify(params));
 				 
 				 uni.uploadFile({
-				            url:  _self.LoginHost + "/api/Upload/UploadFile",
+				            url:  config.Parameters.LoginHost() + "/api/Upload/UploadFile",
 				            filePath: _self.uploadfile[0].tempFilePath,
 				            name: 'file',
 				            formData: params,

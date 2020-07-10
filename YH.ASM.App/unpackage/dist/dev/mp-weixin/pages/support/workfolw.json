@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "工单详情",
+  "usingComponents": {
+    "support-info": "/components/support-workflow/supportInfo",
+    "site-info": "/components/support-workflow/siteInfo"
+  }
+}

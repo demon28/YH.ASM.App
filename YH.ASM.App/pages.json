@@ -117,6 +117,12 @@
 			"style": {
 				"navigationBarTitleText": "负责人审核"
 			}
+		},
+		{
+			"path": "pages/support/workfolw",
+			"style": {
+				"navigationBarTitleText": "工单详情"
+			}
 		}
 		
 		

@@ -5,85 +5,67 @@
 
 	<view class="content">
 
-		<view class="uni-list" >
+		<view class="uni-list">
 
-			<view class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					* 分析人员:
-				</view>
-				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillAnalyzeuser">
-					<text> {{analyzeuser.name}} </text>
-				</view>
-			</view>
+
 
 			<view class="uni-list-cell" style="min-height:80upx ; ">
 				<view class="uni-list-cell-left">
-					* 责任方:
+					* 物料单号:
 				</view>
 				<view class="uni-list-cell-db">
-					<input  placeholder="请输入责任方" v-model="responsible"  />
+					<input placeholder="请输入物料单号" v-model="bookno" />
 				</view>
 			</view>
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 责任人:
+					* 发货单号:
 				</view>
 				<view class="uni-list-cell-db">
-					<input  placeholder="请输入责任人" v-model="duty"  />
+					<input placeholder="请输入发货单号" v-model="sendno" />
 				</view>
 			</view>
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* BOM图纸:
+					* 收货人:
 				</view>
 				<view class="uni-list-cell-db">
-					<input  placeholder="请输入Bom图纸" v-model="bom" />
+					<input placeholder="请输入收货人" v-model="consignee" />
 				</view>
 			</view>
 
+
+
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 是否下单:
+					* 交付时间:
 				</view>
 				<view class="uni-list-cell-db">
-					<radio-group @change="radioChange">
-						<label class="radio">
-							<radio value="0" checked="true" />否</label>
-						<label class="radio">
-							<radio value="1" />是</label>
-					</radio-group>
-				</view>
-			</view>
-
-			<view v-show="ordershow" class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					* 下单时间:
-				</view>
-				<view class="uni-list-cell-db">
-					<picker mode="date" :value="ordertime" :end="endDate" @change="bindDateChange">
-						<view class="uni-input">{{ordertime}}</view>
+					<picker mode="date" :value="delivery" :end="endDate" @change="bindDateChangedev">
+						<view class="uni-input">{{delivery}}</view>
 					</picker>
 				</view>
 			</view>
-			
-			<view v-show="ordershow" class="uni-list-cell" style="min-height:80upx ;">
+
+			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 下单人:
+					* 送货时间:
 				</view>
 				<view class="uni-list-cell-db">
-					<input  placeholder="请填写下单人" v-model="orderman" />
+					<picker mode="date" :value="senddate" :end="endDate" @change="bindDateChangeSend">
+						<view class="uni-input">{{senddate}}</view>
+					</picker>
 				</view>
 			</view>
-			
 
-			
+
 
 		</view>
 
 
 		<!--上传文件操作开始，不用动 -->
 		<view class="uni-list" style="margin-top: 30upx;">
-			
+
 			<!--抄送人员以及处理人 操作开始，不用动 -->
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
@@ -91,10 +73,10 @@
 				</view>
 				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillUser">
 					<text> {{conductor.name}} </text>
-			
+
 				</view>
 			</view>
-			
+
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					抄送人员:
@@ -104,9 +86,9 @@
 				</view>
 			</view>
 			<!--抄送人员以及处理人，不用动 -->
-			
-			
-			
+
+
+
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					上传附件:
@@ -132,209 +114,162 @@
 		</view>
 
 
-		<view class="uni-textarea" style="margin-top: 30upx;">
-			<textarea placeholder="初步原因分析" v-model="analyze" />
+	<view class="uni-textarea" style="margin-top: 30upx;">
+			<textarea placeholder="结果描述" v-model="remarks" />
 			</view>
-		        
-		<view class="uni-textarea" style="margin-top: 30upx;">
-			<textarea placeholder="初步解决方案" v-model="solution" />
-		</view>		
 
-		<button class="btn-logout" style="margin-top: 30upx;" @click="TestConfig()">提交</button>
- 
-	
+		<button class="btn-logout" style="margin-top: 30upx;" @click="onSubmit()">提交</button>
 
- </view>
+
+
+	</view>
 
 </template>
 
 <script>
-	import {mapState,mapMutations} from 'vuex';
-	import unilist from '../../components/uni-list-item/uni-list-item.vue';
-	import unilist_item from '../../components/uni-list/uni-list.vue';
-    import config from '../../static/js/Config.js';
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
+
+	import config from '../../static/js/Config.js';
 	import SugarRequest from '../../static/js/SugarRequest.js';
 	import Verificat from '../../static/js/Verificat.js';
 
 	export default {
-		computed:{ 
-		...mapState(['userId','disporseAnalyzeuser','supportConductor','supportCopy']),  
-        endDate() {
-            return this.getDate('end');
-        }
-		
+		computed: {
+			...mapState(['userId', 'supportConductor', 'supportCopy']),
+			endDate() {
+				return this.getDate('end');
+			},
+
 		},
-		
+
 		data() {
 			const currentDate = this.getDate({ format: true });
 			return {
-				model:{},
-				conductor:{},
-				analyzeuser:{},
-				sid:0,
-				copy:[],
-				uploadfile:[],
-				filelist:[],
-				fileStatus:"",
-				personal:0,
-				ordershow:false,
+
+				sid: 0,
+				conductor: {},
+				copy: [],
+				uploadfile: [],
+				filelist: [],
+				fileStatus: "",
+				personal: 0,
+
+				bookno: "",
+				sendno: "",
+				consignee: "",
 				
-				ordertime:this.currentDate,    //下单时间
-				responsible:"",  //责任方
-				duty:"",
-				bom:"",
-				orderman:"",
-				analyze:"",
-				solution:"",
-				isorder:0
+				senddate: currentDate,
+				delivery: currentDate,
+				
+				remarks:"",
 			}
 		},
-		onLoad(pramse){
-				var _self=this;
-				_self.personal=pramse.personal;
-				_self.sid=pramse.sid;
-				
-			},
-		onShow(option){
-			var _self=this;
+		onLoad(pramse) {
+			var _self = this;
+			_self.personal = pramse.personal;
+			_self.sid = pramse.sid;
 
-				let analy=_self.disporseAnalyzeuser;
-				
-				console.log("分析人员："+ JSON.stringify(analy));
-				
-				if(analy!=null && analy.length>0){
-					_self.analyzeuser=analy[0];
-					
-				}else{
-					_self.analyzeuser={name:"请选择"};;
-				}
+		},
+		onShow(option) {
+			var _self = this;
 
-				console.log("处理人员："+ JSON.stringify(_self.supportConductor));
-				let checkconductor=_self.supportConductor;
-				if(checkconductor!=null && checkconductor.length>0){
-				_self.conductor=checkconductor[0];
-				}else{
-				_self.conductor={name:"请选择"};;
-				}
-			
-				let checkCopy=_self.supportCopy;
-				if(checkCopy!=null && checkCopy.length>0){
-				_self.copy=checkCopy;
-				}
+			console.log("处理人员：" + JSON.stringify(_self.supportConductor));
+			let checkconductor = _self.supportConductor;
+			if (checkconductor != null && checkconductor.length > 0) {
+				_self.conductor = checkconductor[0];
+			} else {
+				_self.conductor = {
+					name: "请选择"
+				};;
+			}
+
+			let checkCopy = _self.supportCopy;
+			if (checkCopy != null && checkCopy.length > 0) {
+				_self.copy = checkCopy;
+			}
+		
+		
+		
 		},
 		methods: {
-			
-		TestConfig(){
-			console.log(config.Parameters.LoginHost.call())
-			
-		},
-			
-		onSubmit(){
-			var _self=this;
-			var paramsCheck=_self.verifyParameters();
-			if(!paramsCheck.res)
-			{
-				uni.showToast({
-					icon:"none",
-					title:paramsCheck.message
-				})
-				return;
-			}
-			
-			this.model.SID=this.sid;
-			this.model.ANALYZEUSER=this.analyzeuser.uuid;
-			this.model.ANALYZE=this.analyze;
-			this.model.SOLUTION=this.solution;
-			this.model.RESPONSIBLE=this.responsible;
-			this.model.DUTY=this.duty;
-			this.model.BOM=this.bom;
-			this.model.ISORDER=this.isorder
-			
-			if(this.model.ISORDER!=0 &&this.model.ISORDER!="0" ){
-				this.model.ORDERMAN=this.orderman;
-				this.model.ORDERTIME=this.ordertime;
-			}
-			
-			this.model.NEXTUSER=this.conductor.uuid;
-			this.model.SUPPORTSTATUS=this.isorder=="0"?"2":"1";
-			this.model.PERSONALID=this.personal;
-			
-			
-			let ccValue="";
-			if(_self.copy.length>0){
-				
-				//循环拼接推送人员
-				for (var i = 0; i < _self.copy.length; i++) {
-					ccValue+=_self.copy[i].uuid+",";
-				}
-				ccValue = ccValue.substring(0, ccValue.length - 1);   //去掉最后一个逗号
-				
-				//有推送则添加推送消息，没有则不添加
-				_self.model.Push={CONDUCTOR:_self.conductor.uuid,CC:ccValue,POINT:0};
-			}
-			
-			console.log(JSON.stringify(_self.model));
-			let path="/api/Support/AddDisposer";
-			this.$SugarRequest.Post(_self.model,path,(res,data)=>{
-				
-				uni.showModal({
-					content: '处理成功，返回首页！',
-					showCancel: false,
-					success: (re) => {
-						if (re.confirm)
-						{
-							console.log("回到首页");
-							uni.reLaunch({url:"../main/main"});
-						
-						}
-					}
-				})
-				
-				
-			});
-			
-		},
-		radioChange(evt){
-				console.log("是否需要下单:"+ evt.target.value) 
-		   this.isorder= evt.target.value;
-		   this.ordershow=this.isorder=="1";
-		   this.ordertime=  this.endDate;
-		}, 
-		getDate(type) {
-            const date = new Date();
-            let year = date.getFullYear();
-            let month = date.getMonth() + 1;
-            let day = date.getDate();
 
-            if (type === 'start') {
-                year = year - 60;
-            } else if (type === 'end') {
-                year = year + 2;
-            }
-            month = month > 9 ? month : '0' + month;;
-            day = day > 9 ? day : '0' + day;
-            return `${year}-${month}-${day}`;
-        },
-		bindDateChange(e){
-			 this.ordertime = e.target.value;
+		onSubmit() {
+			var _self = this;
+			
+		//检查参数
+		var paramsCheck = _self.verifyParameters();
+		if (!paramsCheck.res) {
+			uni.showToast({
+				icon: "none",
+				title: paramsCheck.message
+			})
+			return;
+		}
+		
+		//组装实体
+			let model = this.BuilderModel();
+		
+			console.log("我要开始出了工单了："+JSON.stringify(model));
+			let path = "/api/Support/AddPmcOrder";
+		
+		//提交数据
+				this.$SugarRequest.Post(model,path,(res,data)=>{
+					
+					uni.showModal({
+						content: '处理成功，返回首页！',
+						showCancel: false,
+						success: (re) => {
+							if (re.confirm)
+							{
+								console.log("回到首页");
+								uni.reLaunch({url:"../main/main"});
+							
+							}
+						}
+					})
+					
+					
+				});
+				
 		},
-		onFillUser(){
+		
+
+		getDate(type) {
+			const date = new Date();
+			let year = date.getFullYear();
+			let month = date.getMonth() + 1;
+			let day = date.getDate();
+
+			if (type === 'start') {
+				year = year - 60;
+			} else if (type === 'end') {
+				year = year + 2;
+			}
+			month = month > 9 ? month : '0' + month;;
+			day = day > 9 ? day : '0' + day;
+			return `${year}-${month}-${day}`;
+		},
+		bindDateChangeSend(e) {
+			this.senddate = e.target.value;
+		},
+		bindDateChangedev(e) {
+			this.delivery = e.target.value;
+		},
+		onFillUser() {
 			uni.navigateTo({
 				url: '../user/fillUser?isSingle=true&type=conductor'
 			});
 		},
-		onFillAnalyzeuser(){
-			
-			uni.navigateTo({
-				url: '../user/fillUser?isSingle=true&type=analyzeuser'
-			});
-		},
-		onFillCopy(){
+
+		onFillCopy() {
 			uni.navigateTo({
 				url: '../user/fillUser?isSingle=false&type=copy'
 			});
 		},
-		onUpload(){
+		onUpload() {
 			var _self=this;
 			uni.chooseMedia({
 			  count: 1,
@@ -366,7 +301,7 @@
 				 console.log("上传参数："+JSON.stringify(params));
 				 
 				 uni.uploadFile({
-				            url:  _self.LoginHost + "/api/Upload/UploadFile",
+				            url:  config.Parameters.LoginHost() + "/api/Upload/UploadFile",
 				            filePath: _self.uploadfile[0].tempFilePath,
 				            name: 'file',
 				            formData: params,
@@ -407,55 +342,92 @@
 			  }
 			});
 			
-		
+					
 			
 			
 		},
-		verifyParameters(){
-			
-			let _self=this;
-			let result={res:true,message:""};
-			
-			if(!Verificat.itemHasKeyVer(_self.analyzeuser,"uuid")){
-				result.res=false;
-				result.message="请选择分析人员";
+		verifyParameters() {
+
+			let _self = this;
+			let result = {
+				res: true,
+				message: ""
+			};
+
+			if (!Verificat.isNotNullTrim(_self.bookno)) {
+				result.res = false;
+				result.message = "请填写物料单号";
 			}
-			  
-			 console.log("处理人："+JSON.stringify(_self.conductor));
-			if(!Verificat.itemHasKeyVer(_self.conductor,"uuid"))
-			{
-				result.res=false;
-				result.message="请选择处理人";
+
+			if (!Verificat.isNotNullTrim(_self.sendno)) {
+				result.res = false;
+				result.message = "请填写发货单号";
 			}
-	     
-			if(!Verificat.isNotNullTrim(_self.analyze)){
-				result.res=false;
-				result.message="请填写分析原因";
+			if (!Verificat.isNotNullTrim(_self.consignee)) {
+				result.res = false;
+				result.message = "请填写收货人";
 			}
-			
-			if(!Verificat.isNotNullTrim(_self.solution)){
-				result.res=false;
-				result.message="请填写解决方案";
+
+			if (!Verificat.isNotNullTrim(_self.delivery)) {
+				result.res = false;
+				result.message = "请选择交付时间";
 			}
-			
-			if(!Verificat.isNotNullTrim(_self.responsible)){
-				result.res=false;
-				result.message="请填写责任方";
+			if (!Verificat.isNotNullTrim(_self.senddate)) {
+				result.res = false;
+				result.message = "请选择发货时间";
 			}
-			if(!Verificat.isNotNullTrim(_self.duty)){
-				result.res=false;
-				result.message="请填写责任人";
+
+
+			console.log("处理人：" + JSON.stringify(_self.conductor));
+			if (!Verificat.itemHasKeyVer(_self.conductor, "uuid")) {
+				result.res = false;
+				result.message = "请选择处理人";
 			}
-			if(!Verificat.isNotNullTrim(_self.bom)){
-				result.res=false;
-				result.message="请填写Bom图纸";
-			}
-			 
+
+
 			return result;
+
+		},
+		BuilderModel() {
+		var _self=this;
+			
+
+			let model = {};
+
+			//装载model
+			model.SID = this.sid;
+			model.NEXTUSER = this.conductor.uuid;
+			model.PERSONALID = this.personal;
+			model.SUPPORTSTATUS = 2;  
+
+			model.BOOKNO = this.bookno;
+			model.SENDNO = this.sendnom;
+			model.CONSIGNEE = this.consignee;
+
+			model.SENDDATE = this.senddate; //下单时间
+			model.DELIVERY = this.delivery;
+			model.REMARKS=this.remarks;
+
+			let ccValue = "";
+			if (_self.copy.length > 0) {
+
+				//循环拼接推送人员
+				for (var i = 0; i < _self.copy.length; i++) {
+					ccValue += _self.copy[i].uuid + ",";
+				}
+				ccValue = ccValue.substring(0, ccValue.length - 1); //去掉最后一个逗号
+
+				//有推送则添加推送消息，没有则不添加
+				model.Push = {
+					CONDUCTOR: _self.conductor.uuid,
+					CC: ccValue,
+					POINT: 0
+				};
+			}
+			return model;
 		}
-		}
+		},
 	}
-	
 </script>
 
 
@@ -469,10 +441,12 @@
 
 		background: linear-gradient(to right, #365fff, #36bbff);
 	}
-	input{
+
+	input {
 		font-size: 26upx;
-		
+
 	}
+
 	.btn-logout-hover {
 		background: linear-gradient(to right, #365fdd, #36bbfa);
 	}

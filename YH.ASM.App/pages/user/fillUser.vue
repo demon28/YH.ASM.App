@@ -108,8 +108,12 @@
 				...mapMutations(['setSupportConductor','setSupportCopy','setDisporseAnalyzeuser']),
 			Init() {
 				var _self = this;
-
+				if(_self.pagecount==0){
+					_self.pagecount=10;
+				}
 				if (_self.pageindex > _self.pagecount) {
+					
+					console.log("被返回:"+_self.pageindex+":"+_self.pagecount)
 					return;
 				}
 
@@ -177,7 +181,7 @@
 			},
 			Search() {
 				this.keywords = this.words.value;
-				
+				console.log("触动搜搜："+this.keywords )
 				this.pageindex = 1;
 				this.list = [];
 				this.Init();
