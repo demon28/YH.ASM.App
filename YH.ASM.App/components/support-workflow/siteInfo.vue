@@ -1,20 +1,74 @@
 <template>
 	
-	<!-- <view>
-		<text>我是现场处理组件</text>
-	</view> -->
-	<text>我是现场处理组件</text>
+		<view class="uni-list" style="margin-top: 30upx;">
+			
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					 流程节点：
+				</view>
+				<view class="uni-list-cell-db">
+					<text> {{GetStatus(model.NEXT_STATUS)}} </text>
+				</view>
+			</view>
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					 预计完成时间：
+				</view>
+				<view class="uni-list-cell-db">
+					<text> {{model.ENDDATE}} </text>
+				</view>
+			</view>
+			
+			
+			
+
+
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					 处 理 人:
+				</view>
+				<view class="uni-list-cell-db">
+					<text> {{model.NEXT_USER}} </text>
+				</view>
+			</view>
+			
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					 处理时间：
+				</view>
+				<view class="uni-list-cell-db">
+					<view class="uni-input">{{model.CREATETIME}}</view>
+			
+				</view>
+			</view>
+			
+		<view class="uni-list-cell" style="min-height:80upx ;">
+			<view class="uni-list-cell-left">
+				 结果描述：
+			</view>
+			<view class="uni-list-cell-db">
+				<text> {{model.DESCRIPTION}} </text>
+			</view>
+		</view>
+		
+			
+		
+			</view>
+	
+	
+	
 	
 </template>
 
-
-
-<script>
-		
+<script>		
+	import {mapState,mapMutations} from 'vuex';
+	import * as Enum from "@/static/js/Enum.js";
+	
+	
 	export default {
-		name:"siteInfo",
+		name:"disposerInfo",
 		components: {
-		
+				...mapState(['userId']),  
 		},
 		data() {
 			return {
@@ -22,8 +76,16 @@
 			}
 		},
 		methods: {
-		
 			
+			GetSeverity(value){
+				return EnumGetSingle(value,Enum.Support_Severitylist())
+			},
+			GetType(value){
+			 return	Enum.EnumGetSingle(value,Enum.Support_Typelist())
+			},
+			GetStatus(value){
+				return Enum.EnumGetSingle(value,Enum.Support_Statuslist())
+			}
 		},
 		computed: {
 			

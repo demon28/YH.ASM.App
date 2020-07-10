@@ -70,7 +70,8 @@
                     }
                 }
             }
-        }
+        },
+        "nvueLaunchMode" : ""
     },
     "quickapp" : {},
     "mp-weixin" : {

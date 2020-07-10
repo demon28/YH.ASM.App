@@ -2,6 +2,9 @@
   "navigationBarTitleText": "工单详情",
   "usingComponents": {
     "support-info": "/components/support-workflow/supportInfo",
-    "site-info": "/components/support-workflow/siteInfo"
+    "disposer-info": "/components/support-workflow/disposerInfo",
+    "pmc-info": "/components/support-workflow/pmcInfo",
+    "site-info": "/components/support-workflow/siteInfo",
+    "principal-info": "/components/support-workflow/principalInfo"
   }
 }

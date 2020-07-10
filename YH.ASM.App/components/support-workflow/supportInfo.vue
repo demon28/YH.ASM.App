@@ -4,7 +4,7 @@
 			
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 流程节点:
+					 流程节点：
 				</view>
 				<view class="uni-list-cell-db">
 					<text> {{GetStatus(model.STATUS)}} </text>
@@ -12,7 +12,7 @@
 			</view>
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 工单编号:
+					 工单编号：
 				</view>
 				<view class="uni-list-cell-db">
 					<text> {{model.CODE}} </text>
@@ -21,7 +21,7 @@
 			
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 项目名称:
+					 项目名称：
 				</view>
 				<view class="uni-list-cell-db">
 					<text> {{model.PROJECTNAME}} </text>
@@ -30,7 +30,7 @@
 
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 问题机型:
+					 问题机型：
 				</view>
 				<view class="uni-list-cell-db" >
 					<text> {{ model.MACHINENAME}}-{{model.MACHINESERIAL}} </text>
@@ -39,7 +39,7 @@
 
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 问题类型:
+					 问题类型：
 				</view>
 				<view class="uni-list-cell-db">
 				<view class="uni-input">{{GetType(model.TYPE)}}</view>
@@ -60,30 +60,30 @@
 					 发现时间:
 				</view>
 				<view class="uni-list-cell-db">
-					<view class="uni-input">{{model.FINDDATE}}</view>
+					<view class="uni-input">{{model.FINDATE}}</view>
 
 				</view>
 			</view>
 
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 处理人:
+					 处 理 人：
 				</view>
-				<view class="uni-list-cell">
-					<text> {{model.CONDUCTORNAME}} </text>
-				</view>
-			</view>
-<view class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					 创建时间:
-				</view>
-				<view class="uni-list-cell">
+				<view class="uni-list-cell-db">
 					<text> {{model.CONDUCTORNAME}} </text>
 				</view>
 			</view>
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					问题描述:
+					创建时间：
+				</view>
+				<view class="uni-list-cell-db">
+					<text> {{model.CREATETIME}} </text>
+				</view>
+			</view>
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-db">
+			<view style="margin-left: 20upx;">	问题描述：</view>
 					<view class="uni-textarea" >
 						<textarea  v-model="model.CONTENT" />
 					</view>
@@ -116,13 +116,15 @@
 		methods: {
 			
 			GetSeverity(value){
-				Enum.EnumGetSingle(value,Enum.Support_Severitylist())
+				return Enum.EnumGetSingle(value,Enum.Support_Severitylist())
 			},
 			GetType(value){
-				Enum.EnumGetSingle(value,Enum.Support_Typelist())
+				
+				return Enum.EnumGetSingle(value,Enum.Support_Typelist())
 			},
 			GetStatus(value){
-				Enum.EnumGetSingle(value,Enum.Support_Statuslist())
+				
+				return Enum.EnumGetSingle(value,Enum.Support_Statuslist())
 			}
 		},
 		computed: {

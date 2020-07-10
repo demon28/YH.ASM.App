@@ -38,7 +38,8 @@ var Get= function (model,path,callback){
 				title: "服务器内部错误！"
 			});
 			return;
-		}		
+		}	
+		console.log("请求结果"+JSON.stringify(res));	
 		callback(res.data,res);
 		
 			 

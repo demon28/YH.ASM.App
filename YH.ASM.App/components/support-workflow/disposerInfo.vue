@@ -4,93 +4,113 @@
 			
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 流程节点:
+					 流程节点：
 				</view>
 				<view class="uni-list-cell-db">
-					<text> {{GetStatus(model.STATUS)}} </text>
+					<text> {{GetStatus(model.NEXT_STATUS)}} </text>
 				</view>
 			</view>
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 工单编号:
+					 分析人员：
 				</view>
 				<view class="uni-list-cell-db">
-					<text> {{model.CODE}} </text>
+					<text> {{model.ANALYZEUSER}} </text>
 				</view>
 			</view>
 			
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 项目名称:
+					 责 任 方：
 				</view>
 				<view class="uni-list-cell-db">
-					<text> {{model.PROJECTNAME}} </text>
+					<text> {{model.RESPONSIBLE}} </text>
 				</view>
 			</view>
 
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 问题机型:
+					 责 任 人：
 				</view>
 				<view class="uni-list-cell-db" >
-					<text> {{ model.MACHINENAME}}-{{model.MACHINESERIAL}} </text>
+					<text> {{ model.DUTY}} </text>
 				</view>
 			</view>
 
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 问题类型:
+					 BOM图纸：
+				</view>
+				<view class="uni-list-cell-db" >
+					<text> {{model.BOM}} </text>
+				</view>
+			</view>
+			
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					 是否下单：
 				</view>
 				<view class="uni-list-cell-db">
-				<view class="uni-input">{{GetType(model.TYPE)}}</view>
+					<view class="uni-input">{{model.ISORDER==1?"是":"否"}}</view>
+			
 				</view>
 			</view>
-
-			<view class="uni-list-cell" style="min-height:80upx ;">
+			<view v-if="model.ISORDER==1" class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 严重程度:
+					 下 单 人：
 				</view>
 				<view class="uni-list-cell-db">
-				<view class="uni-input">{{GetSeverity(model.SEVERITY)}}</view>
+					<view class="uni-input">{{model.ORDERMAN}}</view>
+			
 				</view>
 			</view>
-
-			<view class="uni-list-cell" style="min-height:80upx ;">
+			<view v-if="model.ISORDER==1" class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 发现时间:
+					 下单时间：
 				</view>
 				<view class="uni-list-cell-db">
-					<view class="uni-input">{{model.FINDDATE}}</view>
-
+					<view class="uni-input">{{model.ORDERTIME}}</view>
+			
 				</view>
 			</view>
 
+
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 处理人:
+					 处 理 人:
 				</view>
-				<view class="uni-list-cell">
-					<text> {{model.CONDUCTORNAME}} </text>
+				<view class="uni-list-cell-db">
+					<text> {{model.NEXT_USER}} </text>
 				</view>
 			</view>
-<view class="uni-list-cell" style="min-height:80upx ;">
+			
+			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					 创建时间:
+					 处理时间：
 				</view>
-				<view class="uni-list-cell">
-					<text> {{model.CONDUCTORNAME}} </text>
+				<view class="uni-list-cell-db">
+					<view class="uni-input">{{model.CREATETIME}}</view>
+			
 				</view>
 			</view>
 			<view class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					问题描述:
+				<view class="uni-list-cell-db">
+					<view style="margin-left: 20upx;">分析原因：</view>
 					<view class="uni-textarea" >
-						<textarea  v-model="model.CONTENT" />
+						<textarea tyle="margin-left: 20upx;"  v-model="model.ANALYZE" />
 					</view>
 				
 				</view>
 			</view>
-	
+			
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-db">
+					<view style="margin-left: 20upx;"> 解决方案：</view>
+					<view class="uni-textarea"  style="width: 100%;">
+						<textarea tyle="margin-left: 20upx;"  v-model="model.SOLUTION" />
+					</view>
+				</view>
+			</view>
 			</view>
 	
 	
@@ -116,13 +136,13 @@
 		methods: {
 			
 			GetSeverity(value){
-				Enum.EnumGetSingle(value,Enum.Support_Severitylist())
+				return EnumGetSingle(value,Enum.Support_Severitylist())
 			},
 			GetType(value){
-				Enum.EnumGetSingle(value,Enum.Support_Typelist())
+			 return	Enum.EnumGetSingle(value,Enum.Support_Typelist())
 			},
 			GetStatus(value){
-				Enum.EnumGetSingle(value,Enum.Support_Statuslist())
+				return Enum.EnumGetSingle(value,Enum.Support_Statuslist())
 			}
 		},
 		computed: {
