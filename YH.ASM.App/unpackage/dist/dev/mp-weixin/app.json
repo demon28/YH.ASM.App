@@ -17,7 +17,8 @@
     "pages/support/checkByPmc",
     "pages/support/checkBySite",
     "pages/support/checkByPrincipal",
-    "pages/support/workfolw"
+    "pages/support/workfolw",
+    "pages/support/supportReport"
   ],
   "subPackages": [],
   "window": {
@@ -49,5 +50,6 @@
       "desc": "\"你的位置信息将用于小程序位置接口的效果展示\""
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap46.json"
 }

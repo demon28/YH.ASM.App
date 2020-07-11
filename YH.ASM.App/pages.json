@@ -123,8 +123,15 @@
 			"style": {
 				"navigationBarTitleText": "工单详情"
 			}
+		},
+		{
+			"path": "pages/support/supportReport",
+			"style": {
+				"navigationBarTitleText": "工单汇总",
+				  "enablePullDownRefresh": true
+				
+			}
 		}
-		
 		   
 		
 	],

@@ -18,7 +18,7 @@
 
 			<view class="uni-list-cell" style="min-height:80upx ; ">
 				<view class="uni-list-cell-left">
-					* 责任方:
+					* 责 任 方:
 				</view>
 				<view class="uni-list-cell-db">
 					<input  placeholder="请输入责任方" v-model="responsible"  />
@@ -26,7 +26,7 @@
 			</view>
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 责任人:
+					* 责 任 人:
 				</view>
 				<view class="uni-list-cell-db">
 					<input  placeholder="请输入责任人" v-model="duty"  />
@@ -55,7 +55,7 @@
 				</view>
 			</view>
 
-			<view v-show="ordershow" class="uni-list-cell" style="min-height:80upx ;">
+			<view v-if="ordershow" class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					* 下单时间:
 				</view>
@@ -66,9 +66,9 @@
 				</view>
 			</view>
 			
-			<view v-show="ordershow" class="uni-list-cell" style="min-height:80upx ;">
+			<view v-if="ordershow" class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 下单人:
+					* 下 单 人:
 				</view>
 				<view class="uni-list-cell-db">
 					<input  placeholder="请填写下单人" v-model="orderman" />

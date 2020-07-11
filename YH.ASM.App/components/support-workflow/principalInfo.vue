@@ -9,7 +9,7 @@
 				<view class="uni-list-cell-db">
 					<text> {{GetStatus(model.NEXT_STATUS)}} </text>
 				</view>
-			</view>
+		 	</view>
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					 实际完成时间：
@@ -18,7 +18,6 @@
 					<text> {{model.ENDDATE}} </text>
 				</view>
 			</view>
-			
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					 审核人：
@@ -27,7 +26,6 @@
 					<text> {{model.CHECKUSER}} </text>
 				</view>
 			</view>
-			
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					 审核结果：
@@ -36,9 +34,6 @@
 					<text> {{model.RESULT}} </text>
 				</view>
 			</view>
-			
-
-
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					 处 理 人:
@@ -47,7 +42,6 @@
 					<text> {{model.NEXT_USER}} </text>
 				</view>
 			</view>
-			
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					 处理时间：
@@ -58,11 +52,7 @@
 				</view>
 			</view>
 			
-	
-		
-			
-		
-			</view>
+		</view>
 	
 	
 	

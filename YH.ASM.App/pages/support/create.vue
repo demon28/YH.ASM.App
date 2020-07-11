@@ -132,7 +132,7 @@
 	
 	import ApiSingin from '../../static/js/ApiSingin.js';
 	import Verificat from '../../static/js/Verificat.js';
-import config from '../../static/js/Config.js';
+	import config from '../../static/js/Config.js';
 
 	export default {
 		computed:

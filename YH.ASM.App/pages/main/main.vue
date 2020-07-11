@@ -53,7 +53,7 @@
 					</uni-grid-item>
 					
 					<uni-grid-item >
-					<view class="grid-item-box"  @click="ViewSupportList" >
+					<view class="grid-item-box"  @click="ViewSupporReport" >
 						<image src="../../static/img/allSupport.png" class="image" mode="aspectFill" />
 						<text class="text">工单汇总</text>
 					</view>
@@ -181,6 +181,14 @@
 					
 					uni.navigateTo({
 						url: '../support/create'
+					});
+			}
+			,
+			
+			ViewSupporReport(){
+					
+					uni.navigateTo({
+						url: '../support/supportReport'
 					});
 			}
 			

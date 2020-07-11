@@ -98,7 +98,7 @@
 
 		</view>
 
-<view class="uni-textarea" style="margin-top: 30upx;">
+		<view class="uni-textarea" style="margin-top: 30upx;">
 					<textarea placeholder="结果描述" v-model="result" />
 					</view>
 		<button class="btn-logout" style="margin-top: 30upx;" @click="onSubmit()">提交</button>
@@ -243,7 +243,7 @@
 		},
 	radioChange(evt){
 				console.log("是否需要下单:"+ evt.target.value) 
-		   this.checkright= evt.target.value==0;
+				this.checkright= evt.target.value==0;
 		 
 		  
 		}, 
@@ -360,6 +360,7 @@
 			model.ENDDATE = this.senddate;
 	        model.RESULT=this.result;
 			model.CHECKUSER=this.checkuser;
+			model.STATUS=_self.checkright?0:1;
 			
 			let ccValue = "";
 			if (_self.copy.length > 0) {

@@ -27,7 +27,7 @@
 			</view>
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 收货人:
+					* 收 货 人:
 				</view>
 				<view class="uni-list-cell-db">
 					<input placeholder="请输入收货人" v-model="consignee" />
@@ -69,7 +69,7 @@
 			<!--抄送人员以及处理人 操作开始，不用动 -->
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* 处理人:
+					* 下一处理人:
 				</view>
 				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillUser">
 					<text> {{conductor.name}} </text>
@@ -398,7 +398,7 @@
 			model.SID = this.sid;
 			model.NEXTUSER = this.conductor.uuid;
 			model.PERSONALID = this.personal;
-			model.SUPPORTSTATUS = 2;  
+			model.SUPPORTSTATUS = 3;  
 
 			model.BOOKNO = this.bookno;
 			model.SENDNO = this.sendnom;

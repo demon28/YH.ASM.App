@@ -22,10 +22,13 @@
 				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
 					<view class="uni-flex uni-row">
 
-						<view class="flex-item flex-item-V">严重程度： </view>
+						<view class="flex-item flex-item-V">严重程度：{{SetSeverity(info.SEVERITY)}}  </view>
 						<view class="flex-item flex-item-V" style="display:flex; align-items:center">
-							<uni-rate size="15" disabled="true" :value="SetStar(info.SEVERITY)"></uni-rate>
-						</view>
+					<!-- 		<uni-rate size="15" disabled="true" :value="SetStar(info.SEVERITY)"></uni-rate>
+					 -->
+					
+						 
+						 </view>
 
 
 					</view>
@@ -47,8 +50,8 @@
 
 				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
 					<view class="uni-flex uni-row">
-						<view class="flex-item flex-item-V" style="width: 50%;">创建人： {{info.CREATORNAME}}</view>
-						<view class="flex-item flex-item-V" style="width: 50%;">处理人： {{info.CONDUCTORNAME}}</view>
+						<view class="flex-item flex-item-V" style="width: 50%;">创 建 人： {{info.CREATORNAME}}</view>
+						<view class="flex-item flex-item-V" style="width: 50%;">处 理 人： {{info.CONDUCTORNAME}}</view>
 					</view>
 				</view>
 				<view class="flex-item flex-item-V ">
@@ -139,6 +142,9 @@
 			},
 			TodoSupport(item){
 				this.$emit('child-do',item)
+			},
+			SetSeverity(value) {
+				return this.EnumGetSingle(value, this.Support_Severitylist());
 			},
 			SetStatus(value) {
 				return this.EnumGetSingle(value, this.Support_Statuslist());

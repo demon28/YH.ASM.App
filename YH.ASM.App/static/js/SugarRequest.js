@@ -88,6 +88,7 @@ var Post= function (model,path,callback){
 	     uni.hideLoading();
 		 
 		
+		callback(res.data,res);
 		 		
 		if(res.statusCode!=200){
 			uni.showToast({
@@ -99,8 +100,7 @@ var Post= function (model,path,callback){
 		
 						 
 						
-						
-		callback(res.data,res);
+				
 		
 			 
 	    }
