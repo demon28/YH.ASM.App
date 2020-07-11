@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      return 1;
+      result = 1;
     } else {
-      return 0.5;
+      result = 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,7 +421,10 @@ var protocols = {
 
 
 var todos = [
-'vibrate'];
+'vibrate',
+'preloadPage',
+'unPreloadPage',
+'loadSubPackage'];
 
 var canIUses = [];
 
@@ -757,7 +760,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1694,9 +1697,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!****************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/store/index.js ***!
-  \****************************************************/
+/*!***********************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/store/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2742,9 +2745,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 13:
-/*!***************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/SugarRequest.js ***!
-  \***************************************************************/
+/*!**********************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/SugarRequest.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2881,9 +2884,9 @@ var Post = function Post(model, path, callback) {
 /***/ }),
 
 /***/ 14:
-/*!************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/ApiSingin.js ***!
-  \************************************************************/
+/*!*******************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/ApiSingin.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2911,9 +2914,9 @@ var Singin = function Singin(path, jsonString, ApiKey, timestamp) {
 /***/ }),
 
 /***/ 15:
-/*!**********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/md5.min.js ***!
-  \**********************************************************/
+/*!*****************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/md5.min.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3305,42 +3308,10 @@ module.exports = __webpack_amd_options__;
 
 /***/ }),
 
-/***/ 19:
-/*!*********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/Config.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-var Parameters = {
-
-
-  //是否是开发环境,是则配置true   /正式环境为false
-  Isdevpos: true,
-  ApiKey: "58b59b3ae5d0ec0629950ebdd4dabe39",
-  LoginHost: function LoginHost() {
-    if (Parameters.Isdevpos)
-    {
-      return "http://www.asm.cn:50428";
-    }
-    return "https://asm.yhwins.com:52420";
-  } };var _default =
-
-
-
-
-{
-  Parameters: Parameters };exports.default = _default;
-
-/***/ }),
-
-/***/ 190:
-/*!*******************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
-  \*******************************************************************/
+/***/ 180:
+/*!**************************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3476,6 +3447,204 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   "cloud-download-filled": "\uE8E9",
   "headphones": "\uE8BF",
   "shop": "\uE609" };exports.default = _default;
+
+/***/ }),
+
+/***/ 19:
+/*!****************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Config.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+var Parameters = {
+
+
+  //是否是开发环境,是则配置true   /正式环境为false
+  Isdevpos: true,
+  ApiKey: "58b59b3ae5d0ec0629950ebdd4dabe39",
+  LoginHost: function LoginHost() {
+    if (Parameters.Isdevpos)
+    {
+      return "http://www.asm.cn:50428";
+    }
+    return "https://asm.yhwins.com:52420";
+  } };var _default =
+
+
+
+
+{
+  Parameters: Parameters };exports.default = _default;
+
+/***/ }),
+
+/***/ 195:
+/*!*************************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/iconfont/iconfont.css ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 196:
+/*!******************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/constant.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+
+
+var _global = _interopRequireDefault(__webpack_require__(/*! ./global.js */ 197));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // Vue继承
+copyFuns();
+/**
+             * @name 复制对象到Vue的原型上
+             */
+function copyFuns() {
+  var keys = Object.keys(_global.default);
+  keys.forEach(function (ele) {
+    _vue.default.prototype[ele] = _global.default[ele];
+  });
+}
+
+
+// 注册全局组件
+// import myIconfont from '@/components/myIconfont/myIconfont.vue'
+// Vue.component("my-iconfont",myIconfont)
+// 
+// import myLoading from '@/components/myLoading/myLoading.vue'
+// Vue.component("my-loading",myLoading)
+
+/***/ }),
+
+/***/ 197:
+/*!****************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/global.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 198));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 常量
+if (!globalThis) var globalThis = {};
+globalThis.PATH = "/geomantic/";
+
+/**
+                                  *  @name 请求
+                                  */function
+apiPost(_x, _x2) {return _apiPost.apply(this, arguments);}function _apiPost() {_apiPost = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(url, params) {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+            if (!params) console.warn("没有传入参数params");_context.next = 3;return (
+              new Promise(function (resolve, reject) {
+                uni.request({
+                  url: PATH + url,
+                  method: "POST",
+                  header: {
+                    "content-type": "application/x-www-form-urlencoded" },
+
+                  data: params,
+                  success: function success(res) {
+                    resolve(res.data);
+                  },
+                  fail: function fail(err) {
+                    reject(err);
+                  } });
+
+              }));case 3:return _context.abrupt("return", _context.sent);case 4:case "end":return _context.stop();}}}, _callee);}));return _apiPost.apply(this, arguments);}function
+
+
+showLoading() {return _showLoading.apply(this, arguments);}
+
+
+
+
+
+
+/**
+                                                             * @name 显示toast
+                                                             * @param res {status:"0",(msg||data):""}
+                                                             */function _showLoading() {_showLoading = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:uni.showLoading({ title: "请等待", mask: true });case 1:case "end":return _context2.stop();}}}, _callee2);}));return _showLoading.apply(this, arguments);}function
+showToast(_x3) {return _showToast.apply(this, arguments);}function _showToast() {_showToast = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(res) {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+            uni.showToast({
+              title: (res.msg || res.data).toString().slice(0, 7),
+              mask: true,
+              icon: res.status == 0 ? "success" : "",
+              duration: 1500 });case 1:case "end":return _context3.stop();}}}, _callee3);}));return _showToast.apply(this, arguments);}var _default =
+
+
+
+{
+  apiPost: apiPost };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 198:
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 199);
+
+/***/ }),
+
+/***/ 199:
+/*!************************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// This method of obtaining a reference to the global object needs to be
+// kept identical to the way it is obtained in runtime.js
+var g = (function() {
+  return this || (typeof self === "object" && self);
+})() || Function("return this")();
+
+// Use `getOwnPropertyNames` because not all browsers support calling
+// `hasOwnProperty` on the global `self` object in a worker. See #183.
+var hadRuntime = g.regeneratorRuntime &&
+  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
+
+// Save the old regeneratorRuntime in case it needs to be restored later.
+var oldRuntime = hadRuntime && g.regeneratorRuntime;
+
+// Force reevalutation of runtime.js.
+g.regeneratorRuntime = undefined;
+
+module.exports = __webpack_require__(/*! ./runtime */ 200);
+
+if (hadRuntime) {
+  // Restore the original runtime.
+  g.regeneratorRuntime = oldRuntime;
+} else {
+  // Remove the global property added by runtime.js.
+  try {
+    delete g.regeneratorRuntime;
+  } catch(e) {
+    g.regeneratorRuntime = undefined;
+  }
+}
+
 
 /***/ }),
 
@@ -4113,12 +4282,10 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    {
-      if(vm.$scope && vm.$scope.is){
-        return vm.$scope.is
-      }
-    }
     if (vm.$root === vm) {
+      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
+        return ('') + vm.$options.__file
+      }
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -4153,7 +4320,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm) {
+      while (vm && vm.$options.name !== 'PageBody') {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -4165,7 +4332,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        tree.push(vm);
+        !vm.$options.isReserved && tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -9011,7 +9178,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -9032,14 +9199,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -9115,7 +9282,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9285,9 +9452,10 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue) {
+function internalMixin(Vue ) {
 
-  Vue.config.errorHandler = function(err) {
+  Vue.config.errorHandler = function(err, vm, info) {
+    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -9509,173 +9677,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 205:
-/*!******************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/iconfont/iconfont.css ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-
-/***/ 206:
-/*!***********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/constant.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-
-
-var _global = _interopRequireDefault(__webpack_require__(/*! ./global.js */ 207));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // Vue继承
-copyFuns();
-/**
-             * @name 复制对象到Vue的原型上
-             */
-function copyFuns() {
-  var keys = Object.keys(_global.default);
-  keys.forEach(function (ele) {
-    _vue.default.prototype[ele] = _global.default[ele];
-  });
-}
-
-
-// 注册全局组件
-// import myIconfont from '@/components/myIconfont/myIconfont.vue'
-// Vue.component("my-iconfont",myIconfont)
-// 
-// import myLoading from '@/components/myLoading/myLoading.vue'
-// Vue.component("my-loading",myLoading)
-
-/***/ }),
-
-/***/ 207:
-/*!*********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/global.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 208));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 常量
-if (!globalThis) var globalThis = {};
-globalThis.PATH = "/geomantic/";
-
-/**
-                                  *  @name 请求
-                                  */function
-apiPost(_x, _x2) {return _apiPost.apply(this, arguments);}function _apiPost() {_apiPost = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(url, params) {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-            if (!params) console.warn("没有传入参数params");_context.next = 3;return (
-              new Promise(function (resolve, reject) {
-                uni.request({
-                  url: PATH + url,
-                  method: "POST",
-                  header: {
-                    "content-type": "application/x-www-form-urlencoded" },
-
-                  data: params,
-                  success: function success(res) {
-                    resolve(res.data);
-                  },
-                  fail: function fail(err) {
-                    reject(err);
-                  } });
-
-              }));case 3:return _context.abrupt("return", _context.sent);case 4:case "end":return _context.stop();}}}, _callee);}));return _apiPost.apply(this, arguments);}function
-
-
-showLoading() {return _showLoading.apply(this, arguments);}
-
-
-
-
-
-
-/**
-                                                             * @name 显示toast
-                                                             * @param res {status:"0",(msg||data):""}
-                                                             */function _showLoading() {_showLoading = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:uni.showLoading({ title: "请等待", mask: true });case 1:case "end":return _context2.stop();}}}, _callee2);}));return _showLoading.apply(this, arguments);}function
-showToast(_x3) {return _showToast.apply(this, arguments);}function _showToast() {_showToast = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(res) {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-            uni.showToast({
-              title: (res.msg || res.data).toString().slice(0, 7),
-              mask: true,
-              icon: res.status == 0 ? "success" : "",
-              duration: 1500 });case 1:case "end":return _context3.stop();}}}, _callee3);}));return _showToast.apply(this, arguments);}var _default =
-
-
-
-{
-  apiPost: apiPost };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 208:
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 209);
-
-/***/ }),
-
-/***/ 209:
-/*!************************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// This method of obtaining a reference to the global object needs to be
-// kept identical to the way it is obtained in runtime.js
-var g = (function() {
-  return this || (typeof self === "object" && self);
-})() || Function("return this")();
-
-// Use `getOwnPropertyNames` because not all browsers support calling
-// `hasOwnProperty` on the global `self` object in a worker. See #183.
-var hadRuntime = g.regeneratorRuntime &&
-  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
-
-// Save the old regeneratorRuntime in case it needs to be restored later.
-var oldRuntime = hadRuntime && g.regeneratorRuntime;
-
-// Force reevalutation of runtime.js.
-g.regeneratorRuntime = undefined;
-
-module.exports = __webpack_require__(/*! ./runtime */ 210);
-
-if (hadRuntime) {
-  // Restore the original runtime.
-  g.regeneratorRuntime = oldRuntime;
-} else {
-  // Remove the global property added by runtime.js.
-  try {
-    delete g.regeneratorRuntime;
-  } catch(e) {
-    g.regeneratorRuntime = undefined;
-  }
-}
-
-
-/***/ }),
-
-/***/ 210:
+/***/ 200:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -10407,10 +10409,10 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 211:
-/*!***********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/css/reset.scss ***!
-  \***********************************************************/
+/***/ 201:
+/*!******************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/css/reset.scss ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10421,9 +10423,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 26:
-/*!************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/service.js ***!
-  \************************************************/
+/*!*******************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/service.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10489,9 +10491,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/pages.json ***!
-  \************************************************/
+/*!*******************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/pages.json ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10500,9 +10502,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 77:
-/*!*******************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/Enum.js ***!
-  \*******************************************************/
+/*!**************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Enum.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10621,9 +10623,9 @@ function EnumGetSingle(value, Array) {
 /***/ }),
 
 /***/ 78:
-/*!************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/Verificat.js ***!
-  \************************************************************/
+/*!*******************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Verificat.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10699,9 +10701,9 @@ var itemHasKeyVer = function itemHasKeyVer(item, key) {
 /***/ }),
 
 /***/ 87:
-/*!*********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/myPull.js ***!
-  \*********************************************************/
+/*!****************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/myPull.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
