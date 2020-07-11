@@ -86,7 +86,7 @@
 					
 					this.$SugarRequest.Get({},path,(data,res)=>{
 						
-						console.log(res);
+						console.log(data);
 						_self.wait=	data.Content.Wait;
 						_self.being=data.Content.Being;
 						_self.complete=data.Content.Complete;
@@ -134,6 +134,8 @@
 					this.Init();
 				},
 				clickCard(item){
+					
+					console.log("看Sid："+item.id)
 					uni.navigateTo({
 						url: 'workfolw?sid='+item.id
 					})

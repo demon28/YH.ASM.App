@@ -225,7 +225,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _createForOfIteratorHel
 
       this.$SugarRequest.Get({}, path, function (data, res) {
 
-        console.log(res);
+        console.log(data);
         _self.wait = data.Content.Wait;
         _self.being = data.Content.Being;
         _self.complete = data.Content.Complete;
@@ -273,6 +273,8 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _createForOfIteratorHel
       this.Init();
     },
     clickCard: function clickCard(item) {
+
+      console.log("看Sid：" + item.id);
       uni.navigateTo({
         url: 'workfolw?sid=' + item.id });
 
