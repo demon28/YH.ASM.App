@@ -22,12 +22,11 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useIsolateContext": true,
 		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "",
+	"libVersion": "2.9.2",
 	"appid": "wxda6a631dceee5d1f",
 	"projectname": "YH.ASM.App",
 	"simulatorType": "wechat",

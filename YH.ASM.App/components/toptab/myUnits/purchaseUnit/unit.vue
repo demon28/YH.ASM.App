@@ -9,11 +9,11 @@
 
 			<view class="uni-flex uni-column uni-padding-wrap">
 				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
-					项目名称： {{info.PROJECTNAME}}
+					项目名称： {{info.PROJECTNAME}}[{{info.PROJECTCODE}}]
 
 				</view>
 				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
-					<text class="uni-text">问题机型： {{info.MACHINENAME}}-{{info.MACHINESERIAL}} </text>
+					<text class="uni-text">问题机型： {{info.MACHINENAME}}[{{info.MACHINESERIAL}}] </text>
 				</view>
 
 				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">流程节点： {{SetStatus(info.STATUS)}}</view>
@@ -54,7 +54,7 @@
 						<view class="flex-item flex-item-V" style="width: 50%;">处 理 人： {{info.CONDUCTORNAME}}</view>
 					</view>
 				</view>
-				<view class="flex-item flex-item-V ">
+				<view class="flex-item flex-item-V " style="margin-top: 10upx;">
 					<view class="uni-flex uni-row">
 				
 						<view class="flex-item flex-item-V">查看附件： </view>
@@ -64,7 +64,7 @@
 					</view>
 				</view>
 				
-				<view class="flex-item flex-item-V ">
+				<view class="flex-item flex-item-V " style="margin-top: 10upx;">
 					<view class="uni-flex uni-row">
 				
 						<view class="flex-item flex-item-V" style="min-width: 25%;">问题描述： </view>

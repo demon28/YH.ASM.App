@@ -16,7 +16,7 @@
 					* 项目名称:
 				</view>
 				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillProject">
-					<text> {{project.name}} </text>
+					<text> {{project.name}}[{{project.code}}] </text>
 				</view>
 			</view>
 
@@ -25,7 +25,7 @@
 					* 问题机型:
 				</view>
 				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillMachine">
-					<text> {{machine.name}}-{{machine.serial}} </text>
+					<text> {{machine.name}}[{{machine.serial}}] </text>
 				</view>
 			</view>
 
@@ -77,8 +77,12 @@
 				<view class="uni-list-cell-left">
 					抄送人员:
 				</view>
-				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillCopy">
+				<view class="uni-list-cell-navigate " @click="onFillCopy">
 					<text> <text v-for="item in copy" :key="item.uuid">{{item.name+","}}</text> </text>
+					
+				</view>
+				<view>
+				    <text style="color: #007AFF;margin-right: 20upx;" @click="clearCC" v-if="copy.length>0">清空</text>
 				</view>
 			</view>
 
@@ -175,7 +179,7 @@
 				  _self.project=checkproject[0];
 			  }else{
 				    console.log("=========== this.project.name");
-				  _self.project={name:"请选择"};
+				  _self.project={name:"请选择",code:""};
 			  }  
 			  
 			  	  let checkconductor=_self.supportConductor;
@@ -500,8 +504,10 @@
 			}
 			 
 			return result;
+		},
+		clearCC(){
+			this.copy=[];
 		}
-		
 		}
 	}
 </script>

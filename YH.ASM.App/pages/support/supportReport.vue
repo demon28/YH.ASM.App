@@ -3,7 +3,7 @@
 	
 	
 		<view >
-			<uni-search-bar :radius="100" @input="Search" v-model="words"></uni-search-bar>
+			<uni-search-bar :radius="100" @input="Search()" v-model="words"></uni-search-bar>
 		</view>
 		  <view class=" uni-flex uni-row headerView">
 		                <view class="flex-item  itemview">
@@ -63,13 +63,13 @@
 			data(){
 				return{
 					list:[],
-				  
+				  	keywords: "",
 					words:"",
 					wait:0,
 					being:0,
 					complete:0,
 					pageindex:1,
-					pagesize:20,
+					pagesize:5,
 					state:3    //0，待处理，1，处理中，2已完成，3，全部（统一按时间排倒叙）
 				}
 			},
@@ -104,10 +104,11 @@
 					model.WatchType=0;  //看所有人的
 					model.pageindex=this.pageindex;
 					model.pagesize=this.pagesize;
-					model.keywords=this.words;
-					
-					let path="/api/Support/List";
+					model.keywords=this.keywords;
 				
+					let path="/api/Support/List";
+					
+					console.log(JSON.stringify(model))
 					this.$SugarRequest.Post(model,path,(data,res)=>{
 						
 						console.log(res);
@@ -129,7 +130,9 @@
 				
 				
 				},
-				search(){
+				Search(){
+					this.list=[];
+					this.keywords=this.words.value;
 					this.pageindex = 1;
 					this.Init();
 				},

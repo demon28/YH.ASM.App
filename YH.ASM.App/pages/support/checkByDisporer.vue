@@ -95,14 +95,18 @@
 				</view>
 			</view>
 			
-			<view class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					抄送人员:
-				</view>
-				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillCopy">
-					<text> <text v-for="item in copy" :key="item.uuid">{{item.name+","}}</text> </text>
-				</view>
+		<view class="uni-list-cell" style="min-height:80upx ;">
+			<view class="uni-list-cell-left">
+				抄送人员:
 			</view>
+			<view class="uni-list-cell-navigate " @click="onFillCopy">
+				<text> <text v-for="item in copy" :key="item.uuid">{{item.name+","}}</text> </text>
+				
+			</view>
+			<view>
+			    <text style="color: #007AFF;margin-right: 20upx;" @click="clearCC" v-if="copy.length>0">清空</text>
+			</view>
+		</view>
 			<!--抄送人员以及处理人，不用动 -->
 			
 			
@@ -152,7 +156,7 @@
 	import {mapState,mapMutations} from 'vuex';
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
-
+	import Config from '../../static/js/Config.js';
 	import SugarRequest from '../../static/js/SugarRequest.js';
 	import Verificat from '../../static/js/Verificat.js';
 	
@@ -361,7 +365,7 @@
 				 console.log("上传参数："+JSON.stringify(params));
 				 
 				 uni.uploadFile({
-				            url:  config.Parameters.LoginHost() + "/api/Upload/UploadFile",
+				            url:  Config.Parameters.LoginHost() + "/api/Upload/UploadFile",
 				            filePath: _self.uploadfile[0].tempFilePath,
 				            name: 'file',
 				            formData: params,
@@ -448,6 +452,12 @@
 			 
 			return result;
 		}
+		,
+		clearCC(){
+			this.copy=[];
+		}
+		
+		
 		}
 	}
 	

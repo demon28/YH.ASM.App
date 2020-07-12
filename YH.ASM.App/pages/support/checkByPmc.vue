@@ -132,7 +132,7 @@
 		mapMutations
 	} from 'vuex';
 
-	import config from '../../static/js/Config.js';
+	import Config from '../../static/js/Config.js';
 	import SugarRequest from '../../static/js/SugarRequest.js';
 	import Verificat from '../../static/js/Verificat.js';
 
@@ -301,7 +301,7 @@
 				 console.log("上传参数："+JSON.stringify(params));
 				 
 				 uni.uploadFile({
-				            url:  config.Parameters.LoginHost() + "/api/Upload/UploadFile",
+				            url:  Config.Parameters.LoginHost() + "/api/Upload/UploadFile",
 				            filePath: _self.uploadfile[0].tempFilePath,
 				            name: 'file',
 				            formData: params,

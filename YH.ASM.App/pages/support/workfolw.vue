@@ -44,7 +44,7 @@
 					问题类型：
 				</view>
 				<view class="uni-list-cell-db">
-					<view class="uni-input">{{GetType(supportModel.TYPE)}}</view>
+					<view class="uni-input">{{GetType(supportModel.SUPPORTTYPE)}}</view>
 				</view>
 			</view>
 

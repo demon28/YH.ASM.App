@@ -8,7 +8,7 @@
 			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in checkItem"
 			 :key="item.id">
 				<view>
-					<view> {{item.name}}-{{item.serial}} </view>
+					<view> {{item.name}}[{{item.serial}}] </view>
 				</view>
 				<view>
 					<button class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="unCheck(item)">取消</button>
