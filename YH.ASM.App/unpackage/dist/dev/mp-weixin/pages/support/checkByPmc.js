@@ -259,6 +259,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 12);
 
 
@@ -427,13 +430,14 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
 
           var params = {
             SigningKey: _self.ApiKey,
-            userid: _self.userId };
+            userid: _self.userId,
+            sid: _self.sid };
 
 
           console.log("上传参数：" + JSON.stringify(params));
 
           uni.uploadFile({
-            url: _Config.default.Parameters.LoginHost() + "/api/Upload/UploadFile",
+            url: _Config.default.Parameters.LoginHost() + "/api/Upload/UploadFileBySid",
             filePath: _self.uploadfile[0].tempFilePath,
             name: 'file',
             formData: params,
@@ -533,7 +537,7 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
       model.SUPPORTSTATUS = 3;
 
       model.BOOKNO = this.bookno;
-      model.SENDNO = this.sendnom;
+      model.SENDNO = this.sendno;
       model.CONSIGNEE = this.consignee;
 
       model.SENDDATE = this.senddate; //下单时间
@@ -557,6 +561,10 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
 
       }
       return model;
+    },
+
+    clearCC: function clearCC() {
+      this.copy = [];
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

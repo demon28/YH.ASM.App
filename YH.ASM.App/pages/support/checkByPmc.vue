@@ -81,8 +81,11 @@
 				<view class="uni-list-cell-left">
 					抄送人员:
 				</view>
-				<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillCopy">
+				<view class="uni-list-cell-navigate" @click="onFillCopy">
 					<text> <text v-for="item in copy" :key="item.uuid">{{item.name+","}}</text> </text>
+				</view>
+				<view>
+					<text style="color: #007AFF;margin-right: 20upx;" @click="clearCC" v-if="copy.length>0">清空</text>
 				</view>
 			</view>
 			<!--抄送人员以及处理人，不用动 -->
@@ -114,7 +117,7 @@
 		</view>
 
 
-	<view class="uni-textarea" style="margin-top: 30upx;">
+		<view class="uni-textarea" style="margin-top: 30upx;">
 			<textarea placeholder="结果描述" v-model="remarks" />
 			</view>
 
@@ -295,13 +298,14 @@
 				 
 				 let params={
 					 SigningKey: _self.ApiKey,
-					 userid:_self.userId
+					 userid:_self.userId,
+					 	 sid:_self.sid
 				 }
 				 
 				 console.log("上传参数："+JSON.stringify(params));
 				 
 				 uni.uploadFile({
-				            url:  Config.Parameters.LoginHost() + "/api/Upload/UploadFile",
+				            url:  Config.Parameters.LoginHost() + "/api/Upload/UploadFileBySid",
 				            filePath: _self.uploadfile[0].tempFilePath,
 				            name: 'file',
 				            formData: params,
@@ -401,7 +405,7 @@
 			model.SUPPORTSTATUS = 3;  
 
 			model.BOOKNO = this.bookno;
-			model.SENDNO = this.sendnom;
+			model.SENDNO = this.sendno;
 			model.CONSIGNEE = this.consignee;
 
 			model.SENDDATE = this.senddate; //下单时间
@@ -425,6 +429,10 @@
 				};
 			}
 			return model;
+		},
+		
+		clearCC(){
+			this.copy=[];
 		}
 		},
 	}

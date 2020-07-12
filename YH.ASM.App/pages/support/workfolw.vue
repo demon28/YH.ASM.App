@@ -240,6 +240,15 @@
 			
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
+					发货单号：
+				</view>
+				<view class="uni-list-cell-db" >
+					<text> {{ pmcModel.SENDNO}} </text>
+				</view>
+			</view>
+			
+			<view class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
 					发货时间：
 				</view>
 				<view class="uni-list-cell-db" >

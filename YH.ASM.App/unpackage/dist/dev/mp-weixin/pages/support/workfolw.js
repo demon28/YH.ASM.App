@@ -585,6 +585,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 12);
 var Enum = _interopRequireWildcard(__webpack_require__(/*! @/static/js/Enum.js */ 77));
 var _ApiSingin = _interopRequireDefault(__webpack_require__(/*! ../../static/js/ApiSingin.js */ 14));
