@@ -490,14 +490,15 @@ var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/
           console.log("我要上传的文件路径" + _self.uploadfile[0].tempFilePath);
 
           var params = {
-            SigningKey: _self.ApiKey,
-            userid: _self.userId };
+
+            userid: _self.userId,
+            sid: _self.sid };
 
 
           console.log("上传参数：" + JSON.stringify(params));
 
           uni.uploadFile({
-            url: _Config.default.Parameters.LoginHost() + "/api/Upload/UploadFile",
+            url: _Config.default.Parameters.LoginHost() + "/api/Upload/UploadFileBySid",
             filePath: _self.uploadfile[0].tempFilePath,
             name: 'file',
             formData: params,
