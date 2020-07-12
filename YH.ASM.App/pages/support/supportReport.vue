@@ -8,24 +8,24 @@
 		  <view class=" uni-flex uni-row headerView">
 		                <view class="flex-item  itemview">
 							
-							<view class="uni-flex uni-column">
+							<view class="uni-flex uni-column" @click="ChangeState(0)">
 							                <view class="flex-item flex-item-V "><text>待处理</text></view>
-							                <view class="flex-item flex-item-V "><text class="counttext">{{wait}}</text></view>
+							                <view class="flex-item flex-item-V "><text class="counttext" style="color:#F37B1D;">{{wait}}</text></view>
 							               
 							 </view>
 						
 						</view>
-		                <view class="flex-item  itemview">
+		                <view class="flex-item  itemview" @click="ChangeState(1)">
 							<view class="uni-flex uni-column">
 							                <view class="flex-item flex-item-V "><text>处理中</text></view>
-							                <view class="flex-item flex-item-V "><text class="counttext">{{being}}</text></view>
+							                <view class="flex-item flex-item-V " ><text class="counttext" style="color:#0FAEFF;">{{being}}</text></view>
 							               
 							 </view>
 						</view>
-		                <view class="flex-item itemview">
+		                <view class="flex-item itemview" @click="ChangeState(2)">
 							<view class="uni-flex uni-column">
 							                <view class="flex-item flex-item-V "><text>已完成</text></view>
-							                <view class="flex-item flex-item-V "><text class="counttext">{{complete}}</text></view>
+							                <view class="flex-item flex-item-V "><text class="counttext" style="color:#1AAD19;">{{complete}}</text></view>
 							               
 							 </view>
 						</view>
@@ -69,7 +69,7 @@
 					being:0,
 					complete:0,
 					pageindex:1,
-					pagesize:5,
+					pagesize:10,
 					state:3    //0，待处理，1，处理中，2已完成，3，全部（统一按时间排倒叙）
 				}
 			},
@@ -142,6 +142,14 @@
 					uni.navigateTo({
 						url: 'workfolw?sid='+item.id
 					})
+				},
+				ChangeState(value){
+					
+					this.list=[];
+					this.pageindex = 1;
+					this.state=value;
+					this.Init();
+					
 				}
 				
 			},

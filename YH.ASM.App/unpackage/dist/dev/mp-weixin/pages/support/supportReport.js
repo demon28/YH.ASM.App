@@ -208,7 +208,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _createForOfIteratorHel
       being: 0,
       complete: 0,
       pageindex: 1,
-      pagesize: 5,
+      pagesize: 10,
       state: 3 //0，待处理，1，处理中，2已完成，3，全部（统一按时间排倒叙）
     };
   },
@@ -280,6 +280,14 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _createForOfIteratorHel
       console.log("看Sid：" + item.id);
       uni.navigateTo({
         url: 'workfolw?sid=' + item.id });
+
+    },
+    ChangeState: function ChangeState(value) {
+
+      this.list = [];
+      this.pageindex = 1;
+      this.state = value;
+      this.Init();
 
     } },
 
