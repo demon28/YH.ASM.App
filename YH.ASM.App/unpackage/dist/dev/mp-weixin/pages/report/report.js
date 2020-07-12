@@ -242,6 +242,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Config.js */ 19));
+var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Verificat.js */ 78));
 
 var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var unilist = function unilist() {__webpack_require__.e(/*! require.ensure | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list-item/uni-list-item.vue */ 63));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var unilist_item = function unilist_item() {__webpack_require__.e(/*! require.ensure | components/uni-list/uni-list */ "components/uni-list/uni-list").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-list/uni-list.vue */ 70));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
@@ -249,7 +250,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
 
 {
-  computed: _objectSpread({}, (0, _vuex.mapState)(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname', 'userId', "maintainer"])),
+  computed: _objectSpread({}, (0, _vuex.mapState)(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname', 'userId', "maintainer", 'supportProject', 'supportMachine'])),
 
 
   components: {
@@ -276,11 +277,15 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
       datetime: "", //时间
       content: "", //工单内容
 
-      projectName: "", //项目名称
-      customerName: "", //客户名称   （已作废）
+      //projectName:"",      //项目名称  (已作废)
+      //machineName:"",  //设备名称 （已作废）
+      //customerName:"",   //客户名称   （已作废）
+
+      project: {},
+      machine: {},
+
       supportName: "", //工单名称
 
-      machineName: "", //设备名称
       machineCount: "", //设备数量
 
       maintenancePeople: [], //售后维护人员外键userid
@@ -292,7 +297,28 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
   },
   onShow: function onShow(option) {
 
-    console.log("子窗体传参数量：" + this.maintainer.length);
+
+    var _self = this;
+
+    var checkproject = _self.supportProject;
+
+    if (checkproject != null && checkproject.length > 0) {
+      _self.project = checkproject[0];
+    } else {
+      console.log("=========== this.project.name");
+      _self.project = { name: "请选择", code: "" };
+    }
+
+
+    var checkMid = _self.supportMachine;
+    if (checkMid != null && checkMid.length > 0) {
+      _self.machine = checkMid[0];
+    } else {
+      _self.machine = { name: "请选择", serial: "" };;
+
+    }
+
+
 
     var checkitem = this.maintainer;
     if (checkitem != null && checkitem.length > 0) {
@@ -455,7 +481,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
     },
 
-    onInfoSubmit: function onInfoSubmit() {
+    onInfoSubmit: function onInfoSubmit() {var _data;
       var _self = this;
 
 
@@ -491,6 +517,28 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
         return;
       }
+
+      console.log("项目：" + JSON.stringify(_self.project));
+      if (!_Verificat.default.itemHasKeyVer(_self.project, "id")) {
+
+        uni.showToast({
+          icon: 'none',
+          title: "请选择项目" });
+
+
+        return;
+      }
+
+      if (!_Verificat.default.itemHasKeyVer(_self.machine, "id")) {
+        uni.showToast({
+          icon: 'none',
+          title: "请选择设备" });
+
+
+        return;
+      }
+
+
 
       if (parseFloat(_self.machineCount).toString() == "NaN") {
 
@@ -552,7 +600,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
       uni.request({
         url: _Config.default.Parameters.LoginHost() + "/api/Direction/Put", //仅为示例，并非真实接口地址。
-        data: {
+        data: (_data = {
           userId: _self.userId,
           projecId: _self.indexProject,
           customerId: _self.indexProjectkehu,
@@ -562,18 +610,20 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
           latitude: _self.locatllatitude,
           content: _self.content,
           address: _self.locatladdress,
-          date: _self.datetime,
+          date: _self.datetime }, _defineProperty(_data, "projecId",
 
-          projectName: _self.projectName,
-          customerName: _self.customerName,
-          supportName: _self.supportName,
 
-          machineName: _self.machineName,
-          machineCount: _self.machineCount,
-          remarks: afterUser, //本来想用外键表的，这里tu简单，直接用的备注字段
-          machineAssist: _self.machineAssist,
 
-          SigningKey: Key },
+
+        _self.project.id), _defineProperty(_data, "machineId",
+        _self.machine.id), _defineProperty(_data, "supportName",
+
+        _self.supportName), _defineProperty(_data, "machineCount",
+        _self.machineCount), _defineProperty(_data, "remarks",
+        afterUser), _defineProperty(_data, "machineAssist",
+        _self.machineAssist), _defineProperty(_data, "SigningKey",
+
+        Key), _data),
 
         method: "POST",
         header: {
@@ -638,6 +688,19 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
       uni.navigateTo({
 
         url: 'person?isSingle=false' });
+
+    },
+
+    onFillProject: function onFillProject() {
+
+      uni.navigateTo({
+        url: '../project/fillProject?isSingle=true' });
+
+
+    },
+    onFillMachine: function onFillMachine() {
+      uni.navigateTo({
+        url: '../machine/fillMachine?isSingle=true' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

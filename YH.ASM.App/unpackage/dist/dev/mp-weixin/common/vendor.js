@@ -1727,12 +1727,29 @@ var store = new _vuex.default.Store({
     supportCopy: [], //创建工单时的抄送对象
     supportMachine: [], //工单设备
     disporseAnalyzeuser: [], //技术处理，分析人员
+
+    reportProject: [], //日报选择项目
+    reportMachine: [], //日报选择设备
+
     loading: false },
 
   mutations: {
     switch_loading: function switch_loading(state) {
       state.loading = !state.loading;
     },
+
+
+    //未启用
+    setReportMachine: function setReportMachine(state, items) {
+      state.reportMachine = [];
+      state.reportMachine = items;
+    },
+    //未启用
+    setReportProject: function setReportProject(state, items) {
+      state.reportProject = [];
+      state.reportProject = items;
+    },
+
 
     setDisporseAnalyzeuser: function setDisporseAnalyzeuser(state, items) {
       state.disporseAnalyzeuser = [];

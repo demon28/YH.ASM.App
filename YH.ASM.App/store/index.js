@@ -24,12 +24,29 @@ const store = new Vuex.Store({
 		supportCopy:[],  //创建工单时的抄送对象
 		supportMachine:[],//工单设备
 		disporseAnalyzeuser:[],//技术处理，分析人员
+		
+		reportProject:[],  //日报选择项目
+		reportMachine:[],  //日报选择设备
+		
 		loading:false,
 	},
 	mutations: {
 		switch_loading(state){
 			state.loading = !state.loading
 		},
+		
+		
+		//未启用
+		setReportMachine(state,items){
+			state.reportMachine=[];
+			state.reportMachine=items;
+		},
+		//未启用
+		setReportProject(state,items){
+			state.reportProject=[];
+			state.reportProject=items;
+		},
+		
 		
 		setDisporseAnalyzeuser(state,items){
 			state.disporseAnalyzeuser=[];

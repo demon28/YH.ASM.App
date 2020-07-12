@@ -25,23 +25,23 @@
 				</view>
 			</view>
 	
-			<view class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					* 项目名称:
-				</view>
-				<view class="uni-list-cell-db">
-					 <input class="uni-input"  placeholder="请输入当前项目名称" v-model="projectName" />
-				</view>
+		<view class="uni-list-cell" style="min-height:80upx ;">
+			<view class="uni-list-cell-left">
+				* 项目名称:
 			</view>
+			<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillProject">
+				<text> {{project.name}}[{{project.code}}] </text>
+			</view>
+		</view>
 		
-			<view class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					* 设备名称:
-				</view>
-				<view class="uni-list-cell-db">
-				 <input class="uni-input"  placeholder="请输入项目客户信息" v-model="machineName" />
-				</view>
+		<view class="uni-list-cell" style="min-height:80upx ;">
+			<view class="uni-list-cell-left">
+				* 设备名称:
 			</view>
+			<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillMachine">
+				<text> {{machine.name}}[{{machine.serial}}] </text>
+			</view>
+		</view>
 	
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
@@ -103,6 +103,7 @@
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
  import config from '../../static/js/Config.js';
+ import Verificat from '../../static/js/Verificat.js';
 	
 import {
 		mapState,
@@ -110,7 +111,7 @@ import {
 	} from 'vuex'
 
 	export default {
-		computed: { ...mapState(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname','userId',"maintainer"])
+		computed: { ...mapState(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname','userId',"maintainer",'supportProject','supportMachine'])
 		},
 
 		components: {
@@ -137,11 +138,15 @@ import {
 				datetime: "",    //时间
 				content:"",    //工单内容
 				
-				projectName:"",      //项目名称
-				customerName:"",   //客户名称   （已作废）
+				//projectName:"",      //项目名称  (已作废)
+				//machineName:"",  //设备名称 （已作废）
+				//customerName:"",   //客户名称   （已作废）
+			
+				project:{},
+				machine:{},
+			
 				supportName:"",    //工单名称
 				
-				machineName:"",  //设备名称
 				machineCount:"", //设备数量
 				
 				maintenancePeople:[],//售后维护人员外键userid
@@ -153,14 +158,35 @@ import {
 		},
 		onShow(option) { 
 			
-			console.log("子窗体传参数量："+this.maintainer.length);
+			
+			var _self=this;
+			
+			let checkproject=_self.supportProject;
+			
+			if(checkproject!=null && checkproject.length>0){
+				  _self.project=checkproject[0];
+			 }else{
+				    console.log("=========== this.project.name");
+				  _self.project={name:"请选择",code:""};
+			 }  
+			
+			
+			let checkMid=_self.supportMachine;
+			if(checkMid!=null && checkMid.length>0){
+				 _self.machine=checkMid[0];
+			}else{
+				_self.machine={name:"请选择",serial:""};;
+								  
+			}
+			
+			
 		    
 			let checkitem=this.maintainer;
 			if(checkitem!=null && checkitem.length>0){
 				this.checks=checkitem;
 			}
 			
-			
+		
 			
 		},
 		mounted() {
@@ -183,7 +209,7 @@ import {
 
 
 			bindPickerChange: function(e) {
-			console.log(e.target.value);
+				console.log(e.target.value);
 				this.indexType = e.target.value
 			},
 
@@ -353,6 +379,28 @@ import {
 					return
 				}
 				
+				console.log("项目："+JSON.stringify(_self.project));
+				if(!Verificat.itemHasKeyVer(_self.project,"id")){
+					
+					uni.showToast({
+						icon: 'none',
+						title: "请选择项目",
+					});
+			
+				   return ;
+				}
+				
+				if(!Verificat.itemHasKeyVer(_self.machine,"id")){
+					uni.showToast({
+						icon: 'none',
+						title: "请选择设备",
+					});
+								
+				   return ;
+				}
+				
+				
+				
 				　if (parseFloat(_self.machineCount).toString() == "NaN") { 
 				　　　
 				 uni.showToast({
@@ -425,11 +473,13 @@ import {
 						address:_self.locatladdress,
 						date:_self.datetime,
 						
-						projectName:_self.projectName,
-						customerName:_self.customerName,
-						supportName:_self.supportName,
-						
-						 machineName:_self.machineName,
+						//projectName:_self.projectName,
+					   //customerName:_self.customerName,
+					   // machineName:_self.machineName,
+					   projecId:_self.project.id,
+					   machineId:_self.machine.id,
+					   
+					    supportName:_self.supportName,
 						 machineCount:_self.machineCount,
 						remarks: afterUser  ,    //本来想用外键表的，这里tu简单，直接用的备注字段
 					  machineAssist:_self.machineAssist,
@@ -501,6 +551,21 @@ import {
 					url: 'person?isSingle=false'
 				});
 			}
+			,
+			onFillProject(){
+				
+				uni.navigateTo({
+					url: '../project/fillProject?isSingle=true'
+				});
+				
+			},
+			onFillMachine(){
+				uni.navigateTo({
+					url: '../machine/fillMachine?isSingle=true'
+				});
+			},
+		
+		
 		}
 	}
 </script>
