@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      return 1;
+      result = 1;
     } else {
-      return 0.5;
+      result = 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,7 +421,10 @@ var protocols = {
 
 
 var todos = [
-'vibrate'];
+'vibrate',
+'preloadPage',
+'unPreloadPage',
+'loadSubPackage'];
 
 var canIUses = [];
 
@@ -1694,9 +1697,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!****************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/store/index.js ***!
-  \****************************************************/
+/*!***********************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/store/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2759,9 +2762,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 13:
-/*!***************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/SugarRequest.js ***!
-  \***************************************************************/
+/*!**********************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/SugarRequest.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2898,9 +2901,9 @@ var Post = function Post(model, path, callback) {
 /***/ }),
 
 /***/ 14:
-/*!************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/ApiSingin.js ***!
-  \************************************************************/
+/*!*******************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/ApiSingin.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2928,9 +2931,9 @@ var Singin = function Singin(path, jsonString, ApiKey, timestamp) {
 /***/ }),
 
 /***/ 15:
-/*!**********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/md5.min.js ***!
-  \**********************************************************/
+/*!*****************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/md5.min.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4114,9 +4117,9 @@ module.exports = __webpack_amd_options__;
 /***/ }),
 
 /***/ 19:
-/*!*********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/Config.js ***!
-  \*********************************************************/
+/*!****************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Config.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4126,15 +4129,21 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var Parameters = {
 
 
-  //是否是开发环境,是则配置true   /正式环境为false
-  Isdevpos: true,
+  //是否是开发环境： 1： 开发环境， 2：测试环境，3，正式环境
+  Isdevpos: 1,
   ApiKey: "58b59b3ae5d0ec0629950ebdd4dabe39",
   LoginHost: function LoginHost() {
-    if (Parameters.Isdevpos)
+    if (Parameters.Isdevpos == 1)
     {
       return "http://www.asm.cn:50428";
     }
-    return "https://asm.yhwins.com:52420";
+    if (Parameters.Isdevpos == 2) {
+      return "https://asm.yhwins.com:52421";
+    }
+    if (Parameters.Isdevpos == 3) {
+      return "https://asm.yhwins.com:52420";
+    }
+
   } };var _default =
 
 
@@ -4779,12 +4788,10 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    {
-      if(vm.$scope && vm.$scope.is){
-        return vm.$scope.is
-      }
-    }
     if (vm.$root === vm) {
+      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
+        return ('') + vm.$options.__file
+      }
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -4819,7 +4826,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm) {
+      while (vm && vm.$options.name !== 'PageBody') {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -4831,7 +4838,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        tree.push(vm);
+        !vm.$options.isReserved && tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -9951,9 +9958,10 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue) {
+function internalMixin(Vue ) {
 
-  Vue.config.errorHandler = function(err) {
+  Vue.config.errorHandler = function(err, vm, info) {
+    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -10176,9 +10184,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 201:
-/*!*******************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
-  \*******************************************************************/
+/*!**************************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10318,9 +10326,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 216:
-/*!******************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/iconfont/iconfont.css ***!
-  \******************************************************************/
+/*!*************************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/iconfont/iconfont.css ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10331,9 +10339,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 217:
-/*!***********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/constant.js ***!
-  \***********************************************************/
+/*!******************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/constant.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10364,9 +10372,9 @@ function copyFuns() {
 /***/ }),
 
 /***/ 218:
-/*!*********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/global.js ***!
-  \*********************************************************/
+/*!****************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/global.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10425,9 +10433,9 @@ showToast(_x3) {return _showToast.apply(this, arguments);}function _showToast() 
 /***/ }),
 
 /***/ 219:
-/*!***********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/css/reset.scss ***!
-  \***********************************************************/
+/*!******************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/css/reset.scss ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10438,9 +10446,9 @@ showToast(_x3) {return _showToast.apply(this, arguments);}function _showToast() 
 /***/ }),
 
 /***/ 26:
-/*!************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/service.js ***!
-  \************************************************/
+/*!*******************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/service.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10506,9 +10514,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/pages.json ***!
-  \************************************************/
+/*!*******************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/pages.json ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10516,10 +10524,88 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 77:
-/*!*******************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/Enum.js ***!
-  \*******************************************************/
+/***/ 49:
+/*!*******************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Verificat.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /** 非空验证 */
+var isNotNull = function isNotNull(source) {
+  if (source != null && source != undefined && source != 'undefined' && source != "")
+  return true;
+  return false;
+};
+
+
+
+/**去空格后非空验证*/
+var isNotNullTrim = function isNotNullTrim(source) {
+  if (source != null && source != undefined && source != 'undefined' && source.trim() != "")
+  return true;
+  return false;
+};
+/**
+    * 验证字符串最大长度【注：一个汉字的长度为2】
+    * @param source 字符串
+    * @param num 指定的长度
+    */
+var textMaxVer = function textMaxVer(source, num) {
+  if (source.replace(/[^\x00-\xff]/g, "**").length <= num)
+  return true;
+  return false;
+};
+
+
+/**
+    * 验证字符串最小长度【注：一个汉字的长度为2】
+    * @param source 字符串
+    * @param num 指定的长度
+    */
+var textMinVer = function textMinVer(source, num) {
+  if (source.replace(/[^\x00-\xff]/g, "**").length >= num)
+  return true;
+  return false;
+};
+
+/*验证集合对象是否有值*/
+var arrayVer = function arrayVer(array) {
+  if (!Array.isArray(array))
+  return false;
+
+  if (array.length == 0)
+  return false;
+
+  return false;
+
+};
+var itemVer = function itemVer(item) {
+  return Object.keys(item).length != 0;
+
+};
+var itemHasKeyVer = function itemHasKeyVer(item, key) {
+  return item.hasOwnProperty(key);
+
+};var _default =
+
+
+{
+  isNotNull: isNotNull,
+  isNotNullTrim: isNotNullTrim,
+  textMaxVer: textMaxVer,
+  textMinVer: textMinVer,
+  arrayVer: arrayVer,
+  itemVer: itemVer,
+  itemHasKeyVer: itemHasKeyVer };exports.default = _default;
+
+/***/ }),
+
+/***/ 78:
+/*!**************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Enum.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10637,88 +10723,10 @@ function EnumGetSingle(value, Array) {
 
 /***/ }),
 
-/***/ 78:
-/*!************************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/Verificat.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /** 非空验证 */
-var isNotNull = function isNotNull(source) {
-  if (source != null && source != undefined && source != 'undefined' && source != "")
-  return true;
-  return false;
-};
-
-
-
-/**去空格后非空验证*/
-var isNotNullTrim = function isNotNullTrim(source) {
-  if (source != null && source != undefined && source != 'undefined' && source.trim() != "")
-  return true;
-  return false;
-};
-/**
-    * 验证字符串最大长度【注：一个汉字的长度为2】
-    * @param source 字符串
-    * @param num 指定的长度
-    */
-var textMaxVer = function textMaxVer(source, num) {
-  if (source.replace(/[^\x00-\xff]/g, "**").length <= num)
-  return true;
-  return false;
-};
-
-
-/**
-    * 验证字符串最小长度【注：一个汉字的长度为2】
-    * @param source 字符串
-    * @param num 指定的长度
-    */
-var textMinVer = function textMinVer(source, num) {
-  if (source.replace(/[^\x00-\xff]/g, "**").length >= num)
-  return true;
-  return false;
-};
-
-/*验证集合对象是否有值*/
-var arrayVer = function arrayVer(array) {
-  if (!Array.isArray(array))
-  return false;
-
-  if (array.length == 0)
-  return false;
-
-  return false;
-
-};
-var itemVer = function itemVer(item) {
-  return Object.keys(item).length != 0;
-
-};
-var itemHasKeyVer = function itemHasKeyVer(item, key) {
-  return item.hasOwnProperty(key);
-
-};var _default =
-
-
-{
-  isNotNull: isNotNull,
-  isNotNullTrim: isNotNullTrim,
-  textMaxVer: textMaxVer,
-  textMinVer: textMinVer,
-  arrayVer: arrayVer,
-  itemVer: itemVer,
-  itemHasKeyVer: itemHasKeyVer };exports.default = _default;
-
-/***/ }),
-
 /***/ 87:
-/*!*********************************************************!*\
-  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/myPull.js ***!
-  \*********************************************************/
+/*!****************************************************************!*\
+  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/myPull.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

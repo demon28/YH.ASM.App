@@ -1,5 +1,5 @@
 
-.headerView.data-v-1b9b5154{
+.headerView.data-v-1d7d090c{
 	width: 100%;
 	text-align: center;
 	 -webkit-box-pack: center;
@@ -9,13 +9,13 @@
 	 background-color: #FFFFFF;
 	 margin-top: 10rpx;
 }
-.itemview.data-v-1b9b5154{
+.itemview.data-v-1d7d090c{
 	width: 30%;
 	height: 150rpx;
 	padding: 10rpx;
 	font-size: 30rpx;
 }
-.counttext.data-v-1b9b5154{
+.counttext.data-v-1d7d090c{
 	margin-top: 30rpx;
 	font-size: 40rpx;
 }

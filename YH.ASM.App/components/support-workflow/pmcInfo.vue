@@ -38,7 +38,7 @@
 				</view>
 			</view>
 
-		<view class="uni-list-cell" style="min-height:80upx ;">
+			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
 					交付时间：
 				</view>
@@ -66,6 +66,7 @@
 			
 				</view>
 			</view>
+			
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-db">
 					<view style="margin-left: 20upx;">备注：</view>
