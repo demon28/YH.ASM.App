@@ -25,14 +25,22 @@ const store = new Vuex.Store({
 		supportMachine:[],//工单设备
 		disporseAnalyzeuser:[],//技术处理，分析人员
 		
-		reportProject:[],  //日报选择项目
-		reportMachine:[],  //日报选择设备
+		reportProject:[],  //日报选择项目 ---暂不启用
+		reportMachine:[],  //日报选择设备 ---展不启用
+		
+		reportSupport:[],
 		
 		loading:false,
 	},
 	mutations: {
 		switch_loading(state){
 			state.loading = !state.loading
+		},
+		
+		
+		setReportSupport(state,items){
+			state.reportSupport=[];
+			state.reportSupport=items;
 		},
 		
 		

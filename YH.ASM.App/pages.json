@@ -131,6 +131,14 @@
 				  "enablePullDownRefresh": true
 				
 			}
+		},
+		{
+			"path": "pages/support/fillSupport",
+			"style": {
+				"navigationBarTitleText": "工单列表",
+				  "enablePullDownRefresh": true
+				
+			}
 		}
 		   
 		

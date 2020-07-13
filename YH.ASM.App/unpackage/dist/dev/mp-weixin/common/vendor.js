@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      result = 1;
+      return 1;
     } else {
-      result = 0.5;
+      return 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,10 +421,7 @@ var protocols = {
 
 
 var todos = [
-'vibrate',
-'preloadPage',
-'unPreloadPage',
-'loadSubPackage'];
+'vibrate'];
 
 var canIUses = [];
 
@@ -760,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1697,9 +1694,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!***********************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/store/index.js ***!
-  \***********************************************************/
+/*!****************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/store/index.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1731,14 +1728,22 @@ var store = new _vuex.default.Store({
     supportMachine: [], //工单设备
     disporseAnalyzeuser: [], //技术处理，分析人员
 
-    reportProject: [], //日报选择项目
-    reportMachine: [], //日报选择设备
+    reportProject: [], //日报选择项目 ---暂不启用
+    reportMachine: [], //日报选择设备 ---展不启用
+
+    reportSupport: [],
 
     loading: false },
 
   mutations: {
     switch_loading: function switch_loading(state) {
       state.loading = !state.loading;
+    },
+
+
+    setReportSupport: function setReportSupport(state, items) {
+      state.reportSupport = [];
+      state.reportSupport = items;
     },
 
 
@@ -2762,9 +2767,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 13:
-/*!**********************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/SugarRequest.js ***!
-  \**********************************************************************/
+/*!***************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/SugarRequest.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2901,9 +2906,9 @@ var Post = function Post(model, path, callback) {
 /***/ }),
 
 /***/ 14:
-/*!*******************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/ApiSingin.js ***!
-  \*******************************************************************/
+/*!************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/ApiSingin.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2931,9 +2936,9 @@ var Singin = function Singin(path, jsonString, ApiKey, timestamp) {
 /***/ }),
 
 /***/ 15:
-/*!*****************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/md5.min.js ***!
-  \*****************************************************************/
+/*!**********************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/md5.min.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4117,9 +4122,9 @@ module.exports = __webpack_amd_options__;
 /***/ }),
 
 /***/ 19:
-/*!****************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Config.js ***!
-  \****************************************************************/
+/*!*********************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/Config.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4788,10 +4793,12 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    if (vm.$root === vm) {
-      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
-        return ('') + vm.$options.__file
+    {
+      if(vm.$scope && vm.$scope.is){
+        return vm.$scope.is
       }
+    }
+    if (vm.$root === vm) {
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -4826,7 +4833,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm && vm.$options.name !== 'PageBody') {
+      while (vm) {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -4838,7 +4845,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        !vm.$options.isReserved && tree.push(vm);
+        tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -9684,7 +9691,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -9705,14 +9712,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -9788,7 +9795,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9958,10 +9965,9 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue ) {
+function internalMixin(Vue) {
 
-  Vue.config.errorHandler = function(err, vm, info) {
-    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
+  Vue.config.errorHandler = function(err) {
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -10183,10 +10189,10 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 201:
-/*!**************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
-  \**************************************************************************/
+/***/ 207:
+/*!*******************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10325,10 +10331,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 216:
-/*!*************************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/iconfont/iconfont.css ***!
-  \*************************************************************************/
+/***/ 222:
+/*!******************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/iconfont/iconfont.css ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10338,10 +10344,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 217:
-/*!******************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/constant.js ***!
-  \******************************************************************/
+/***/ 223:
+/*!***********************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/constant.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10349,7 +10355,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 
 
-var _global = _interopRequireDefault(__webpack_require__(/*! ./global.js */ 218));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // Vue继承
+var _global = _interopRequireDefault(__webpack_require__(/*! ./global.js */ 224));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // Vue继承
 copyFuns();
 /**
              * @name 复制对象到Vue的原型上
@@ -10371,10 +10377,10 @@ function copyFuns() {
 
 /***/ }),
 
-/***/ 218:
-/*!****************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/global.js ***!
-  \****************************************************************/
+/***/ 224:
+/*!*********************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/global.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10432,10 +10438,10 @@ showToast(_x3) {return _showToast.apply(this, arguments);}function _showToast() 
 
 /***/ }),
 
-/***/ 219:
-/*!******************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/css/reset.scss ***!
-  \******************************************************************/
+/***/ 225:
+/*!***********************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/css/reset.scss ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10446,9 +10452,9 @@ showToast(_x3) {return _showToast.apply(this, arguments);}function _showToast() 
 /***/ }),
 
 /***/ 26:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/service.js ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/service.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10514,9 +10520,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!*******************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/pages.json ***!
-  \*******************************************************/
+/*!************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/pages.json ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10525,9 +10531,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 49:
-/*!*******************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Verificat.js ***!
-  \*******************************************************************/
+/*!************************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/Verificat.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10603,9 +10609,9 @@ var itemHasKeyVer = function itemHasKeyVer(item, key) {
 /***/ }),
 
 /***/ 78:
-/*!**************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Enum.js ***!
-  \**************************************************************/
+/*!*******************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/Enum.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10724,9 +10730,9 @@ function EnumGetSingle(value, Array) {
 /***/ }),
 
 /***/ 87:
-/*!****************************************************************!*\
-  !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/myPull.js ***!
-  \****************************************************************/
+/*!*********************************************************!*\
+  !*** E:/Work/YH.ASM.App/YH.ASM.App/static/js/myPull.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

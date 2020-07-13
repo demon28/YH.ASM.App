@@ -18,7 +18,8 @@
     "pages/support/checkBySite",
     "pages/support/checkByPrincipal",
     "pages/support/workfolw",
-    "pages/support/supportReport"
+    "pages/support/supportReport",
+    "pages/support/fillSupport"
   ],
   "subPackages": [],
   "window": {
