@@ -32,14 +32,7 @@
 					<input  placeholder="请输入责任人" v-model="duty"  />
 				</view>
 			</view>
-			<view class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					* BOM图纸:
-				</view>
-				<view class="uni-list-cell-db">
-					<input  placeholder="请输入Bom图纸" v-model="bom" />
-				</view>
-			</view>
+		
 
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
@@ -47,11 +40,21 @@
 				</view>
 				<view class="uni-list-cell-db">
 					<radio-group @change="radioChange">
+						<label class="radio" >
+							<radio value="1" checked="true" />是</label>
 						<label class="radio">
-							<radio value="0" checked="true" />否</label>
-						<label class="radio">
-							<radio value="1" />是</label>
+							<radio value="0"  />否</label>
+					
 					</radio-group>
+				</view>
+			</view>
+			
+			<view v-if="ordershow" class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					* BOM图纸:
+				</view>
+				<view class="uni-list-cell-db">
+					<input  placeholder="请输入Bom图纸" v-model="bom" />
 				</view>
 			</view>
 
@@ -163,7 +166,7 @@
 	
 	export default {
 		computed:{ 
-		...mapState(['userId','disporseAnalyzeuser','supportConductor','supportCopy']),  
+		...mapState(['userId','disporseAnalyzeuser','supportConductor','supportCopy','userName']),  
         endDate() {
             return this.getDate('end');
         }
@@ -182,16 +185,16 @@
 				filelist:[],
 				fileStatus:"",
 				personal:0,
-				ordershow:false,
+				ordershow:true,
 				
 				ordertime:currentDate,    //下单时间
 				responsible:"",  //责任方
 				duty:"",
-				bom:"",
+				bom:" ",
 				orderman:"",
 				analyze:"",
 				solution:"",
-				isorder:0
+				isorder:1
 			}
 		},
 		onLoad(pramse){
@@ -211,7 +214,7 @@
 					_self.analyzeuser=analy[0];
 					
 				}else{
-					_self.analyzeuser={name:"请选择"};;
+					_self.analyzeuser={name:this.userName,uuid:this.userId};
 				}
 
 				console.log("处理人员："+ JSON.stringify(_self.supportConductor));
@@ -446,11 +449,7 @@
 				result.res=false;
 				result.message="请填写责任人";
 			}
-			if(!Verificat.isNotNullTrim(_self.bom)){
-				result.res=false;
-				result.message="请填写Bom图纸";
-			}
-			 
+		
 			return result;
 		}
 		,

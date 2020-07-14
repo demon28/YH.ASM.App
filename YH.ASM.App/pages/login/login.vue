@@ -116,10 +116,7 @@
 			
 					 
 						 if (res.data.Success) {
-							 
-							 
-							 
-							 	console.log("======uuid"+res.data.Content.USER_ID);
+							 console.log("======uuid"+res.data.Content.USER_ID);
 								
 							 //登录信息写进本地数据库
 						 	this.login(res.data.Content);
@@ -148,7 +145,7 @@
 						 } else {
 						 	uni.showToast({
 						 		icon: 'none',
-						 		title: '用户账号或密码不正确',
+						 		title: res.data.Message,
 						 	});
 						 }
 						 

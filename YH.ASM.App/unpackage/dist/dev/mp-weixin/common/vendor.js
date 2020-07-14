@@ -3005,18 +3005,18 @@ exports.features = {};
 
 /***/ }),
 
-/***/ 164:
+/***/ 166:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 165);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 167);
 
 /***/ }),
 
-/***/ 165:
+/***/ 167:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -3047,7 +3047,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 166);
+module.exports = __webpack_require__(/*! ./runtime */ 168);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -3064,7 +3064,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 166:
+/***/ 168:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -4146,7 +4146,7 @@ var Parameters = {
       return "http://www.asm.cn:50428";
     }
     if (Parameters.Isdevpos == 2) {
-      return "https://asm.yhwins.com:52421";
+      return "https://asm.yhwins.com:52428";
     }
     if (Parameters.Isdevpos == 3) {
       return "https://asm.yhwins.com:52420";
@@ -10204,7 +10204,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 201:
+/***/ 209:
 /*!**************************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/components/uni-icons/icons.js ***!
   \**************************************************************************/
@@ -10346,7 +10346,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 216:
+/***/ 224:
 /*!*************************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/iconfont/iconfont.css ***!
   \*************************************************************************/
@@ -10359,7 +10359,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 217:
+/***/ 225:
 /*!******************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/constant.js ***!
   \******************************************************************/
@@ -10370,7 +10370,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 
 
-var _global = _interopRequireDefault(__webpack_require__(/*! ./global.js */ 218));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // Vue继承
+var _global = _interopRequireDefault(__webpack_require__(/*! ./global.js */ 226));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // Vue继承
 copyFuns();
 /**
              * @name 复制对象到Vue的原型上
@@ -10392,7 +10392,7 @@ function copyFuns() {
 
 /***/ }),
 
-/***/ 218:
+/***/ 226:
 /*!****************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/global.js ***!
   \****************************************************************/
@@ -10400,7 +10400,7 @@ function copyFuns() {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 164));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 常量
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 166));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 常量
 if (!globalThis) var globalThis = {};
 globalThis.PATH = "/geomantic/";
 
@@ -10453,7 +10453,7 @@ showToast(_x3) {return _showToast.apply(this, arguments);}function _showToast() 
 
 /***/ }),
 
-/***/ 219:
+/***/ 227:
 /*!******************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/css/reset.scss ***!
   \******************************************************************/
@@ -10545,7 +10545,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 49:
+/***/ 51:
 /*!*******************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Verificat.js ***!
   \*******************************************************************/
@@ -10623,7 +10623,7 @@ var itemHasKeyVer = function itemHasKeyVer(item, key) {
 
 /***/ }),
 
-/***/ 78:
+/***/ 80:
 /*!**************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/Enum.js ***!
   \**************************************************************/
@@ -10687,7 +10687,7 @@ function Support_Statuslist() {
   Statuslist.push({ value: 2, text: "分析完成-->现场处理" });
   Statuslist.push({ value: 3, text: "PMC完成-->现场处理" });
   Statuslist.push({ value: 4, text: "现场处理-->负责人审核" });
-  Statuslist.push({ value: 5, text: "负责人审核-->未完成" });
+  Statuslist.push({ value: 5, text: "负责人审核-->驳回再处理" });
   Statuslist.push({ value: 6, text: "负责人审核-->已完成" });
   Statuslist.push({ value: 7, text: "已拒绝" });
 
@@ -10744,7 +10744,7 @@ function EnumGetSingle(value, Array) {
 
 /***/ }),
 
-/***/ 87:
+/***/ 89:
 /*!****************************************************************!*\
   !*** E:/Work/YH-ASM/YH.ASM.App/YH.ASM.App/static/js/myPull.js ***!
   \****************************************************************/

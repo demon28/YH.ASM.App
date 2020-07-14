@@ -389,7 +389,7 @@
 						 审核结果：
 					</view>
 					<view class="uni-list-cell-db">
-						<text style="color: #007AFF;"> {{item.model.STATUS==0?'审核通过': '审核不通过'}} </text>
+						<text style="color: #007AFF;"> {{item.model.STATUS==0?'审核通过': '审核不通过'}}  </text>
 					</view>
 				</view>
 				

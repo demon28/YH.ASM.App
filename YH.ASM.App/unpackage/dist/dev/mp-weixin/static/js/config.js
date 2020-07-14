@@ -12,7 +12,7 @@ const Parameters={
 					return "http://www.asm.cn:50428";
 				}
 				if(Parameters.Isdevpos==2){
-					return "https://asm.yhwins.com:52421";
+					return "https://asm.yhwins.com:52428";
 				}
 				if(Parameters.Isdevpos==3){
 					return "https://asm.yhwins.com:52420";

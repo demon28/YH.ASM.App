@@ -125,7 +125,7 @@
 
 	export default {
 		computed: {
-			...mapState(['userId', 'supportConductor', 'supportCopy']),
+			...mapState(['userId', 'supportConductor', 'supportCopy','userName']),
 			endDate() {
 				return this.getDate('end');
 			},
@@ -147,6 +147,7 @@
 				senddate: currentDate,
 				checkuser:"",
 				checkright:true,
+				checkstatus:0,
 				result:""
 			}
 		},
@@ -158,7 +159,8 @@
 		},
 		onShow(option) {
 			var _self = this;
-
+			this.checkuser=this.userName;
+			
 			console.log("处理人员：" + JSON.stringify(_self.supportConductor));
 			let checkconductor = _self.supportConductor;
 			if (checkconductor != null && checkconductor.length > 0) {
@@ -245,10 +247,10 @@
 				url: '../user/fillUser?isSingle=true&type=conductor'
 			});
 		},
-	radioChange(evt){
+		radioChange(evt){
 				console.log("是否需要下单:"+ evt.target.value) 
 				this.checkright= evt.target.value==0;
-		 
+				this.checkstatus=evt.target.value;
 		  
 		}, 
 		onFillCopy() {
@@ -365,7 +367,10 @@
 			model.ENDDATE = this.senddate;
 	        model.RESULT=this.result;
 			model.CHECKUSER=this.checkuser;
-			model.STATUS=_self.checkright?0:1;
+			
+			console.log("审核结果："+_self.checkstatus);
+			
+			model.STATUS=_self.checkstatus;
 			
 			let ccValue = "";
 			if (_self.copy.length > 0) {

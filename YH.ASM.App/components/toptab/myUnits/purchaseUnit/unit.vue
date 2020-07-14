@@ -16,7 +16,7 @@
 					<text class="uni-text">问题机型： {{info.MACHINENAME}}[{{info.MACHINESERIAL}}] </text>
 				</view>
 
-				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">流程节点： {{SetStatus(info.STATUS)}}</view>
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">当前节点： {{SetStatus(info.STATUS)}}</view>
 
 
 				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
@@ -51,7 +51,7 @@
 				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
 					<view class="uni-flex uni-row">
 						<view class="flex-item flex-item-V" style="width: 50%;">创 建 人： {{info.CREATORNAME}}</view>
-						<view class="flex-item flex-item-V" style="width: 50%;">处 理 人： {{info.CONDUCTORNAME}}</view>
+						<view class="flex-item flex-item-V" style="width: 50%;">当前处理人： {{info.CONDUCTORNAME}}</view>
 					</view>
 				</view>
 				<view class="flex-item flex-item-V " style="margin-top: 10upx;">

@@ -77,7 +77,7 @@
 			this.Init();
 			uni.stopPullDownRefresh();
 
-		},
+		}, 
 		onReachBottom() {
 			console.log("上拉加载");
 			
