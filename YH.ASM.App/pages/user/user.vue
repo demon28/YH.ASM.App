@@ -4,6 +4,11 @@
 			<button v-if="!hasLogin" type="primary" class="primary" @tap="bindLogin">登录</button>
 			<button v-if="hasLogin" type="default" @tap="bindLogout">退出登录</button>
 		</view>
+		
+	
+		<view class="headerView">{{Version}}[{{Mark}}]</view>
+		
+		<view class="headerView">{{Url}}</view>
 	</view>
 </template>
 
@@ -12,10 +17,19 @@
 		mapState,
 		mapMutations
 	} from 'vuex'
-
+import Config from '../../static/js/Config.js';
 	export default {
 		computed: {
 			...mapState(['hasLogin', 'forcedLogin'])
+		},
+		data(){
+			
+			return{
+				Version:Config.Parameters.Version,
+				Mark:Config.Parameters.Mark(),
+				Url:Config.Parameters.LoginHost()
+			}
+			
 		},
 		methods: {
 			...mapMutations(['logout']),
@@ -49,5 +63,10 @@
 </script>
 
 <style>
-
+.headerView{
+		width: 100%;
+		text-align: center;
+		 justify-content: center;
+		margin-top: 40upx;
+	}
 </style>

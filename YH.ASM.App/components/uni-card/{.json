@@ -1,0 +1,19 @@
+{
+	"data": {
+		"errors": {
+			"Uuid": ["Error converting value {null} to type 'System.Int32'. Path 'Uuid', line 1, position 38."]
+		},
+		"status": 400,
+		"title": "One or more validation errors occurred.",
+		"traceId": "|ed4e2427-4df6faa3d656662c.",
+		"type": "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+	},
+	"errMsg": "request:ok",
+	"header": {
+		"content-length": "273",
+		"content-type": "application/problem+json; charset=utf-8",
+		"date": "Fri, 10 Jul 2020 02:41:33 GMT",
+		"server": "Kestrel"
+	},
+	"statusCode": 400
+}

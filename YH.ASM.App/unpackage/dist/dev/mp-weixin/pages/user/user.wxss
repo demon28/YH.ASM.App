@@ -1,0 +1,10 @@
+
+.headerView{
+		width: 100%;
+		text-align: center;
+		 -webkit-box-pack: center;
+		 -webkit-justify-content: center;
+		         justify-content: center;
+		margin-top: 40rpx;
+}
+

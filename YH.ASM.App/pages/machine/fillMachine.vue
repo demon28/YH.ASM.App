@@ -73,13 +73,14 @@
 			this.pageindex = 1;
 			this.checkItem=[];
 			this.checked=false;
-			
+			this.list=[];
 			this.Init();
 			uni.stopPullDownRefresh();
 
 		},
 		onReachBottom() {
 			console.log("上拉加载");
+			
 			this.pageindex = this.pageindex + 1;
 			this.Init();
 		},

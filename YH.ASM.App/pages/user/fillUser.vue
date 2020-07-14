@@ -15,7 +15,7 @@
 				</view>
 			</label>
 			<button type="primary" size="mini" class="mini-btn" @click="onConfim" style="margin-right: 15upx;margin-top: 10upx; margin-bottom: 10upx;" >确定并返回</button>
-			
+			    
 		</view>
 
 		<view style="margin-top: 15upx;">
@@ -78,7 +78,7 @@
 			this.pageindex = 1;
 			this.checkItem=[];
 			this.checked=false;
-			
+			this.list=[];	
 			this.Init();
 			uni.stopPullDownRefresh();
 

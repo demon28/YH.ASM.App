@@ -99,13 +99,14 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
     this.pageindex = 1;
     this.checkItem = [];
     this.checked = false;
-
+    this.list = [];
     this.Init();
     uni.stopPullDownRefresh();
 
   },
   onReachBottom: function onReachBottom() {
     console.log("上拉加载");
+
     this.pageindex = this.pageindex + 1;
     this.Init();
   },

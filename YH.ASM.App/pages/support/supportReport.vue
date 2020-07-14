@@ -53,7 +53,7 @@
 	
 		import {mapState,mapMutations} from 'vuex';
 		import uniCard from '@/components/uni-card/uni-card.vue';
-	
+		import config from '../../static/js/Config.js'
 		export default {
 			computed: {...mapState(['userId','forcedLogin', 'hasLogin', 'userName','workid'])},
 			components: {uniCard},
@@ -83,6 +83,8 @@
 					var  _self=this;
 					
 					let path="/api/Support/SelectCount";
+					
+					console.log(config.Parameters.LoginHost()+path +"========请求的服务路径，好诡异isdevops："+config.Parameters.Isdevpos);
 					
 					this.$SugarRequest.Get({},path,(data,res)=>{
 						
