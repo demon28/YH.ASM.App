@@ -138,8 +138,8 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
 
       var model = {
         pageindex: _self.pageindex,
-        pagesize: _self.pagesize };
-
+        pagesize: _self.pagesize,
+        keywords: this.keywords };
 
       var jsonString = JSON.stringify(model);
       var timestamp = Math.round(new Date().getTime() / 1000);

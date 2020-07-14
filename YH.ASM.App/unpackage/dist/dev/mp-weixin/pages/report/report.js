@@ -241,6 +241,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Config.js */ 19));
 var _Verificat = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Verificat.js */ 49));
 
@@ -250,7 +253,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
 
 {
-  computed: _objectSpread({}, (0, _vuex.mapState)(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname', 'userId', "maintainer", 'supportProject', 'supportMachine'])),
+  computed: _objectSpread({}, (0, _vuex.mapState)(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname', 'userId', "maintainer", 'supportProject', 'supportMachine', 'reportSupport'])),
 
 
   components: {
@@ -280,11 +283,12 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
       //projectName:"",      //项目名称  (已作废)
       //machineName:"",  //设备名称 （已作废）
       //customerName:"",   //客户名称   （已作废）
+      //	supportName:"",    //工单名称 (已作废)
 
       project: {},
       machine: {},
+      support: {},
 
-      supportName: "", //工单名称
 
       machineCount: "", //设备数量
 
@@ -315,6 +319,15 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
       _self.machine = checkMid[0];
     } else {
       _self.machine = { name: "请选择", serial: "" };;
+
+    }
+
+
+    var checksupport = _self.reportSupport;
+    if (checksupport != null && checksupport.length > 0) {
+      _self.support = checksupport[0];
+    } else {
+      _self.support = { code: "请选择" };;
 
     }
 
@@ -616,7 +629,8 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
 
         _self.project.id), _defineProperty(_data, "machineId",
-        _self.machine.id), _defineProperty(_data, "supportName",
+        _self.machine.id), _defineProperty(_data, "supportId",
+        _self.support.sid), _defineProperty(_data, "supportName",
 
         _self.supportName), _defineProperty(_data, "machineCount",
         _self.machineCount), _defineProperty(_data, "remarks",
@@ -701,6 +715,11 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
     onFillMachine: function onFillMachine() {
       uni.navigateTo({
         url: '../machine/fillMachine?isSingle=true' });
+
+    },
+    onFillSupport: function onFillSupport() {
+      uni.navigateTo({
+        url: '../support/fillSupport?isSingle=true' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

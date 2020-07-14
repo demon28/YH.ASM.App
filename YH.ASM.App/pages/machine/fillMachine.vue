@@ -113,7 +113,7 @@
 				let model={
 					pageindex: _self.pageindex,
 					pagesize: _self.pagesize,
-				
+					keywords:this.keywords
 				 };
 				 let jsonString=JSON.stringify(model);
 				 let timestamp=Math.round(new Date().getTime()/1000);

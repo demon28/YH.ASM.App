@@ -42,15 +42,18 @@
 				<text> {{machine.name}}[{{machine.serial}}] </text>
 			</view>
 		</view>
-	
-			<view class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					* 工单序号:
-				</view>
-				<view class="uni-list-cell-db">
-				 <input class="uni-input"  placeholder="请输入处理的工单序号"  v-model="supportName" />
-				</view>
+		
+		
+		<view class="uni-list-cell" style="min-height:80upx ;">
+			<view class="uni-list-cell-left">
+				* 工单序号:
 			</view>
+			<view class="uni-list-cell-navigate uni-navigate-right" @click="onFillSupport">
+				<text> {{support.code}} </text>
+			</view>
+		</view>
+		
+	
 	
 			<view class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
@@ -102,8 +105,8 @@
 <script>
 	import unilist from '../../components/uni-list-item/uni-list-item.vue';
 	import unilist_item from '../../components/uni-list/uni-list.vue';
- import config from '../../static/js/Config.js';
- import Verificat from '../../static/js/Verificat.js';
+	import config from '../../static/js/Config.js';
+	import Verificat from '../../static/js/Verificat.js';
 	
 import {
 		mapState,
@@ -111,7 +114,7 @@ import {
 	} from 'vuex'
 
 	export default {
-		computed: { ...mapState(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname','userId',"maintainer",'supportProject','supportMachine'])
+		computed: { ...mapState(['forcedLogin', 'hasLogin', 'userName', 'workid', 'department', 'dtname','userId',"maintainer",'supportProject','supportMachine','reportSupport'])
 		},
 
 		components: {
@@ -141,11 +144,12 @@ import {
 				//projectName:"",      //项目名称  (已作废)
 				//machineName:"",  //设备名称 （已作废）
 				//customerName:"",   //客户名称   （已作废）
+				//	supportName:"",    //工单名称 (已作废)
 			
 				project:{},
 				machine:{},
+				support:{},
 			
-				supportName:"",    //工单名称
 				
 				machineCount:"", //设备数量
 				
@@ -176,6 +180,15 @@ import {
 				 _self.machine=checkMid[0];
 			}else{
 				_self.machine={name:"请选择",serial:""};;
+								  
+			}
+			
+			
+			let checksupport=_self.reportSupport;
+			if(checksupport!=null && checksupport.length>0){
+				 _self.support=checksupport[0];
+			}else{
+				_self.support={code:"请选择"};;
 								  
 			}
 			
@@ -478,6 +491,7 @@ import {
 					   // machineName:_self.machineName,
 					   projecId:_self.project.id,
 					   machineId:_self.machine.id,
+					   supportId:_self.support.sid,
 					   
 					    supportName:_self.supportName,
 						 machineCount:_self.machineCount,
@@ -564,7 +578,12 @@ import {
 					url: '../machine/fillMachine?isSingle=true'
 				});
 			},
-		
+			onFillSupport(){
+			uni.navigateTo({
+				url: '../support/fillSupport?isSingle=true'
+			});
+		},
+				
 		
 		}
 	}
