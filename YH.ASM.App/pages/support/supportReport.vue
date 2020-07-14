@@ -26,18 +26,73 @@
 							<view class="uni-flex uni-column">
 							                <view class="flex-item flex-item-V "><text>已完成</text></view>
 							                <view class="flex-item flex-item-V "><text class="counttext" style="color:#1AAD19;">{{complete}}</text></view>
-							               
 							 </view>
 						</view>
 		    </view>
-	
 		
-		<view class="example-body">
-			<view v-for="item in list" :key="item.id" class="example-box">
-				<uni-card :title="item.title" :is-shadow="item.shadow" :note="item.note" :extra="item.extra" :thumbnail="item.thumbnail" @click="clickCard(item)">
-					<text class="content-box-text" >{{ item.content }}</text>
-				</uni-card>
+		<view class="list-view" v-for="(info,index) in list" v-bind:key='info.SID'>
+			
+			<view class="uni-flex uni-column " style="padding: 20upx;"  @click="clickCard(info)">
+				
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
+					工单编号： {{info.CODE}}
+							
+				</view>
+				
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
+					项目名称： {{info.PROJECTNAME}}[{{info.PROJECTCODE}}]
+			
+				</view>
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
+					<text class="uni-text">问题机型： {{info.MACHINENAME}}[{{info.MACHINESERIAL}}] </text>
+				</view>
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">当前节点： 
+				<text style="color: #007AFF;">{{SetStatus(info.STATUS)}}</text>
+				</view>
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">创建时间： {{info.CREATETIME}}</view>
+				
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
+					<view class="uni-flex uni-row">
+						<view class="flex-item flex-item-V">严重程度：{{SetSeverity(info.SEVERITY)}}  </view>
+					</view>
+				</view>
+			<!-- 	<view class="flex-item flex-item-V ">
+					<view class="uni-flex uni-row">
+			
+						<view class="flex-item flex-item-V">工单状态： </view>
+						<view class="flex-item flex-item-V">
+							<uni-tag :text="SetState(info.PSTATUS)" type="primary" size="small" />
+						</view>
+					</view>
+				</view> -->
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
+					<view class="uni-flex uni-row">
+						<view class="flex-item flex-item-V" style="width: 50%;">创 建 人： {{info.CREATORNAME}}</view>
+						<view class="flex-item flex-item-V" style="width: 50%;">当前处理人： {{info.CONDUCTORNAME}}</view>
+					</view>
+				</view>
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;">
+					<view class="uni-flex uni-row">
+						<view class="flex-item flex-item-V">查看附件： </view>
+						<view class="flex-item flex-item-V">
+							<uni-tag text="附件信息" type="warning" size="small"  @click="ViewAttachment(info.SID)"/>
+						</view>
+					</view>
+				</view>
+				<view class="flex-item flex-item-V " style="margin-top: 10upx;">
+					<view class="uni-flex uni-row">
+						<view class="flex-item flex-item-V" style="min-width: 25%;">问题描述： </view>
+						<view class="flex-item flex-item-V">
+						 {{info.CONTENT}}
+						</view>
+				
+				
+					</view>
+				</view>
 			</view>
+			
+			
+			
 		</view>
 		
 		
@@ -54,9 +109,18 @@
 		import {mapState,mapMutations} from 'vuex';
 		import uniCard from '@/components/uni-card/uni-card.vue';
 		import config from '../../static/js/Config.js'
+		import uniTag from "@/components/uni-tag/uni-tag.vue"
+		import {
+			Support_Prioritylist,
+			Support_Severitylist,
+			Support_Statuslist,
+			Support_State,
+			EnumGetSingle
+		} from "@/static/js/Enum.js";
+		
 		export default {
 			computed: {...mapState(['userId','forcedLogin', 'hasLogin', 'userName','workid'])},
-			components: {uniCard},
+			components: {uniCard,uniTag},
 			onLoad() {
 				this.Init();
 			},
@@ -74,7 +138,10 @@
 				}
 			},
 			methods:{
-				
+				Support_State,
+				Support_Statuslist,
+				Support_Severitylist,
+				EnumGetSingle,
 				Init(){
 					this.InitReportCount();
 					this.InitListData();
@@ -98,7 +165,6 @@
 				InitListData(){
 					
 					var  _self=this;
-					console.log("打印uuid===="+_self.userId);
 				
 					let model={};
 					model.Uuid=_self.userId;   //查所有人工单，不指定useriid，指定也没有用
@@ -110,22 +176,14 @@
 				
 					let path="/api/Support/List";
 					
-					console.log(JSON.stringify(model))
+					//console.log(JSON.stringify(model))
+					
 					this.$SugarRequest.Post(model,path,(data,res)=>{
 						
-						console.log(res);
-						for (let item of data.Content) {
-							console.log("查看item"+item.CODE);
-							let cardinfo={}
-							cardinfo.id=item.SID;
-							cardinfo.title=item.CODE;
-							cardinfo.content=item.CONTENT;
-							cardinfo.extra=item.CREATETIME;
-							cardinfo.shadow=true;
-							cardinfo.note="查看全部";
-							
-							_self.list.push(cardinfo);
+						//console.log("======="+JSON.stringify(data));
 						
+						for (let item of data.Content) {
+							_self.list.push(item);
 						}
 						
 					});
@@ -133,16 +191,21 @@
 				
 				},
 				Search(){
+					console.log("输入框搜索===="+this.list.length);
 					this.list=[];
 					this.keywords=this.words.value;
 					this.pageindex = 1;
-					this.Init();
+					this.InitListData();
+					
+						console.log("搜索之后===="+this.list.length);
 				},
 				clickCard(item){
 					
-					console.log("看Sid："+item.id)
+					
+					
+					console.log("看Sid："+JSON.stringify(item))
 					uni.navigateTo({
-						url: 'workfolw?sid='+item.id
+						url: 'workfolw?sid='+item.SID
 					})
 				},
 				ChangeState(value){
@@ -150,9 +213,23 @@
 					this.list=[];
 					this.pageindex = 1;
 					this.state=value;
-					this.Init();
+					this.InitListData();
 					
-				}
+				},
+				SetSeverity(value) {
+					return this.EnumGetSingle(value, this.Support_Severitylist());
+				},
+				SetStatus(value) {
+					return this.EnumGetSingle(value, this.Support_Statuslist());
+				},
+				SetState(value) {
+					return this.EnumGetSingle(value, this.Support_State());
+				},	
+				ViewAttachment(sid){
+				uni.navigateTo({
+					url: 'attachment?sid='+sid
+				})
+			},
 				
 			},
 			
@@ -165,7 +242,7 @@
 			
 			},
 			onReachBottom() {
-				console.log("上拉加载");
+				console.log("上拉加载===="+this.list.length);
 				this.pageindex = this.pageindex + 1;
 				this.InitListData();
 			},
@@ -200,6 +277,9 @@
 		margin-top: 30upx;
 		font-size: 40upx;
 	}
-	
+	.list-view{ 
+		background-color: #FFFFFF;
+		margin-top: 20upx;
+	}
 	
 </style>

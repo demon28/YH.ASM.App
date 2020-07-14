@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "工作清单",
+  "navigationBarTitleText": "管理表清单",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "my-tabs": "/components/toptab/myTabs/myTabs",

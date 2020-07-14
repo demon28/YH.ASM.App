@@ -15,10 +15,9 @@
 				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
 					<text class="uni-text">问题机型： {{info.MACHINENAME}}[{{info.MACHINESERIAL}}] </text>
 				</view>
-
-				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">当前节点： {{SetStatus(info.STATUS)}}</view>
-
-
+				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">当前节点： 
+					<text style="color: #007AFF;">{{SetStatus(info.STATUS)}}</text>
+					</view>
 				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
 					<view class="uni-flex uni-row">
 
@@ -33,8 +32,6 @@
 
 					</view>
 				</view>
-
-
 				<view class="flex-item flex-item-V ">
 					<view class="uni-flex uni-row">
 
@@ -44,10 +41,6 @@
 						</view>
 					</view>
 				</view>
-
-
-
-
 				<view class="flex-item flex-item-V " style="margin-top: 8upx;margin-bottom: 8upx;">
 					<view class="uni-flex uni-row">
 						<view class="flex-item flex-item-V" style="width: 50%;">创 建 人： {{info.CREATORNAME}}</view>
@@ -56,17 +49,14 @@
 				</view>
 				<view class="flex-item flex-item-V " style="margin-top: 10upx;">
 					<view class="uni-flex uni-row">
-				
 						<view class="flex-item flex-item-V">查看附件： </view>
 						<view class="flex-item flex-item-V">
 							<uni-tag text="附件信息" type="warning" size="small"  @click="ViewAttachment(info.SID)"/>
 						</view>
 					</view>
 				</view>
-				
 				<view class="flex-item flex-item-V " style="margin-top: 10upx;">
 					<view class="uni-flex uni-row">
-				
 						<view class="flex-item flex-item-V" style="min-width: 25%;">问题描述： </view>
 						<view class="flex-item flex-item-V">
 						 {{info.CONTENT}}
@@ -75,14 +65,7 @@
 				
 					</view>
 				</view>
-			
-			
-			
-				
-				
 			</view>
-
-				
 
 		</view>
 		<view class="unit-foot">

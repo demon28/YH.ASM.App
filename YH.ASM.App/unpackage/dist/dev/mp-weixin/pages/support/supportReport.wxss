@@ -19,6 +19,9 @@
 	margin-top: 30rpx;
 	font-size: 40rpx;
 }
-
+.list-view.data-v-1d7d090c{ 
+	background-color: #FFFFFF;
+	margin-top: 20rpx;
+}
 
 

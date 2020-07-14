@@ -96,14 +96,32 @@ var components = {
   uniSearchBar: function() {
     return __webpack_require__.e(/*! import() | components/uni-search-bar/uni-search-bar */ "components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-search-bar/uni-search-bar.vue */ 251))
   },
-  uniCard: function() {
-    return __webpack_require__.e(/*! import() | components/uni-card/uni-card */ "components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/components/uni-card/uni-card.vue */ 258))
+  uniTag: function() {
+    return __webpack_require__.e(/*! import() | components/uni-tag/uni-tag */ "components/uni-tag/uni-tag").then(__webpack_require__.bind(null, /*! @/components/uni-tag/uni-tag.vue */ 272))
   }
 }
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.list, function(info, index) {
+    var m0 = _vm.SetStatus(info.STATUS)
+    var m1 = _vm.SetSeverity(info.SEVERITY)
+    return {
+      $orig: _vm.__get_orig(info),
+      m0: m0,
+      m1: m1
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -190,12 +208,76 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 12);
 
-var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Config.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _createForOfIteratorHelper(o) {if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) {var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var it,normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniCard = function uniCard() {__webpack_require__.e(/*! require.ensure | components/uni-card/uni-card */ "components/uni-card/uni-card").then((function () {return resolve(__webpack_require__(/*! @/components/uni-card/uni-card.vue */ 258));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Config.js */ 19));
+
+var _Enum = __webpack_require__(/*! @/static/js/Enum.js */ 80);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _createForOfIteratorHelper(o) {if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) {var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var it,normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniCard = function uniCard() {__webpack_require__.e(/*! require.ensure | components/uni-card/uni-card */ "components/uni-card/uni-card").then((function () {return resolve(__webpack_require__(/*! @/components/uni-card/uni-card.vue */ 258));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniTag = function uniTag() {__webpack_require__.e(/*! require.ensure | components/uni-tag/uni-tag */ "components/uni-tag/uni-tag").then((function () {return resolve(__webpack_require__(/*! @/components/uni-tag/uni-tag.vue */ 272));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
 {
   computed: _objectSpread({}, (0, _vuex.mapState)(['userId', 'forcedLogin', 'hasLogin', 'userName', 'workid'])),
-  components: { uniCard: uniCard },
+  components: { uniCard: uniCard, uniTag: uniTag },
   onLoad: function onLoad() {
     this.Init();
   },
@@ -213,7 +295,10 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
     };
   },
   methods: {
-
+    Support_State: _Enum.Support_State,
+    Support_Statuslist: _Enum.Support_Statuslist,
+    Support_Severitylist: _Enum.Support_Severitylist,
+    EnumGetSingle: _Enum.EnumGetSingle,
     Init: function Init() {
       this.InitReportCount();
       this.InitListData();
@@ -237,7 +322,6 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
     InitListData: function InitListData() {
 
       var _self = this;
-      console.log("打印uuid====" + _self.userId);
 
       var model = {};
       model.Uuid = _self.userId; //查所有人工单，不指定useriid，指定也没有用
@@ -249,22 +333,14 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
 
       var path = "/api/Support/List";
 
-      console.log(JSON.stringify(model));
+      //console.log(JSON.stringify(model))
+
       this.$SugarRequest.Post(model, path, function (data, res) {
 
-        console.log(res);var _iterator = _createForOfIteratorHelper(
+        //console.log("======="+JSON.stringify(data));
+        var _iterator = _createForOfIteratorHelper(
         data.Content),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var item = _step.value;
-            console.log("查看item" + item.CODE);
-            var cardinfo = {};
-            cardinfo.id = item.SID;
-            cardinfo.title = item.CODE;
-            cardinfo.content = item.CONTENT;
-            cardinfo.extra = item.CREATETIME;
-            cardinfo.shadow = true;
-            cardinfo.note = "查看全部";
-
-            _self.list.push(cardinfo);
-
+            _self.list.push(item);
           }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
 
       });
@@ -272,16 +348,21 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
 
     },
     Search: function Search() {
+      console.log("输入框搜索====" + this.list.length);
       this.list = [];
       this.keywords = this.words.value;
       this.pageindex = 1;
-      this.Init();
+      this.InitListData();
+
+      console.log("搜索之后====" + this.list.length);
     },
     clickCard: function clickCard(item) {
 
-      console.log("看Sid：" + item.id);
+
+
+      console.log("看Sid：" + JSON.stringify(item));
       uni.navigateTo({
-        url: 'workfolw?sid=' + item.id });
+        url: 'workfolw?sid=' + item.SID });
 
     },
     ChangeState: function ChangeState(value) {
@@ -289,7 +370,21 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
       this.list = [];
       this.pageindex = 1;
       this.state = value;
-      this.Init();
+      this.InitListData();
+
+    },
+    SetSeverity: function SetSeverity(value) {
+      return this.EnumGetSingle(value, this.Support_Severitylist());
+    },
+    SetStatus: function SetStatus(value) {
+      return this.EnumGetSingle(value, this.Support_Statuslist());
+    },
+    SetState: function SetState(value) {
+      return this.EnumGetSingle(value, this.Support_State());
+    },
+    ViewAttachment: function ViewAttachment(sid) {
+      uni.navigateTo({
+        url: 'attachment?sid=' + sid });
 
     } },
 
@@ -304,7 +399,7 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
 
   },
   onReachBottom: function onReachBottom() {
-    console.log("上拉加载");
+    console.log("上拉加载====" + this.list.length);
     this.pageindex = this.pageindex + 1;
     this.InitListData();
   } };exports.default = _default;

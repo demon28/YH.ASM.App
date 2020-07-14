@@ -36,14 +36,14 @@
 		{
 			"path": "pages/support/create",
 			"style": {
-				"navigationBarTitleText": "创建工单"
+				"navigationBarTitleText": "创建问题管理表"
 			}
 		},
 		
 		{
 			"path": "pages/support/list",
 			"style": {
-				"navigationBarTitleText": "工作清单",
+				"navigationBarTitleText": "管理表清单",
 				         "enablePullDownRefresh": true
 			}
 		},
@@ -83,7 +83,7 @@
 		},{
 			"path": "pages/support/attachment",
 			"style": {
-				"navigationBarTitleText": "工单附件"
+				"navigationBarTitleText": "管理表附件"
 				
 			}
 		},
@@ -96,38 +96,38 @@
 		{
 			"path": "pages/support/checkByDisporer",
 			"style": {
-				"navigationBarTitleText": "技术处理"
+				"navigationBarTitleText": "责任人处理"
 			}
 		},
 		{
 			"path": "pages/support/checkByPmc",
 			"style": {
-				"navigationBarTitleText": "PMC跟进"
+				"navigationBarTitleText": "售后内勤维护"
 			}
 		},
 		{
 			"path": "pages/support/checkBySite",
 			"style": {
-				"navigationBarTitleText": "现场人员处理"
+				"navigationBarTitleText": "现场人员整改"
 			}
 		}
 		,
 		{
 			"path": "pages/support/checkByPrincipal",
 			"style": {
-				"navigationBarTitleText": "负责人审核"
+				"navigationBarTitleText": "现场负责人审核"
 			}
 		},
 		{
 			"path": "pages/support/workfolw",
 			"style": {
-				"navigationBarTitleText": "工单详情"
+				"navigationBarTitleText": "管理表详情"
 			}
 		},
 		{
 			"path": "pages/support/supportReport",
 			"style": {
-				"navigationBarTitleText": "工单汇总",
+				"navigationBarTitleText": "管理表汇总",
 				  "enablePullDownRefresh": true
 				
 			}
@@ -135,7 +135,7 @@
 		{
 			"path": "pages/support/fillSupport",
 			"style": {
-				"navigationBarTitleText": "工单列表",
+				"navigationBarTitleText": "管理表列表",
 				  "enablePullDownRefresh": true
 				
 			}

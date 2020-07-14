@@ -36,26 +36,26 @@
 			</view>
 			
 			<view >
-				<view style="margin-left: 15upx;margin-top: 15px;">工单</view> 
+				<view style="margin-left: 15upx;margin-top: 15px;">问题管理表</view> 
 				<uni-grid :column="4" :highlight="true" style="background-color: #F5F5F5;">
 					<uni-grid-item >
 						<view class="grid-item-box" @click="ViewSupporCreate"  >
 							<image src="../../static/img/createSupport.png" class="image" mode="aspectFill" />
-							<text class="text">创建工单 </text>
+							<text class="text">创建问题 </text>
 						</view>
 					</uni-grid-item>
 					
 					<uni-grid-item >
 						<view class="grid-item-box"  @click="ViewSupportList" >
 							<image src="../../static/img/mySupprot.png" class="image" mode="aspectFill" />
-							<text class="text">工作清单</text>
+							<text class="text">我的管理表</text>
 						</view>
 					</uni-grid-item>
 					
 					<uni-grid-item >
 					<view class="grid-item-box"  @click="ViewSupporReport" >
 						<image src="../../static/img/allSupport.png" class="image" mode="aspectFill" />
-						<text class="text">工单汇总</text>
+						<text class="text">管理表汇总</text>
 					</view>
 					</uni-grid-item>
 					 
