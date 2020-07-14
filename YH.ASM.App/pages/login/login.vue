@@ -20,6 +20,10 @@
 		<view class="btn-row">
 			<button type="primary" class="primary" @tap="bindLogin">登录</button>
 		</view>
+		
+		
+		
+		<view class="headerView">{{Version}}[{{Mark}}]</view>
 	</view>
 </template>
 
@@ -46,7 +50,11 @@
 				password: '',
 				positionTop: 0,
 				isDevtools: false,
-				src:"../../static/img/logo.png"
+				src:"../../static/img/logo.png",
+				Version:config.Parameters.Version,
+				Mark:config.Parameters.Mark(),
+				Url:config.Parameters.LoginHost()
+				
 			}
 		},
 		computed: mapState(['forcedLogin']),
@@ -245,5 +253,11 @@
 		width: 100%;
 		height: 100%;
 		opacity: 0;
+	}.headerView{
+		width: 100%;
+		text-align: center;
+		 justify-content: center;
+		 position: absolute;
+		bottom: 40upx;
 	}
 </style>

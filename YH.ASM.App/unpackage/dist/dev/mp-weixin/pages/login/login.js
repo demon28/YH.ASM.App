@@ -156,6 +156,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _service = _interopRequireDefault(__webpack_require__(/*! ../../service.js */ 26));
 
 
@@ -178,7 +182,11 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
       password: '',
       positionTop: 0,
       isDevtools: false,
-      src: "../../static/img/logo.png" };
+      src: "../../static/img/logo.png",
+      Version: _Config.default.Parameters.Version,
+      Mark: _Config.default.Parameters.Mark(),
+      Url: _Config.default.Parameters.LoginHost() };
+
 
   },
   computed: (0, _vuex.mapState)(['forcedLogin']),

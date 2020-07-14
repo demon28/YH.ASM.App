@@ -53,4 +53,13 @@
 	height: 100%;
 	opacity: 0;
 }
+.headerView{
+	width: 100%;
+	text-align: center;
+	 -webkit-box-pack: center;
+	 -webkit-justify-content: center;
+	         justify-content: center;
+	 position: absolute;
+	bottom: 40rpx;
+}
 
