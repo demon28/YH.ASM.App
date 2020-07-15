@@ -273,7 +273,7 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
 {
   computed: _objectSpread({},
 
-  (0, _vuex.mapState)(['userId', 'supportProject', 'supportConductor', 'supportCopy', 'supportMachine']), {
+  (0, _vuex.mapState)(['userId', 'supportProject', 'supportConductor', 'supportCopy', 'supportMachine', 'hasLogin']), {
     endDate: function endDate() {
       return this.getDate('end');
     } }),
@@ -303,7 +303,9 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
 
   },
   onShow: function onShow(option) {
+
     var _self = this;
+
     var checkproject = _self.supportProject;
 
     console.log("===========哎哟，wx不执行吗" + JSON.stringify(checkproject));
@@ -365,6 +367,10 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
       }
 
       var supportModel = {};
+
+
+
+
       supportModel.CreatorId = _self.userId;
       supportModel.ConductorId = _self.conductor.uuid;
       supportModel.ProjectId = _self.project.id;
@@ -529,7 +535,6 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
         url: '../machine/fillMachine?isSingle=true' });
 
     },
-
     onUpload: function onUpload() {
       var _self = this;
       uni.chooseMedia({
@@ -613,14 +618,25 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
       var result = { res: true, message: "" };
 
       console.log("项目：" + JSON.stringify(_self.project));
+
+      if (!_Verificat.default.isNotNull(_self.userId)) {
+
+        result.res = false;
+        result.message = "请重新登录！";
+        return result;
+      }
+
+
       if (!_Verificat.default.itemHasKeyVer(_self.project, "id")) {
         result.res = false;
         result.message = "请选择项目";
+        return result;
       }
 
       if (!_Verificat.default.itemHasKeyVer(_self.machine, "id")) {
         result.res = false;
         result.message = "请填写问题机型";
+        return result;
       }
 
       console.log("处理人：" + JSON.stringify(_self.conductor));
@@ -628,11 +644,13 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
       {
         result.res = false;
         result.message = "请选择处理人";
+        return result;
       }
 
       if (!_Verificat.default.isNotNullTrim(_self.content)) {
         result.res = false;
         result.message = "请填写问题描述";
+        return result;
       }
 
       return result;

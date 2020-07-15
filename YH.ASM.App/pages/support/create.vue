@@ -141,7 +141,7 @@
 	export default {
 		computed:
 		{ 
-		...mapState(['userId','supportProject','supportConductor','supportCopy','supportMachine']),  
+		...mapState(['userId','supportProject','supportConductor','supportCopy','supportMachine','hasLogin']),  
         endDate() {
             return this.getDate('end');
         }
@@ -171,7 +171,9 @@
 			}
 		},
 		onShow(option){
-			var _self=this;
+			
+			 var _self=this;
+		
 			  let checkproject=_self.supportProject;
 			  
 			  console.log("===========哎哟，wx不执行吗"+JSON.stringify(checkproject));
@@ -207,7 +209,7 @@
 				  
 				  
 				let checkCopy=_self.supportCopy;
-				if(checkCopy!=null && checkCopy.length>0){
+			if(checkCopy!=null && checkCopy.length>0){
 					_self.copy=checkCopy;
 				}
 				  
@@ -233,6 +235,10 @@
 			}
 			
 			let supportModel={};
+			
+			
+			
+			
 			supportModel.CreatorId=_self.userId;
 			supportModel.ConductorId=_self.conductor.uuid;
 			supportModel.ProjectId=_self.project.id;
@@ -397,7 +403,6 @@
 				url: '../machine/fillMachine?isSingle=true'
 			});
 		},
-		
 		onUpload(){
 			var _self=this;
 			uni.chooseMedia({
@@ -481,14 +486,25 @@
 			let result={res:true,message:""};
 			
 			 console.log("项目："+JSON.stringify(_self.project));
+			 
+			if(!Verificat.isNotNull(_self.userId)){
+				
+				result.res=false;
+				result.message="请重新登录！";
+				return result;
+			} 
+			 
+			 
 			if(!Verificat.itemHasKeyVer(_self.project,"id")){
 				result.res=false;
 				result.message="请选择项目";
+				return result;
 			}
 			
 			if(!Verificat.itemHasKeyVer(_self.machine,"id")){
 				result.res=false;
 				result.message="请填写问题机型";
+				return result;
 			}
 			  
 			 console.log("处理人："+JSON.stringify(_self.conductor));
@@ -496,11 +512,13 @@
 			{
 				result.res=false;
 				result.message="请选择处理人";
+				return result;
 			}
 	     
 			if(!Verificat.isNotNullTrim(_self.content)){
 				result.res=false;
 				result.message="请填写问题描述";
+				return result;
 			}
 			 
 			return result;
