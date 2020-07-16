@@ -353,7 +353,7 @@
 
 		},
 		BuilderModel() {
-		var _self=this;
+			var _self=this;
 			
 
 			let model = {};
@@ -391,8 +391,8 @@
 			return model;
 		},
 		clearCC(){
-			this.copy=[];
-		}
+				this.copy=[];
+			}
 		},
 	}
 </script>
