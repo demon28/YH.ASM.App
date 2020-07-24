@@ -113,8 +113,6 @@
 						       }
 						   });
 					   }
-					   
-					   
 			       }
 			  ,fail:function(e){
 				  

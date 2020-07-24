@@ -371,6 +371,7 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
 
 
 
+
       supportModel.CreatorId = _self.userId;
       supportModel.ConductorId = _self.conductor.uuid;
       supportModel.ProjectId = _self.project.id;
@@ -477,10 +478,6 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
 
 
         } });
-
-
-
-
 
 
 
@@ -622,7 +619,7 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
       if (!_Verificat.default.isNotNull(_self.userId)) {
 
         result.res = false;
-        result.message = "请重新登录！";
+        result.message = "登录已失效，请重新登录！";
         return result;
       }
 

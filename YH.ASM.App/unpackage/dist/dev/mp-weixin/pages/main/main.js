@@ -252,8 +252,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
             } });
 
         }
-
-
       },
       fail: function fail(e) {
 
