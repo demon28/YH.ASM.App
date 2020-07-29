@@ -205,7 +205,7 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
     this.pageindex = 1;
     this.checkItem = [];
     this.checked = false;
-
+    this.list = [];
     this.Init();
     uni.stopPullDownRefresh();
 

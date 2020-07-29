@@ -71,7 +71,7 @@
 			this.pageindex = 1;
 			this.checkItem=[];
 			this.checked=false;
-			
+			this.list=[];
 			this.Init();
 			uni.stopPullDownRefresh();
 

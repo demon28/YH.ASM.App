@@ -35,7 +35,7 @@
 			<view class="uni-flex uni-column " style="padding: 20upx;">
 				
 				<view class="flex-item flex-item-V " style="margin-top: 5upx;margin-bottom: 5upx;">
-					工单编号：	<text style="color:#A5673F;"   @click="clickCard(info)"> {{info.CODE}}</text>
+					编号：	<text style="color:#A5673F;"   @click="clickCard(info)"> {{info.CODE}}</text>
 							
 				</view>
 				

@@ -236,10 +236,6 @@
 			
 			let supportModel={};
 			
-			
-			
-			
-			
 			supportModel.CreatorId=_self.userId;
 			supportModel.ConductorId=_self.conductor.uuid;
 			supportModel.ProjectId=_self.project.id;

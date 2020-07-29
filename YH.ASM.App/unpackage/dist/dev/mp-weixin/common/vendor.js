@@ -4139,7 +4139,7 @@ var Parameters = {
 
   //是否是开发环境： 1： 开发环境， 2：预投产环境，3，正式环境
   Isdevpos: 2,
-  Version: "1.1.24",
+  Version: "1.1.26",
   ApiKey: "58b59b3ae5d0ec0629950ebdd4dabe39",
   LoginHost: function LoginHost() {
     if (Parameters.Isdevpos == 1) {

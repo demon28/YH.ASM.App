@@ -5,8 +5,7 @@
 
 
 		<view v-if="checked" class="uni-list" style="margin-top: 20upx;">
-			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in checkItem"
-			 :key="item.id">
+			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in checkItem" :key="item.id">
 				<view>
 					<view> {{item.content}} </view>
 				</view>

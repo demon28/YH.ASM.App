@@ -368,10 +368,6 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
 
       var supportModel = {};
 
-
-
-
-
       supportModel.CreatorId = _self.userId;
       supportModel.ConductorId = _self.conductor.uuid;
       supportModel.ProjectId = _self.project.id;
