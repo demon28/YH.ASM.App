@@ -8,7 +8,7 @@
 			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in checkItem"
 			 :key="item.id">
 				<view>
-					<view> {{item.name}}[{{item.serial}}] </view>
+					<view> {{item.typesname}}[{{item.serial}}] </view>
 				</view>
 				<view>
 					<button class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="unCheck(item)">取消</button>
@@ -25,7 +25,7 @@
 		<view class="uni-list" style="margin-top: 20upx;">
 			<label class="uni-list-cell uni-list-cell-pd" style=" min-height: 60upx; height: 60upx;" v-for="item in list" :key="item.id">
 				<view>
-					<view> {{item.name}}-{{item.serial}}</view>
+					<view> {{item.typesname}}[{{item.serial}}]</view>
 				</view>
 				<view>
 					<button v-if="!isSingle" class="mini-btn" type="default" size="mini" style="margin-top: 10upx;" @click="onCheckMany(item)">选中</button>
@@ -133,7 +133,7 @@
 					success: (res) => {
 						uni.hideLoading();
 
-						//console.log(JSON.stringify( res));
+						console.log(JSON.stringify( res));
 
 						//服务的返回信息不为true
 						if (!res.data.Success) {
@@ -151,10 +151,12 @@
 							let name = res.data.Content[i].NAME;
 							let id = res.data.Content[i].MID;
 							let serial= res.data.Content[i].SERIAL;
+							let typesname=res.data.Content[i].TYPESNAME;
 							_self.list.push({
 								id: id,
 								name: name,
 								serial:serial,
+								typesname:typesname
 							});
 
 

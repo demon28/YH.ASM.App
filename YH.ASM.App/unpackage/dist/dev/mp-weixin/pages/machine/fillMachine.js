@@ -212,7 +212,7 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
         success: function success(res) {
           uni.hideLoading();
 
-          //console.log(JSON.stringify( res));
+          console.log(JSON.stringify(res));
 
           //服务的返回信息不为true
           if (!res.data.Success) {
@@ -230,10 +230,12 @@ var _Config = _interopRequireDefault(__webpack_require__(/*! ../../static/js/Con
             var name = res.data.Content[i].NAME;
             var id = res.data.Content[i].MID;
             var serial = res.data.Content[i].SERIAL;
+            var typesname = res.data.Content[i].TYPESNAME;
             _self.list.push({
               id: id,
               name: name,
-              serial: serial });
+              serial: serial,
+              typesname: typesname });
 
 
 
