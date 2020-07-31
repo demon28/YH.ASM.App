@@ -288,6 +288,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 12);
 var _uniListItem = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-list-item/uni-list-item.vue */ 66));
 var _uniList = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-list/uni-list.vue */ 73));

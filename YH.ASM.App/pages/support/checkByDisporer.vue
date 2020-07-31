@@ -51,12 +51,36 @@
 			
 			<view v-if="ordershow" class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
-					* BOM图纸:
+					* BOM单号:
 				</view>
 				<view class="uni-list-cell-db">
-					<input  placeholder="请输入Bom图纸" v-model="bom" />
+					<input  placeholder="请输入Bom单号" v-model="bom" />
 				</view>
 			</view>
+			
+			
+			
+			<view v-if="ordershow" class="uni-list-cell" style="min-height:80upx ;">
+				<view class="uni-list-cell-left">
+					* BOM附件:
+				</view>
+				<view>
+					<button @click="onUpload" size="mini" type="default" class="mini-btn" style="margin-right: 15upx;margin-top: 5upx; ">添加</button>
+				</view>
+			</view>
+			
+			<view v-if="ordershow" class="uni-list-cell" style="min-height:80upx ;" v-for="file in uploadfile" :key="file.tempFilePath">
+				<view class="uni-list-cell-left">
+				<!-- 	{{file.type}} -->
+				</view>
+				<view>
+					<text style="margin-right: 30upx; color: #0FAEFF;">{{fileStatus}}</text>
+				</view>
+			</view>
+			<!--上传文件操作结束（其实应该封装成组件，但是现在还不会玩）-->
+			
+			
+			
 
 			<view v-if="ordershow" class="uni-list-cell" style="min-height:80upx ;">
 				<view class="uni-list-cell-left">
@@ -113,26 +137,7 @@
 			<!--抄送人员以及处理人，不用动 -->
 			
 			
-			
-			<view class="uni-list-cell" style="min-height:80upx ;">
-				<view class="uni-list-cell-left">
-					上传附件:
-				</view>
-				<view>
-					<button @click="onUpload" size="mini" type="default" class="mini-btn" style="margin-right: 15upx;margin-top: 5upx; ">添加</button>
-				</view>
-			</view>
-
-
-			<view class="uni-list-cell" style="min-height:80upx ;" v-for="file in uploadfile" :key="file.tempFilePath">
-				<view class="uni-list-cell-left">
-					{{file.type}}
-				</view>
-				<view>
-					<text style="margin-right: 30upx; color: #0FAEFF;">{{fileStatus}}</text>
-				</view>
-			</view>
-			<!--上传文件操作结束（其实应该封装成组件，但是现在还不会玩）-->
+		
 
 
 

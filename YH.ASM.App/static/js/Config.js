@@ -5,7 +5,7 @@ const Parameters={
 	
 	//是否是开发环境： 1： 开发环境， 2：预投产环境，3，正式环境
 	Isdevpos:3,   
-	Version:"1.1.27",
+	Version:"1.1.28",
 	ApiKey:"58b59b3ae5d0ec0629950ebdd4dabe39",
 	LoginHost:function(){
 				if(Parameters.Isdevpos==1){
