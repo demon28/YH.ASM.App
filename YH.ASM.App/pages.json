@@ -57,6 +57,15 @@
 				
 			}
 		},
+		
+		{
+			"path": "pages/machine/fillMachineByProjectId",
+			"style": {
+				"navigationBarTitleText": "选择设备",
+				         "enablePullDownRefresh": true
+				
+			}
+		},
 		{
 			"path": "pages/machine/fillMachine",
 			"style": {

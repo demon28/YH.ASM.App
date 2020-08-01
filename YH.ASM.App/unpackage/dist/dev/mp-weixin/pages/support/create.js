@@ -733,10 +733,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniIcons: function() {
-    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 204))
+    return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 210))
   },
   uniBadge: function() {
-    return __webpack_require__.e(/*! import() | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! @/components/uni-badge/uni-badge.vue */ 212))
+    return __webpack_require__.e(/*! import() | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! @/components/uni-badge/uni-badge.vue */ 218))
   }
 }
 var render = function() {
@@ -776,7 +776,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! ../uni-icons/uni-icons.vue */ 204));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniBadge = function uniBadge() {__webpack_require__.e(/*! require.ensure | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then((function () {return resolve(__webpack_require__(/*! ../uni-badge/uni-badge.vue */ 212));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! ../uni-icons/uni-icons.vue */ 210));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniBadge = function uniBadge() {__webpack_require__.e(/*! require.ensure | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then((function () {return resolve(__webpack_require__(/*! ../uni-badge/uni-badge.vue */ 218));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 

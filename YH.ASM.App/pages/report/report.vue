@@ -574,8 +574,29 @@ import {
 				
 			},
 			onFillMachine(){
+				var _self=this;
+				
+				console.log("看一看projectid是什么？",_self.project.id);
+				
+				if(!Verificat.isNotNull(_self.project.id)){
+					uni.showToast({
+						title:"请先选择项目！"
+					});
+					
+					return ;
+				}
+				
+				if(_self.project.id==0){
+					
+					uni.showToast({
+						title:"请先选择项目！"
+					});
+					return ;
+				}
+				
+				
 				uni.navigateTo({
-					url: '../machine/fillMachine?isSingle=true'
+					url: '../machine/fillMachineByProjectId?isSingle=true&projectId='+_self.project.id
 				});
 			},
 			onFillSupport(){

@@ -8,6 +8,7 @@
     "pages/support/create",
     "pages/support/list",
     "pages/report/person",
+    "pages/machine/fillMachineByProjectId",
     "pages/machine/fillMachine",
     "pages/project/fillProject",
     "pages/user/fillUser",
