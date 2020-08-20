@@ -57,19 +57,10 @@
 				
 			}
 		},
-		
-		{
-			"path": "pages/machine/fillMachineByProjectId",
-			"style": {
-				"navigationBarTitleText": "选择设备",
-				         "enablePullDownRefresh": true
-				
-			}
-		},
 		{
 			"path": "pages/machine/fillMachine",
 			"style": {
-				"navigationBarTitleText": "选择设备",
+				"navigationBarTitleText": "选择项目",
 				         "enablePullDownRefresh": true
 				
 			}
@@ -151,7 +142,15 @@
 		}
 		   
 		
-	],
+	    
+        ,{
+            "path" : "pages/report/details/details",
+            "style" : {
+				"navigationBarTitleText": "日报详情",
+				  "enablePullDownRefresh": true
+			}
+        }
+    ],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#0faeff",

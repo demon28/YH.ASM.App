@@ -8,7 +8,6 @@
     "pages/support/create",
     "pages/support/list",
     "pages/report/person",
-    "pages/machine/fillMachineByProjectId",
     "pages/machine/fillMachine",
     "pages/project/fillProject",
     "pages/user/fillUser",
@@ -20,7 +19,8 @@
     "pages/support/checkByPrincipal",
     "pages/support/workfolw",
     "pages/support/supportReport",
-    "pages/support/fillSupport"
+    "pages/support/fillSupport",
+    "pages/report/details/details"
   ],
   "subPackages": [],
   "window": {
@@ -52,5 +52,6 @@
       "desc": "\"你的位置信息将用于小程序位置接口的效果展示\""
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap96.json"
 }
