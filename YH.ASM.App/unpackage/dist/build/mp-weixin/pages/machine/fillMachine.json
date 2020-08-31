@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "选择项目",
+  "navigationBarTitleText": "选择设备",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "uni-search-bar": "/components/uni-search-bar/uni-search-bar"
