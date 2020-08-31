@@ -2,7 +2,7 @@
 	
 		<view class="content">
 			<uni-list loadmoreoffset="1" >
-				<uni-list-item  :title="item.type" :note="item.date"  v-bind:key="item.traid" v-for="(item,index) in list"  :rightText="item.address" :show-arrow="false"  >
+				<uni-list-item  :title="item.type" :note="item.date"  v-bind:key="item.traid" v-for="(item,index) in list"  :rightText="item.address" :show-arrow="false"  @click="onDetails(item.traid)">
 				</uni-list-item>
 			</uni-list>
 			
@@ -117,6 +117,15 @@
 			   		 
 			       }
 			   });
+		   },
+		   //查看详情
+		   onDetails(traid){
+			   console.log("进来了"+traid)
+			   uni.navigateTo({
+				   url:'./details/details?traid='+traid
+			   })
+				   
+			   
 		   }
 		   
 	    }
