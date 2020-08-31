@@ -5,37 +5,34 @@
 	},
 	"setting": {
 		"urlCheck": false,
+		"scopeDataCheck": false,
+		"coverView": true,
 		"es6": true,
 		"postcss": true,
+		"compileHotReLoad": false,
 		"preloadBackgroundData": false,
 		"minified": true,
-		"newFeature": true,
-		"coverView": true,
 		"autoAudits": false,
+		"newFeature": false,
+		"uglifyFileName": false,
+		"uploadWithSourceMap": true,
+		"useIsolateContext": true,
+		"nodeModules": false,
+		"enhance": false,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false,
 		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-<<<<<<< HEAD
-		"compileHotReLoad": false,
-=======
->>>>>>> e67ee932eea46ee87731abc34970bc01b99bc650
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-<<<<<<< HEAD
-		"useIsolateContext": true,
-=======
->>>>>>> e67ee932eea46ee87731abc34970bc01b99bc650
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "",
-	"appid": "wxda6a631dceee5d1f",
+	"appid": "wx33f579450621696c",
 	"projectname": "YH.ASM.App",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
